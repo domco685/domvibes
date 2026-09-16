@@ -93,7 +93,11 @@ export const summarize = internalAction({
       throw new Error(`Claude API error ${response.status}: ${detail}`);
     }
     const data = await response.json();
-    const text: string = data.content?.[0]?.text ?? "";
+    // pick the text block explicitly; content[0] isn't guaranteed to be text
+    const textBlock = data.content?.find(
+      (b: { type: string }) => b.type === "text",
+    );
+    const text: string = textBlock?.text ?? "";
     await ctx.runMutation(internal.questions.saveSummary, {
       text,
       questionCount: questions.length,

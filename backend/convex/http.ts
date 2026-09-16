@@ -108,7 +108,7 @@ http.route({
     const cached = await ctx.runQuery(internal.questions.latestSummary, {});
     const stale =
       cached === null ||
-      (cached.questionCount !== questions.length &&
+      ((cached.text === "" || cached.questionCount !== questions.length) &&
         Date.now() - cached.generatedAt > 15_000);
     if (wantRefresh && stale && questions.length > 0) {
       try {
@@ -118,8 +118,10 @@ http.route({
           questionCount: questions.length,
           summarizedCount: fresh.questionCount,
         });
-      } catch {
-        // fall through to cached so the slide never breaks mid-talk
+      } catch (e) {
+        // fall through to cached so the slide never breaks mid-talk,
+        // but leave a trace in convex logs so failures are debuggable
+        console.error("summary refresh failed:", e);
       }
     }
     return json(req, {
