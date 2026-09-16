@@ -1,0 +1,12 @@
+node_modules/
+.env
+.env.*
+.vercel/
+.claude/
+.playwright-mcp/
+.DS_Store
+
+# loose working media, too big or not site assets
+*.mp4
+0621.png
+strip-check*.jpeg

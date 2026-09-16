@@ -1,0 +1,615 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SHOPIFY × CLAUDE CODE — The DOMVIBES Field Guide</title>
+<meta name="description" content="Your Saturday build plans. Everything from the Shopify × Claude Code event with Dom & Benza — mindset, setup, and copy-paste tutorial prompts for building, growing, and creating weird stuff.">
+<meta property="og:title" content="SHOPIFY × CLAUDE CODE — The DOMVIBES Field Guide">
+<meta property="og:description" content="Mindset, setup, and the full Tutorial Arcade of copy-paste Claude Code prompts for Shopify.">
+<meta property="og:image" content="https://domvibes.vercel.app/shopify-claude-code/og.jpg">
+<meta property="og:url" content="https://domvibes.vercel.app/shopify-claude-code">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://domvibes.vercel.app/shopify-claude-code/og.jpg">
+<link rel="icon" href="/logo.webp" type="image/webp">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Titan+One&family=Bungee&family=Space+Grotesk:wght@400;500;700&family=IBM+Plex+Mono:wght@400;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --pink:#F52B8E;
+    --teal:#2EE6C8;
+    --yellow:#FFE81A;
+    --purple:#9B5DE5;
+    --orange:#FF9F1C;
+    --mint:#9BE8C4;
+    --ink:#12000B;
+    --shopgreen:#95BF47;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{
+    font-family:'Space Grotesk',sans-serif;
+    color:var(--ink);
+    background-color:var(--pink);
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='320' height='320' viewBox='0 0 320 320'%3E%3Cpath d='M20 40 q15 -22 30 0 t30 0 t30 0' fill='none' stroke='%232EE6C8' stroke-width='7' stroke-linecap='round'/%3E%3Cpath d='M200 280 q15 -22 30 0 t30 0' fill='none' stroke='%239BE8C4' stroke-width='7' stroke-linecap='round'/%3E%3Cpolygon points='250,60 285,115 215,115' fill='%239B5DE5'/%3E%3Cpolygon points='60,230 88,272 32,272' fill='%23FFE81A'/%3E%3Ccircle cx='150' cy='150' r='9' fill='%23FF9F1C'/%3E%3Ccircle cx='300' cy='200' r='7' fill='%23FFE81A'/%3E%3Ccircle cx='40' cy='130' r='7' fill='%23FF9F1C'/%3E%3Cpath d='M120 300 l14 -24 l-8 24 l14 -24' fill='none' stroke='%23FFE81A' stroke-width='6' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+    background-size:320px 320px;
+    overflow-x:hidden;
+  }
+  ::selection{background:var(--yellow);color:var(--ink)}
+
+  .ticker{
+    background:var(--ink);color:var(--yellow);
+    font-family:'Bungee',cursive;font-size:clamp(.8rem,2vw,1rem);
+    padding:.55em 0;white-space:nowrap;overflow:hidden;
+  }
+  .ticker-inner{display:inline-block;animation:scroll 28s linear infinite}
+  @keyframes scroll{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+  .ticker span{margin:0 1.2em}
+  .t-pink{color:var(--pink)} .t-teal{color:var(--teal)} .t-purp{color:#c9a6ff} .t-green{color:var(--shopgreen)}
+
+  .wrap{max-width:980px;margin:0 auto;padding:0 20px}
+
+  .hero{padding:48px 0 10px;text-align:center}
+  .home-link{display:inline-block;transform:rotate(-3deg);transition:transform .15s}
+  .home-link:hover{transform:rotate(2deg) scale(1.05)}
+  .home-link img{
+    width:110px;border:5px solid #fff;outline:4px solid var(--ink);
+    border-radius:12px;box-shadow:7px 7px 0 var(--ink);display:block;
+  }
+  h1{
+    font-family:'Titan One',cursive;
+    font-size:clamp(2rem,7vw,3.6rem);
+    color:#fff;-webkit-text-stroke:2.5px var(--ink);
+    text-shadow:6px 6px 0 var(--teal);
+    margin:26px 0 8px;line-height:1.1;letter-spacing:.02em;
+  }
+  h1 .x{color:var(--yellow);-webkit-text-stroke:2.5px var(--ink)}
+  .hero .sub{
+    font-family:'Bungee',cursive;color:#ffd9ec;
+    font-size:clamp(.95rem,2.6vw,1.2rem);text-shadow:2px 2px 0 var(--ink);
+    max-width:640px;margin:10px auto 0;line-height:1.5;
+  }
+
+  /* photo strip */
+  .photo-strip{
+    display:flex;flex-wrap:wrap;justify-content:center;gap:26px;
+    padding:34px 0 6px;align-items:flex-start;
+  }
+  .polaroid{
+    background:#fff;border:5px solid var(--ink);border-radius:10px;
+    padding:10px 10px 14px;box-shadow:9px 9px 0 var(--ink);
+    flex:1 1 260px;max-width:340px;
+    transition:transform .18s;
+  }
+  .polaroid img{display:block;width:100%;border-radius:4px;border:3px solid var(--ink)}
+  .polaroid figcaption{
+    font-family:'Bungee',cursive;font-size:.78rem;text-align:center;
+    margin-top:10px;line-height:1.4;
+  }
+  .polaroid.p1{transform:rotate(-2.5deg)}
+  .polaroid.p2{transform:rotate(1.6deg) translateY(14px)}
+  .polaroid.p3{transform:rotate(-1.2deg)}
+  .polaroid:hover{transform:rotate(0deg) scale(1.04)}
+
+  section{padding:34px 0}
+  .card{
+    background:#fff;border:6px solid var(--ink);border-radius:22px;
+    box-shadow:12px 12px 0 var(--ink);
+    padding:clamp(24px,4.5vw,44px);position:relative;
+  }
+  .tilt-l{transform:rotate(-.8deg)} .tilt-r{transform:rotate(.8deg)}
+  h2{
+    font-family:'Titan One',cursive;
+    font-size:clamp(1.5rem,4.5vw,2.3rem);
+    -webkit-text-stroke:2px var(--ink);color:#fff;
+    text-shadow:5px 5px 0 var(--teal);
+    margin-bottom:.6em;letter-spacing:.02em;
+  }
+  h2.alt{text-shadow:5px 5px 0 var(--purple)}
+  h2.alt2{text-shadow:5px 5px 0 var(--orange)}
+  h2.alt3{text-shadow:5px 5px 0 var(--shopgreen)}
+  .card p, .card li{font-size:clamp(1rem,2.3vw,1.14rem);line-height:1.65}
+  .card p{margin-bottom:1em}
+  .card p:last-child{margin-bottom:0}
+  .hl{background:var(--yellow);padding:.05em .25em;border-radius:.3em;font-weight:700}
+  .hl-t{background:var(--teal)} .hl-p{background:#d8befa} .hl-o{background:#ffd9a3}
+
+  .badge{
+    position:absolute;top:-22px;right:22px;
+    font-family:'Bungee',cursive;font-size:.85rem;
+    background:var(--teal);border:4px solid var(--ink);border-radius:999px;
+    padding:.4em .9em;transform:rotate(4deg);box-shadow:4px 4px 0 var(--ink);
+  }
+  .badge.b2{background:var(--yellow)} .badge.b3{background:var(--orange)} .badge.b4{background:var(--shopgreen)}
+
+  ul.vibes{list-style:none;display:grid;gap:14px;margin-top:6px}
+  ul.vibes li{
+    border:4px solid var(--ink);border-radius:14px;padding:16px 18px;
+    box-shadow:6px 6px 0 var(--ink);background:#fff;
+  }
+  ul.vibes li:nth-child(5n+1){background:#CFF9EE}
+  ul.vibes li:nth-child(5n+2){background:#FFF6B0}
+  ul.vibes li:nth-child(5n+3){background:#EBDCFE}
+  ul.vibes li:nth-child(5n+4){background:#FFE3C2}
+  ul.vibes li:nth-child(5n+5){background:#FFD9EC}
+  ul.vibes b{font-family:'Bungee',cursive;font-size:.92rem;display:block;margin-bottom:.35em}
+
+  .btn{
+    display:inline-block;font-family:'Titan One',cursive;
+    font-size:clamp(1rem,2.6vw,1.3rem);color:var(--ink);
+    background:var(--yellow);border:5px solid var(--ink);border-radius:999px;
+    padding:.6em 1.4em;text-decoration:none;
+    box-shadow:8px 8px 0 var(--ink);transition:transform .12s, box-shadow .12s;cursor:pointer;
+  }
+  .btn:hover{transform:translate(3px,3px);box-shadow:4px 4px 0 var(--ink)}
+  .btn.teal{background:var(--teal)}
+
+  /* ===== TUTORIAL ARCADE ===== */
+  .arcade-intro{text-align:center;color:#fff;margin-bottom:8px}
+  .arcade-intro h2{font-size:clamp(1.9rem,6vw,3rem);text-shadow:6px 6px 0 var(--purple)}
+  .arcade-intro p{
+    font-family:'Bungee',cursive;color:#ffd9ec;text-shadow:2px 2px 0 var(--ink);
+    font-size:clamp(.9rem,2.4vw,1.05rem);max-width:620px;margin:0 auto;line-height:1.6;
+  }
+  .world{
+    border:6px solid var(--ink);border-radius:22px;
+    box-shadow:12px 12px 0 var(--ink);
+    padding:clamp(22px,4vw,38px);margin-top:34px;position:relative;
+  }
+  .world.w1{background:#CFF9EE;transform:rotate(-.6deg)}
+  .world.w2{background:#FFF6B0;transform:rotate(.6deg)}
+  .world.w3{background:#EBDCFE;transform:rotate(-.5deg)}
+  .world-tag{
+    font-family:'Bungee',cursive;font-size:.8rem;
+    position:absolute;top:-20px;left:26px;
+    background:var(--ink);color:var(--yellow);
+    border-radius:999px;padding:.4em 1em;letter-spacing:.15em;
+  }
+  .world h3{
+    font-family:'Titan One',cursive;font-size:clamp(1.4rem,4vw,2rem);
+    -webkit-text-stroke:1.5px var(--ink);color:#fff;
+    text-shadow:4px 4px 0 var(--ink);margin-bottom:4px;
+  }
+  .world > p{margin:6px 0 18px;line-height:1.6;font-size:1.02rem}
+
+  details.cart{
+    border:5px solid var(--ink);border-radius:16px;background:#fff;
+    box-shadow:7px 7px 0 var(--ink);margin-top:16px;overflow:hidden;
+  }
+  details.cart[open]{box-shadow:3px 3px 0 var(--ink)}
+  summary.cart-label{
+    list-style:none;cursor:pointer;display:flex;align-items:center;gap:14px;
+    padding:16px 18px;user-select:none;
+  }
+  summary.cart-label::-webkit-details-marker{display:none}
+  .cart-icon{
+    flex:0 0 auto;width:46px;height:46px;display:grid;place-items:center;
+    font-size:1.5rem;border:4px solid var(--ink);border-radius:10px;
+    background:var(--yellow);box-shadow:3px 3px 0 var(--ink);
+  }
+  details.cart:nth-of-type(2n) .cart-icon{background:var(--teal)}
+  details.cart:nth-of-type(3n) .cart-icon{background:#FFB8D9}
+  .cart-title{font-family:'Bungee',cursive;font-size:clamp(.95rem,2.5vw,1.15rem);line-height:1.3}
+  .cart-sub{font-size:.9rem;color:#5a4451;margin-top:2px}
+  .cart-arrow{margin-left:auto;font-family:'Bungee',cursive;font-size:1.2rem;transition:transform .2s}
+  details.cart[open] .cart-arrow{transform:rotate(90deg)}
+  .cart-body{padding:0 18px 20px;border-top:4px dashed #e9c8da}
+  .cart-body > p{font-size:1rem;line-height:1.6;margin:14px 0}
+  .cart-body a{color:var(--pink);font-weight:700}
+
+  .term{
+    background:var(--ink);border:4px solid var(--ink);border-radius:12px;
+    margin-top:6px;overflow:hidden;
+  }
+  .term-bar{
+    display:flex;align-items:center;gap:8px;
+    background:#2b0a1e;padding:8px 12px;
+  }
+  .dot{width:12px;height:12px;border-radius:50%}
+  .dot.r{background:#ff5f56}.dot.y{background:#ffbd2e}.dot.g{background:#27c93f}
+  .term-bar .term-name{
+    font-family:'IBM Plex Mono',monospace;font-size:.75rem;color:#ff9fce;margin-left:4px;
+  }
+  .copy-btn{
+    margin-left:auto;font-family:'Bungee',cursive;font-size:.72rem;
+    background:var(--teal);color:var(--ink);border:3px solid #000;
+    border-radius:8px;padding:.45em .9em;cursor:pointer;
+    box-shadow:2px 2px 0 #000;
+  }
+  .copy-btn:hover{transform:translate(1px,1px);box-shadow:1px 1px 0 #000}
+  .copy-btn.copied{background:var(--yellow)}
+  .term pre{
+    font-family:'IBM Plex Mono',monospace;font-size:.85rem;line-height:1.6;
+    color:#7dffc8;padding:16px 18px;white-space:pre-wrap;word-break:break-word;
+    max-height:420px;overflow-y:auto;margin:0;
+  }
+  .note{
+    background:#FFE3C2;border:4px solid var(--ink);border-radius:12px;
+    padding:12px 16px;font-size:.95rem;line-height:1.55;margin-top:14px;
+    box-shadow:4px 4px 0 var(--ink);
+  }
+  .note b{font-family:'Bungee',cursive;font-size:.8rem}
+
+  .warn-card{background:#12000B;color:#fff;border-color:#fff}
+  .warn-card h2{text-shadow:5px 5px 0 var(--orange)}
+  .warn-card p{color:#ffd9ec}
+
+  .links-row{display:flex;flex-wrap:wrap;gap:14px;margin-top:18px}
+
+  footer{text-align:center;padding:44px 20px 60px;color:#fff}
+  footer .stars{font-size:1.3rem;letter-spacing:.4em;color:var(--yellow);text-shadow:2px 2px 0 var(--ink)}
+  footer p{margin-top:10px;text-shadow:1px 1px 0 var(--ink);font-size:.95rem}
+  footer a{color:var(--yellow);font-weight:700}
+  .socials{display:flex;justify-content:center;gap:14px;margin-top:18px;flex-wrap:wrap}
+  .socials a{
+    font-family:'Bungee',cursive;font-size:.85rem;color:var(--ink);
+    background:#fff;border:4px solid var(--ink);border-radius:999px;
+    padding:.5em 1.1em;text-decoration:none;box-shadow:4px 4px 0 var(--ink);
+    transition:transform .12s, box-shadow .12s;
+  }
+  .socials a:hover{transform:translate(2px,2px);box-shadow:2px 2px 0 var(--ink)}
+</style>
+</head>
+<body>
+
+<div class="ticker" aria-hidden="true">
+  <div class="ticker-inner">
+    <span>★ DOMVIBES ★</span><span class="t-green">SHOPIFY × CLAUDE CODE</span><span class="t-teal">YOUR SATURDAY BUILD PLANS</span><span class="t-pink">COPY · PASTE · SHIP</span><span class="t-purp">OBJECTIVE-ORIENTED PROGRAMMING</span><span>★ THE TUTORIAL ARCADE ★</span><span class="t-teal">NO CS DEGREE REQUIRED</span>
+    <span>★ DOMVIBES ★</span><span class="t-green">SHOPIFY × CLAUDE CODE</span><span class="t-teal">YOUR SATURDAY BUILD PLANS</span><span class="t-pink">COPY · PASTE · SHIP</span><span class="t-purp">OBJECTIVE-ORIENTED PROGRAMMING</span><span>★ THE TUTORIAL ARCADE ★</span><span class="t-teal">NO CS DEGREE REQUIRED</span>
+  </div>
+</div>
+
+<header class="hero wrap">
+  <a class="home-link" href="/" title="Back to DOMVIBES"><img src="/logo.webp" alt="DOMVIBES logo — back to home"></a>
+  <h1>SHOPIFY <span class="x">×</span> CLAUDE CODE</h1>
+  <p class="sub">Your Saturday build plans. Everything Dom &amp; Benza covered at the Shopify event — the mindset, the setup, and every copy-paste prompt.</p>
+  <div class="photo-strip">
+    <figure class="polaroid p1">
+      <img src="/shopify-claude-code/photo-workshop.jpg" alt="Dom and Benza on stage at the Build a store with Claude Code + the Shopify AI Toolkit workshop, July 16 2026" loading="lazy">
+      <figcaption>THE WORKSHOP · JULY 16, 2026 ✨</figcaption>
+    </figure>
+    <figure class="polaroid p2">
+      <img src="/shopify-claude-code/photo-dom.jpg" alt="Dom mid-explanation on stage, laptop on lap, hand in the air" loading="lazy">
+      <figcaption>DOM, MID-VIBE 🎤</figcaption>
+    </figure>
+    <figure class="polaroid p3">
+      <img src="/shopify-claude-code/photo-table.jpg" alt="Dom and Benza talking around a big wooden table at Shopify" loading="lazy">
+      <figcaption>THE DEBRIEF 🍿</figcaption>
+    </figure>
+  </div>
+</header>
+
+<main class="wrap">
+
+  <section>
+    <div class="card tilt-l">
+      <span class="badge">READ ME 1ST</span>
+      <h2>THE MINDSET</h2>
+      <p>The whole point of the event: show what's possible when you work with Claude Code <span class="hl">in a curious way</span> — share your ideas and goals, and let it guide the execution.</p>
+      <ul class="vibes">
+        <li><b>🤖 You have a digital developer now</b>Claude Code is an agent that lives inside your computer. It's called an "agent harness" because it translates what you want into real, working workflows.</li>
+        <li><b>🎯 This is objective-oriented programming</b>Your job is explaining what you want and making sure it understands your goals. The single best technique: keep telling it what you want, keep asking questions, and be honest — <span class="hl">"I have no idea what to do next, please help me"</span> is literally how Dom and Benza learned everything.</li>
+        <li><b>🧠 Not technical? Zero disadvantage</b>You're limited only by imagination, determination, patience, and how much context you can hold in your brain. If you're ADHD — our time has finally come to channel it and be hyper-human!</li>
+        <li><b>👑 Defer to the best model</b>It costs more, but you know you're getting max power — your tools are an extension of your creativity. On a budget? For grunt work (like scraping videos) a lower tier is fine. When unsure, just ask: <span class="hl-t hl">"which model is most efficient for this job?"</span></li>
+        <li><b>⚠️ One real precaution</b>If you're a real merchant with a real store, be very mindful about what you ask the agent to do — some things really hurt (Dom has been through it). And never, ever let people you don't trust connect to your store.</li>
+      </ul>
+    </div>
+  </section>
+
+  <section>
+    <div class="card tilt-r">
+      <span class="badge b4">PRO MOVES</span>
+      <h2 class="alt">THE ESSENTIALS <span style="font-size:.6em">(FROM BENZA)</span></h2>
+      <p>A few things that make everything below go smoother once you're in a Claude Code session:</p>
+      <ul class="vibes">
+        <li><b>🎛️ Pick the right model</b>Default to the most capable model for real thinking or building. Drop to a lighter one for cheap, repetitive jobs like scraping or formatting. Not sure? Just ask Claude <span class="hl">"which model is most efficient for this job?"</span></li>
+        <li><b>💾 Save your skills</b>When you find a workflow that works, have Claude save it as a <b>skill</b> so you can reuse it later instead of re-explaining every time. Your setup gets more powerful the more you save.</li>
+        <li><b>📝 Use a CLAUDE.md</b>A memory file at the root of your project. Put the context Claude should always know in there (your business, your preferences, how you work) — it reads it every session so you stop repeating yourself.</li>
+        <li><b>🧹 Clear your context</b>Long sessions get cluttered and Claude starts losing the thread. Use <span class="hl-t hl">/clear</span> to start fresh, or <span class="hl-t hl">/compact</span> to summarize and keep going. When the answers start drifting, clearing context usually fixes it.</li>
+      </ul>
+    </div>
+  </section>
+
+  <section>
+    <div class="card tilt-l">
+      <span class="badge b2">START HERE</span>
+      <h2 class="alt3">SETUP</h2>
+      <p>Setup is the most technical part. Get through it once and <span class="hl">you are golden</span>. Dom made a whole page walking you through it:</p>
+      <p><a class="btn teal" href="https://shopify-claude-code-setup.vercel.app/" target="_blank" rel="noopener">OPEN THE SETUP GUIDE →</a></p>
+      <div class="note"><b>🔮 BEHIND THE SCENES:</b> That page (and this one!) was made by connecting a Vercel account to Claude and saying, mid-session: <em>"Can you build me a beautiful Vercel page explaining everything we've done here with some visual examples so I can share with an audience."</em> Boom — hosted tutorial page. This trick works for anything you build.</div>
+    </div>
+  </section>
+
+  <!-- ================= TUTORIAL ARCADE ================= -->
+  <section id="arcade">
+    <div class="arcade-intro">
+      <h2>🕹️ THE TUTORIAL ARCADE</h2>
+      <p>Three worlds. Pop open a cartridge, hit COPY PROMPT, paste it into Claude. That's the whole tutorial.</p>
+    </div>
+
+    <!-- WORLD 1 -->
+    <div class="world w1">
+      <span class="world-tag">WORLD 1</span>
+      <h3>🏪 BUILD YOUR STORE</h3>
+      <p>From nothing to a live storefront — or plug Claude into the store you already run.</p>
+
+      <details class="cart">
+        <summary class="cart-label">
+          <span class="cart-icon">✨</span>
+          <span><span class="cart-title">NEW STORE FROM SCRATCH</span><br><span class="cart-sub">Claude builds you a preview store you can claim</span></span>
+          <span class="cart-arrow">▶</span>
+        </summary>
+        <div class="cart-body">
+          <p>Ask Claude and it walks you through creating a <b>preview store</b>. Open it in your browser, tap <b>Save</b> at the bottom, sign up — your sessions link up and you keep vibing in Claude from there (theme, product pages, all of it — see the other cartridges).</p>
+          <div class="term">
+            <div class="term-bar"><span class="dot r"></span><span class="dot y"></span><span class="dot g"></span><span class="term-name">prompt.txt</span><button class="copy-btn">COPY PROMPT</button></div>
+            <pre>Claude, I want to build a new Shopify store for {{insert whacky idea here}}</pre>
+          </div>
+        </div>
+      </details>
+
+      <details class="cart">
+        <summary class="cart-label">
+          <span class="cart-icon">🔌</span>
+          <span><span class="cart-title">CONNECT AN EXISTING STORE</span><br><span class="cart-sub">Already selling? Plug Claude in</span></span>
+          <span class="cart-arrow">▶</span>
+        </summary>
+        <div class="cart-body">
+          <p>Claude will walk you through the whole connection if you just ask:</p>
+          <div class="term">
+            <div class="term-bar"><span class="dot r"></span><span class="dot y"></span><span class="dot g"></span><span class="term-name">prompt.txt</span><button class="copy-btn">COPY PROMPT</button></div>
+            <pre>Claude, can you help me connect my Shopify store?</pre>
+          </div>
+          <div class="note"><b>💡 ALSO:</b> There's a Shopify Connector for Claude Cowork and Claude Desktop too — same idea, no terminal.</div>
+        </div>
+      </details>
+
+      <details class="cart">
+        <summary class="cart-label">
+          <span class="cart-icon">🎨</span>
+          <span><span class="cart-title">THE THEME BUILDER</span><br><span class="cart-sub">A world-class store designer that interviews you first</span></span>
+          <span class="cart-arrow">▶</span>
+        </summary>
+        <div class="cart-body">
+          <p>This is the big one — a three-phase prompt that interviews you, pitches a plan, then builds your whole theme end to end:</p>
+          <div class="term">
+            <div class="term-bar"><span class="dot r"></span><span class="dot y"></span><span class="dot g"></span><span class="term-name">theme-builder.txt</span><button class="copy-btn">COPY PROMPT</button></div>
+            <pre>You are the world's best e-commerce store designer and conversion strategist, and I've hired you to design and build my online store with me. We'll work in three phases. Don't skip ahead.
+
+PHASE 1 — INTERVIEW ME
+Ask me questions one round at a time (max 4-5 questions per round, then wait for my answers). Cover at least:
+1. The product: what I sell, variants, prices, and any digital products, services, or bundles
+2. The customer: who buys this, what they care about, and what would make them hesitate
+3. The brand: my store name, the mood/aesthetic I want (give me 2-3 named directions to pick from if I'm unsure), and any brands whose look I admire
+4. The story: why this product exists and the one belief I want a visitor to leave with
+5. Assets & constraints: what photos/logos I already have, my budget for apps and tools, my platform preference (if any), and anything that's off-limits
+If my answer is vague, push back once with a sharper version of the question. If I say "you decide," make the call and tell me what you chose and why.
+
+PHASE 2 — PITCH THE PLAN
+Present one recommended concept (not a menu of options): the brand direction, the homepage section-by-section with the actual headlines you'd use, the conversion strategy behind each section, and what you'll build vs. what needs me (photos, accounts, apps). Keep it under a page. I'll approve or redline it.
+
+PHASE 3 — BUILD
+Once I approve, build it end to end without asking for further approval: create/update the store, products, and theme; verify the result renders correctly in a browser; and show me screenshots or open it for me. Finish with a punch list of what's left that only I can do.
+
+My starting idea: [one or two sentences about what you want to sell and the feel you want — e.g. "handmade ceramic mugs with a warm, cottage-kitchen feel, plus a digital recipe e-book"]</pre>
+          </div>
+          <div class="note"><b>⚠️ HEADS UP:</b> Once you go down this path you're kind of locked into editing the majority of your theme this way. Got an existing theme you love? Ask Claude how to make a specific change instead — it'll give you surgical pushes for small edits.</div>
+        </div>
+      </details>
+    </div>
+
+    <!-- WORLD 2 -->
+    <div class="world w2">
+      <span class="world-tag">WORLD 2</span>
+      <h3>📈 GROW IT</h3>
+      <p>Connect your tools (ads, content, Shopify, analytics) and put an AI growth team on retainer.</p>
+
+      <details class="cart">
+        <summary class="cart-label">
+          <span class="cart-icon">🧮</span>
+          <span><span class="cart-title">GROWTH CONSULTANT ON RETAINER</span><br><span class="cart-sub">Ex-McKinsey energy, grounded in YOUR real numbers</span></span>
+          <span class="cart-arrow">▶</span>
+        </summary>
+        <div class="cart-body">
+          <p>From office hours: if you can connect all your tools, Claude can act like a top-tier growth consultant — four phases, no generic advice allowed:</p>
+          <div class="term">
+            <div class="term-bar"><span class="dot r"></span><span class="dot y"></span><span class="dot g"></span><span class="term-name">growth-consultant.txt</span><button class="copy-btn">COPY PROMPT</button></div>
+            <pre>You are a top-tier growth strategy consultant (think ex-McKinsey, now specialized in e-commerce brands) and I've put you on retainer for my business. Your job is to understand what's actually happening in my business, find the biggest opportunities, and help me execute them. We'll work in four phases. Don't skip ahead, and never give me generic advice — every claim you make should be grounded in my real numbers.
+
+MY BUSINESS
+What we sell: [one or two sentences]
+Roughly where we are: [e.g. "$40k/month, mostly from Instagram ads, flat for 6 months"]
+My #1 goal right now: [e.g. "grow profitably", "fix retention", "reduce ad dependence"]
+
+WHERE MY DATA LIVES
+Store: [e.g. Shopify]
+Ads: [e.g. Meta, Google, TikTok]
+Analytics: [e.g. GA4, Triple Whale]
+Email/SMS: [e.g. Klaviyo]
+Content/social: [e.g. Instagram, YouTube, blog]
+Other: [spreadsheets, Notion, anything else]
+Tell me which of these you can connect to directly, walk me through connecting them, and flag which ones you can't see so we know where we're blind.
+
+PHASE 1 — LEARN THE BUSINESS
+Pull real data from every connected tool. Build me a one-page picture of the business: revenue and trend, where customers come from, what it costs to acquire them, what they buy, whether they come back, and which products/channels actually make money. Show your numbers. Where data is missing, say so — don't estimate silently. Ask me only the questions the data can't answer.
+
+PHASE 2 — DIAGNOSE
+Tell me the 3-5 things that matter most, ranked. For each: what the data shows, why it's happening (your hypothesis), and what it's costing me or could earn me, in dollars. Include at least one thing I probably don't want to hear. This is the part I'm paying you for — be direct.
+
+PHASE 3 — OPPORTUNITY PLAN
+Turn the diagnosis into a prioritized plan: for each opportunity, the specific action, expected impact, effort, and how we'll measure success. Sort by impact-to-effort. Tell me which items you can execute yourself with the connected tools and which need me. I'll approve or redline the list.
+
+PHASE 4 — EXECUTE AND REVIEW
+Execute the approved items that are within your reach (drafting campaigns, updating the store, building reports, writing content). Always show me anything customer-facing or that spends money before it goes live. Then set up a recurring rhythm: each week, pull fresh numbers, tell me what changed, whether our bets are working, and what we do next.
+
+STANDING RULES
+- Numbers over opinions. If you haven't seen the data, say "I haven't seen this."
+- Push back on my ideas when the data disagrees. Once, clearly, with the numbers.
+- If I say "you decide," decide and tell me why.
+- Distinguish clearly between "the data shows" and "I'm guessing."</pre>
+          </div>
+        </div>
+      </details>
+
+      <details class="cart">
+        <summary class="cart-label">
+          <span class="cart-icon">🏆</span>
+          <span><span class="cart-title">THE ADS MACHINE</span><br><span class="cart-sub">The "ads tournament" that cut CPC 6x for Happy Hoots</span></span>
+          <span class="cart-arrow">▶</span>
+        </summary>
+        <div class="cart-body">
+          <p>Dom took all the Happy Hoots content, made ads compete against each other to see which converts best, <span class="hl-o hl">cut CPC 6x</span>, learned which themes work, then created digital influencers around the winners.</p>
+          <p><a class="btn" href="https://happyhoots-ad-machine.vercel.app/" target="_blank" rel="noopener">SEE THE ADS MACHINE →</a></p>
+          <p>All the tutorials and prompts are at the bottom of that page.</p>
+          <div class="note"><b>🎬 CONTENT AT SCALE:</b> Dom uses SideShift.app to get content made at scale. Got an Instagram with your own content? Ask Claude to connect it by creating a developer app on Meta — then you can do all sorts of stuff with your own content (same with YouTube and TikTok). For the digital-creator side, Dom is experimenting with Higgsfield and Fastlane.</div>
+        </div>
+      </details>
+
+      <details class="cart">
+        <summary class="cart-label">
+          <span class="cart-icon">📰</span>
+          <span><span class="cart-title">THE ADVERTORIAL PAGE</span><br><span class="cart-sub">A story that sells — on its own domain</span></span>
+          <span class="cart-arrow">▶</span>
+        </summary>
+        <div class="cart-body">
+          <p>See the real example Dom built for Happy Hoots: <a href="https://naturemoms.org/happy-hoots-review" target="_blank" rel="noopener">naturemoms.org/happy-hoots-review</a>. The recipe: buy a domain, connect it to Vercel, and ask Claude:</p>
+          <div class="term">
+            <div class="term-bar"><span class="dot r"></span><span class="dot y"></span><span class="dot g"></span><span class="term-name">advertorial.txt</span><button class="copy-btn">COPY PROMPT</button></div>
+            <pre>Build me a high-converting advertorial page for my product. Before you write a single word, interview me. Ask one question at a time: what the product is, who actually buys it, what pain drives the purchase, my best proof (reviews, results, my own story), the offer and price, and where a sale happens. Keep going until you could sell this thing yourself — don't start writing while you're still guessing.
+
+Then give me a checklist of the content you need from me — product photos, review screenshots, real customer quotes, links — and have high standards: if something I give you is weak or generic, say so and tell me exactly what better looks like. Don't politely work around bad inputs.
+
+Then write the advertorial like a story, not an ad. A real customer's point of view, listicle structure ("6 reasons [my audience] are switching to…"), hook in the very first line, one idea per section, specific details instead of adjectives, one clear call-to-action repeated a few times. Mobile-first — most readers are on phones.
+
+Test yourself before showing me: if any paragraph could be pasted onto a competitor's product without edits, it's too generic — rewrite it. If you don't know something, ask me; never invent facts, reviews, or numbers. Show me a preview and get my sign-off before anything is published, and tell me where you'd send ad traffic first to test it cheaply.</pre>
+          </div>
+        </div>
+      </details>
+
+      <details class="cart">
+        <summary class="cart-label">
+          <span class="cart-icon">⚙️</span>
+          <span><span class="cart-title">OPS &amp; SERVICE AUTOPILOT</span><br><span class="cart-sub">Two real office-hours builds to steal</span></span>
+          <span class="cart-arrow">▶</span>
+        </summary>
+        <div class="cart-body">
+          <p><b>Custom operations flows:</b> one merchant now pipes all the custom metadata from each order into Claude, which runs a daily routine making sure the right materials are pre-ordered for staff the next day. That kind of operational efficiency is totally possible.</p>
+          <p><b>Custom service engine:</b> another merchant connected all their messaging accounts and built an automated response engine — with semantic grouping of questions so more and more of it automates over time.</p>
+          <p>No magic prompt needed for these — just describe your workflow to Claude and ask <span class="hl">"how could we automate this?"</span></p>
+        </div>
+      </details>
+
+      <details class="cart">
+        <summary class="cart-label">
+          <span class="cart-icon">🏭</span>
+          <span><span class="cart-title">THE CONTENT ENGINE</span><br><span class="cart-sub">Benza's build — content at scale, not one post at a time</span></span>
+          <span class="cart-arrow">▶</span>
+        </summary>
+        <div class="cart-body">
+          <p>Instead of making one piece of content at a time, build an engine that <span class="hl">researches what's working, writes in your voice, and produces the visuals</span> — so you create at scale. The rough shape:</p>
+          <ul class="vibes">
+            <li><b>🔍 RESEARCH</b>Point Claude at the accounts and videos already winning in your niche and have it pull the patterns — hooks, angles, formats — that actually get watched.</li>
+            <li><b>✍️ SCRIPTS</b>Have it write short-form scripts in your voice off those patterns. In batches, not one at a time.</li>
+            <li><b>🎥 VISUALS &amp; VIDEO</b>Benza uses Higgsfield to generate the imagery and b-roll (the same tool from the Cartoon Studio cartridge) — content gets made without a full production team.</li>
+            <li><b>📡 DISTRIBUTION</b>Connect your accounts so drafts get queued and posted across platforms on a schedule.</li>
+          </ul>
+          <div class="note"><b>🚦 START SMALL:</b> You don't need all of it on day one. Start with research + scripts, get that working, then add the visual and posting pieces.</div>
+        </div>
+      </details>
+    </div>
+
+    <!-- WORLD 3 -->
+    <div class="world w3">
+      <span class="world-tag">WORLD 3</span>
+      <h3>🎨 CREATE WEIRD STUFF</h3>
+      <p>No product? No problem. And when you have one — make cartoons about it.</p>
+
+      <details class="cart">
+        <summary class="cart-label">
+          <span class="cart-icon">📺</span>
+          <span><span class="cart-title">CARTOON STUDIO</span><br><span class="cart-sub">Build cartoon ads with Dom's open-source skill</span></span>
+          <span class="cart-arrow">▶</span>
+        </summary>
+        <div class="cart-body">
+          <p>Dom built a full cartoon ad for Happy Hoots this way — <a href="https://www.instagram.com/p/DZ36CUmJl1o/" target="_blank" rel="noopener">watch it on Instagram</a>. Want your own? Copy-paste this (it'll prompt you to create a Higgsfield account — the same tool Benza uses for his content engine):</p>
+          <div class="term">
+            <div class="term-bar"><span class="dot r"></span><span class="dot y"></span><span class="dot g"></span><span class="term-name">cartoon.txt</span><button class="copy-btn">COPY PROMPT</button></div>
+            <pre>I want to make a cartoon following this framework from Dom's skill https://github.com/domco685/ai-cartoon-studio-skill — can you walk me through what I need to do?</pre>
+          </div>
+        </div>
+      </details>
+
+      <details class="cart">
+        <summary class="cart-label">
+          <span class="cart-icon">📦</span>
+          <span><span class="cart-title">NO PRODUCT? NO PROBLEM</span><br><span class="cart-sub">Two ways to start selling today</span></span>
+          <span class="cart-arrow">▶</span>
+        </summary>
+        <div class="cart-body">
+          <p><b>Sell someone else's winner.</b> Find a merchant with a high-converting product who'll pay you to sell it through <a href="https://www.shopify.com/collective" target="_blank" rel="noopener">Shopify Collective</a> — you add their product to your store and they fulfill it.</p>
+          <p><b>Make a digital product.</b> Create one with Claude Design, Canva, or Claude Code, then sell it with the <a href="https://www.shopify.com/digital-products" target="_blank" rel="noopener">Digital Products app</a>.</p>
+        </div>
+      </details>
+    </div>
+  </section>
+
+  <section>
+    <div class="card warn-card tilt-l">
+      <span class="badge b3">IRL BONUS</span>
+      <h2>LEVEL UP WITH BENZA</h2>
+      <p>Benza has taught over <span class="hl-o hl" style="color:var(--ink)">500,000 students</span>, is a #1-rated AI instructor on Udemy, and has trained teams at companies like Samsung and L3Harris. He runs multi-day bootcamps and hands-on single-day sessions with companies. Dom went through his first-ever bootcamp and had the best time — yes, even Dom learned something — plus met amazing people who are still in a group chat talking about all this stuff. As bootcamp grad Alexis put it: one of the best investments she's ever made in her business.</p>
+      <p><b style="font-family:'Bungee',cursive;color:var(--teal)">AGENTOS</b> is Benza's program for turning your business into an agentic operation — he installs custom Claude Code and AI automations that handle the repetitive parts, and teaches you and your team to build with agents yourselves. Solo founder or whole company, both work. People build content engines, ad creative pipelines, custom ops automations from real order data, automated inbox/customer-service engines, and connected marketing systems.</p>
+      <div class="links-row">
+        <a class="btn" href="https://app.grateful.gg/aibootcamp3" target="_blank" rel="noopener">🎓 AI AGENT BOOTCAMP</a>
+        <a class="btn teal" href="https://agentos.benzamaman.com" target="_blank" rel="noopener">🤖 AGENTOS</a>
+      </div>
+      <div class="socials" style="justify-content:flex-start;margin-top:22px">
+        <a href="https://instagram.com/benzamaman" target="_blank" rel="noopener">📸 BENZA'S IG</a>
+        <a href="https://www.linkedin.com/in/benza-maman" target="_blank" rel="noopener">💼 LINKEDIN</a>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="card tilt-r">
+      <span class="badge">SAY HI</span>
+      <h2 class="alt2">FOLLOW DOM</h2>
+      <p>Dom doesn't have the bandwidth for hands-on support (Shopify keeps him busy), but talks vibe coding and other things constantly on socials:</p>
+      <div class="socials" style="justify-content:flex-start">
+        <a href="https://www.instagram.com/ambitions.dom/" target="_blank" rel="noopener">📸 INSTAGRAM</a>
+        <a href="https://www.youtube.com/@domcoryell" target="_blank" rel="noopener">📹 YOUTUBE</a>
+        <a href="https://x.com/domcoryell" target="_blank" rel="noopener">✖️ X</a>
+      </div>
+    </div>
+  </section>
+
+  <section style="text-align:center">
+    <a class="btn" href="/#join">⚡ JOIN THE DOMVIBES LIST</a>
+    &nbsp;&nbsp;
+    <a class="btn teal" href="/">← BACK TO DOMVIBES</a>
+  </section>
+
+</main>
+
+<footer>
+  <div class="stars">★ ★ ★</div>
+  <p>© 2026 DOMVIBES · <a href="/">domvibes.vercel.app</a> · best viewed with the volume up</p>
+</footer>
+
+<script>
+  document.querySelectorAll('.copy-btn').forEach(function(btn){
+    btn.addEventListener('click', function(e){
+      e.preventDefault();
+      var pre = btn.closest('.term').querySelector('pre');
+      navigator.clipboard.writeText(pre.textContent).then(function(){
+        btn.textContent = 'COPIED!! ✌️';
+        btn.classList.add('copied');
+        setTimeout(function(){ btn.textContent = 'COPY PROMPT'; btn.classList.remove('copied'); }, 1800);
+      });
+    });
+  });
+</script>
+
+</body>
+</html>

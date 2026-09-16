@@ -1,0 +1,633 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AGENTIC SHOPIFY WORKFLOWS — Recharge × Shopify with Dom Coryell</title>
+<meta name="description" content="Live build: one coding agent running Shopify, Recharge, Meta, and Klaviyo. Follow along and drop your questions as we go.">
+<meta property="og:title" content="AGENTIC SHOPIFY WORKFLOWS — Recharge × Shopify">
+<meta property="og:description" content="One coding agent, every tool. Live with Dom Coryell.">
+<meta property="og:image" content="https://domvibes.ai/recharge/photo-dom.jpg">
+<meta property="og:url" content="https://domvibes.ai/recharge">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="/logo.webp" type="image/webp">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Titan+One&family=Bungee&family=Space+Grotesk:wght@400;500;700&family=IBM+Plex+Mono:wght@400;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --pink:#F52B8E;
+    --teal:#2EE6C8;
+    --yellow:#FFE81A;
+    --purple:#9B5DE5;
+    --orange:#FF9F1C;
+    --mint:#9BE8C4;
+    --ink:#12000B;
+    --shopgreen:#95BF47;
+    --recharge:#3901F1;
+    --bar-h:74px;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html,body{height:100%}
+  body{
+    font-family:'Space Grotesk',sans-serif;
+    color:var(--ink);
+    background-color:var(--pink);
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='320' height='320' viewBox='0 0 320 320'%3E%3Cpath d='M20 40 q15 -22 30 0 t30 0 t30 0' fill='none' stroke='%232EE6C8' stroke-width='7' stroke-linecap='round'/%3E%3Cpath d='M200 280 q15 -22 30 0 t30 0' fill='none' stroke='%239BE8C4' stroke-width='7' stroke-linecap='round'/%3E%3Cpolygon points='250,60 285,115 215,115' fill='%239B5DE5'/%3E%3Cpolygon points='60,230 88,272 32,272' fill='%23FFE81A'/%3E%3Ccircle cx='150' cy='150' r='9' fill='%23FF9F1C'/%3E%3Ccircle cx='300' cy='200' r='7' fill='%23FFE81A'/%3E%3Ccircle cx='40' cy='130' r='7' fill='%23FF9F1C'/%3E%3Cpath d='M120 300 l14 -24 l-8 24 l14 -24' fill='none' stroke='%23FFE81A' stroke-width='6' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+    background-size:320px 320px;
+    overflow:hidden;
+  }
+  ::selection{background:var(--yellow);color:var(--ink)}
+
+  .slide{
+    position:fixed;inset:0 0 var(--bar-h) 0;
+    display:flex;flex-direction:column;align-items:center;justify-content:center;
+    padding:clamp(16px,3vw,44px);
+    padding-top:58px;
+    opacity:0;visibility:hidden;transform:translateX(60px) scale(.98);
+    transition:opacity .3s ease,transform .3s ease,visibility .3s;
+    overflow-y:auto;
+  }
+  .slide.active{opacity:1;visibility:visible;transform:none}
+  .slide.back{transform:translateX(-60px) scale(.98)}
+  .inner{width:min(1120px,100%);margin:auto}
+
+  .kicker{
+    display:inline-block;font-family:'Bungee',cursive;
+    background:var(--ink);color:var(--yellow);
+    padding:.45em .9em;border-radius:10px;transform:rotate(-1.5deg);
+    font-size:clamp(.75rem,1.6vw,1.05rem);letter-spacing:.06em;
+    box-shadow:5px 5px 0 rgba(18,0,11,.35);margin-bottom:18px;
+  }
+  h1{
+    font-family:'Titan One',cursive;
+    font-size:clamp(2.4rem,7.5vw,5.4rem);
+    color:#fff;-webkit-text-stroke:3px var(--ink);
+    text-shadow:8px 8px 0 var(--teal);
+    line-height:1.05;letter-spacing:.02em;
+  }
+  h2{
+    font-family:'Titan One',cursive;
+    font-size:clamp(1.8rem,4.8vw,3.2rem);
+    color:#fff;-webkit-text-stroke:2.5px var(--ink);
+    text-shadow:6px 6px 0 var(--teal);
+    line-height:1.1;margin-bottom:.5em;
+  }
+  h2.alt{text-shadow:6px 6px 0 var(--purple)}
+  h2.alt2{text-shadow:6px 6px 0 var(--orange)}
+  h2.alt3{text-shadow:6px 6px 0 var(--shopgreen)}
+  h2.alt4{text-shadow:6px 6px 0 var(--yellow)}
+  .sub{
+    font-family:'Bungee',cursive;color:#ffd9ec;
+    font-size:clamp(1rem,2.4vw,1.5rem);text-shadow:2px 2px 0 var(--ink);
+    line-height:1.5;max-width:820px;
+  }
+
+  .card{
+    background:#fff;border:6px solid var(--ink);border-radius:22px;
+    box-shadow:12px 12px 0 var(--ink);
+    padding:clamp(20px,3.4vw,40px);position:relative;
+  }
+  .card p,.card li{font-size:clamp(1.05rem,2vw,1.4rem);line-height:1.6}
+  .hl{background:var(--yellow);padding:.05em .25em;border-radius:.3em;font-weight:700}
+  .hl-t{background:var(--teal)} .hl-p{background:#d8befa} .hl-o{background:#ffd9a3}
+
+  /* terminal prompt window */
+  .term{
+    background:var(--ink);border:5px solid var(--ink);border-radius:16px;
+    box-shadow:10px 10px 0 rgba(18,0,11,.4);overflow:hidden;text-align:left;
+  }
+  .term-bar{
+    background:#2a0a1d;display:flex;align-items:center;gap:8px;
+    padding:10px 14px;font-family:'IBM Plex Mono',monospace;color:#ff9fce;font-size:.8rem;
+  }
+  .dot{width:13px;height:13px;border-radius:50%}
+  .dot.r{background:#ff5f57}.dot.y{background:#febc2e}.dot.g{background:#28c840}
+  .term-title{margin-left:6px;opacity:.85}
+  .copy-btn{
+    margin-left:auto;font-family:'Bungee',cursive;font-size:.68rem;
+    background:var(--teal);color:var(--ink);border:2px solid var(--ink);
+    border-radius:8px;padding:.35em .8em;cursor:pointer;
+  }
+  .copy-btn:active{transform:translateY(2px)}
+  .term-body{
+    font-family:'IBM Plex Mono',monospace;color:#e9ffe9;
+    padding:clamp(16px,2.6vw,30px);
+    font-size:clamp(1rem,2.1vw,1.55rem);line-height:1.6;white-space:pre-wrap;
+  }
+  .term-body .ps1{color:var(--teal);font-weight:600}
+  .term-body .ok{color:#28c840}
+
+  .returns{
+    margin-top:20px;font-family:'Bungee',cursive;
+    font-size:clamp(.85rem,1.8vw,1.15rem);
+    color:#fff;text-shadow:2px 2px 0 var(--ink);
+  }
+  .returns b{background:var(--teal);color:var(--ink);text-shadow:none;
+    padding:.2em .5em;border-radius:8px;border:3px solid var(--ink);display:inline-block;transform:rotate(-1deg)}
+
+  /* who am i */
+  .who{display:flex;gap:clamp(20px,4vw,56px);align-items:center;flex-wrap:wrap;justify-content:center}
+  .polaroid{
+    background:#fff;border:5px solid var(--ink);border-radius:10px;
+    padding:12px 12px 16px;box-shadow:10px 10px 0 var(--ink);
+    transform:rotate(-2.5deg);width:min(420px,86vw);flex:0 0 auto;
+  }
+  .polaroid img{display:block;width:100%;border-radius:4px;border:3px solid var(--ink)}
+  .polaroid figcaption{font-family:'Bungee',cursive;font-size:.8rem;text-align:center;margin-top:10px}
+  .who-txt{flex:1 1 380px;min-width:300px;text-align:left}
+  .roles{list-style:none;margin-top:14px}
+  .roles li{
+    font-family:'Bungee',cursive;font-size:clamp(1.05rem,2.4vw,1.7rem);
+    background:#fff;border:4px solid var(--ink);border-radius:12px;
+    box-shadow:6px 6px 0 var(--ink);padding:.5em .8em;margin:.55em 0;
+    display:inline-block;
+  }
+  .roles li:nth-child(1){transform:rotate(-1.2deg);background:var(--yellow)}
+  .roles li:nth-child(2){transform:rotate(.9deg);background:var(--teal)}
+  .roles li:nth-child(3){transform:rotate(-.7deg);background:#ffd9a3}
+  .who-txt .receipts{margin-top:14px;color:#ffd9ec;font-family:'Bungee',cursive;
+    font-size:clamp(.8rem,1.6vw,1rem);text-shadow:2px 2px 0 var(--ink);line-height:1.6}
+
+  /* landscape */
+  .land{display:flex;gap:clamp(14px,2.4vw,30px);flex-wrap:wrap;justify-content:center;align-items:stretch;margin-top:8px}
+  .land .card{flex:1 1 380px;max-width:560px;text-align:left}
+  .land h3{font-family:'Bungee',cursive;font-size:clamp(1rem,2vw,1.35rem);margin-bottom:.7em}
+  .old-row{display:flex;align-items:center;gap:10px;margin:.5em 0;flex-wrap:wrap;
+    font-size:clamp(.95rem,1.8vw,1.2rem)}
+  .old-row .arrow{font-weight:700}
+  .chip{
+    display:inline-block;font-family:'Bungee',cursive;
+    border:3px solid var(--ink);border-radius:10px;padding:.35em .7em;
+    font-size:clamp(.72rem,1.5vw,1rem);box-shadow:4px 4px 0 var(--ink);background:#fff;
+  }
+  .chip.shopify{background:var(--shopgreen)}
+  .chip.recharge{background:#c9b8ff}
+  .chip.meta{background:#a5c8ff}
+  .chip.vercel{background:var(--ink);color:#fff}
+  .chip.klaviyo{background:#ffd9a3}
+  .hub{display:flex;flex-direction:column;align-items:center;gap:16px}
+  .hub-agent{
+    font-family:'Titan One',cursive;font-size:clamp(1.3rem,2.8vw,2rem);
+    background:var(--orange);border:5px solid var(--ink);border-radius:16px;
+    box-shadow:8px 8px 0 var(--ink);padding:.4em .8em;transform:rotate(-1.5deg);
+  }
+  .hub-minis{display:flex;gap:8px;flex-wrap:wrap;justify-content:center;align-items:center}
+  .hub-minis .chip{font-size:.62rem;box-shadow:3px 3px 0 var(--ink);opacity:.85}
+  .hub-minis .chip.big{font-size:clamp(.85rem,1.7vw,1.15rem);opacity:1;box-shadow:5px 5px 0 var(--ink);transform:rotate(-1.5deg)}
+  .hub-wire{font-size:1.6rem;line-height:1}
+  .hub-tools{display:flex;gap:10px;flex-wrap:wrap;justify-content:center}
+
+  /* setup slide */
+  .setup-points{list-style:none;text-align:left;margin-top:22px;display:grid;gap:12px}
+  .setup-points li{
+    background:#fff;border:4px solid var(--ink);border-radius:14px;
+    box-shadow:7px 7px 0 var(--ink);padding:.7em 1em;
+    font-size:clamp(1rem,2vw,1.35rem);
+  }
+
+  /* questions slide */
+  .qcount{
+    font-family:'Titan One',cursive;font-size:clamp(2.6rem,7vw,5rem);
+    color:#fff;-webkit-text-stroke:3px var(--ink);text-shadow:7px 7px 0 var(--purple);
+  }
+  .qcount-label{font-family:'Bungee',cursive;color:#ffd9ec;text-shadow:2px 2px 0 var(--ink);
+    font-size:clamp(.85rem,1.8vw,1.15rem);margin-bottom:18px}
+  .themes{display:grid;gap:14px;text-align:left;max-width:940px;margin:0 auto}
+  .theme{
+    background:#fff;border:5px solid var(--ink);border-radius:16px;
+    box-shadow:8px 8px 0 var(--ink);padding:16px 20px;
+  }
+  .theme .t-head{font-family:'Bungee',cursive;font-size:clamp(.85rem,1.7vw,1.1rem);
+    margin-bottom:.35em;display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+  .theme .t-n{background:var(--yellow);border:3px solid var(--ink);border-radius:8px;
+    padding:.1em .5em;font-size:.85em}
+  .theme .t-q{font-size:clamp(1rem,2vw,1.35rem);line-height:1.5}
+  .theme:nth-child(odd){transform:rotate(-.5deg)}
+  .theme:nth-child(even){transform:rotate(.5deg)}
+  .q-empty{font-family:'Bungee',cursive;color:#ffd9ec;text-shadow:2px 2px 0 var(--ink);
+    font-size:clamp(1rem,2.2vw,1.5rem);text-align:center}
+
+  /* bottom question bar */
+  .qbar{
+    position:fixed;left:0;right:0;bottom:0;height:var(--bar-h);
+    background:var(--ink);display:flex;align-items:center;gap:10px;
+    padding:0 clamp(10px,2vw,22px);z-index:50;
+    border-top:4px solid var(--yellow);
+  }
+  .qbar .qb-label{font-family:'Bungee',cursive;color:var(--yellow);
+    font-size:clamp(.65rem,1.4vw,.95rem);white-space:nowrap}
+  .qbar input{
+    flex:1;min-width:0;font-family:'Space Grotesk',sans-serif;
+    font-size:clamp(.95rem,1.8vw,1.15rem);padding:.55em .8em;
+    border:3px solid var(--ink);border-radius:12px;outline:3px solid var(--teal);
+  }
+  .qbar button{
+    font-family:'Bungee',cursive;font-size:clamp(.75rem,1.5vw,1rem);
+    background:var(--teal);color:var(--ink);border:3px solid #fff;
+    border-radius:12px;padding:.55em 1.1em;cursor:pointer;white-space:nowrap;
+  }
+  .qbar button:active{transform:translateY(2px)}
+  .qbar .qb-count{
+    font-family:'Bungee',cursive;color:#fff;font-size:clamp(.65rem,1.3vw,.9rem);
+    background:var(--purple);border:3px solid #fff;border-radius:10px;
+    padding:.35em .7em;white-space:nowrap;
+  }
+  .toast{
+    position:fixed;bottom:calc(var(--bar-h) + 14px);left:50%;transform:translateX(-50%) rotate(-1deg);
+    background:var(--yellow);border:4px solid var(--ink);border-radius:12px;
+    box-shadow:6px 6px 0 var(--ink);font-family:'Bungee',cursive;
+    padding:.6em 1.1em;font-size:.9rem;z-index:60;opacity:0;pointer-events:none;
+    transition:opacity .25s;
+  }
+  .toast.show{opacity:1}
+
+  /* nav */
+  .navdots{
+    position:fixed;top:14px;left:50%;transform:translateX(-50%);
+    display:flex;gap:8px;z-index:50;
+  }
+  .navdots span{
+    width:13px;height:13px;border-radius:50%;background:rgba(255,255,255,.45);
+    border:2.5px solid var(--ink);cursor:pointer;transition:background .2s,transform .2s;
+  }
+  .navdots span.on{background:var(--yellow);transform:scale(1.25)}
+  .navarrow{
+    position:fixed;top:50%;transform:translateY(-50%);z-index:50;
+    font-family:'Titan One',cursive;font-size:1.6rem;
+    background:#fff;border:4px solid var(--ink);border-radius:50%;
+    width:56px;height:56px;cursor:pointer;box-shadow:5px 5px 0 var(--ink);
+    display:flex;align-items:center;justify-content:center;user-select:none;
+  }
+  .navarrow:active{transform:translateY(-50%) translate(2px,2px);box-shadow:2px 2px 0 var(--ink)}
+  .navarrow.prev{left:14px}.navarrow.next{right:14px}
+  .slideno{
+    position:fixed;top:14px;right:16px;z-index:50;
+    font-family:'Bungee',cursive;font-size:.8rem;color:#fff;text-shadow:2px 2px 0 var(--ink);
+  }
+  .homelogo{position:fixed;top:10px;left:14px;z-index:50;transform:rotate(-3deg)}
+  .homelogo img{width:52px;border:3px solid #fff;outline:3px solid var(--ink);
+    border-radius:10px;box-shadow:4px 4px 0 var(--ink);display:block}
+
+  @media (max-width:640px){
+    .navarrow{display:none}
+    .qbar .qb-label{display:none}
+    .navdots{top:auto;bottom:calc(var(--bar-h) + 10px)}
+    .slideno{top:10px;right:12px}
+  }
+</style>
+</head>
+<body>
+
+<a class="homelogo" href="/" title="DOMVIBES home"><img src="/logo.webp" alt="DOMVIBES logo"></a>
+<div class="slideno" id="slideno">1 / 10</div>
+<div class="navdots" id="navdots"></div>
+<div class="navarrow prev" id="prevBtn" title="previous">←</div>
+<div class="navarrow next" id="nextBtn" title="next">→</div>
+
+<!-- 1 · TITLE -->
+<section class="slide" data-n="1">
+  <div class="inner" style="text-align:center">
+    <span class="kicker">RECHARGE × SHOPIFY · LIVE WITH DOM</span>
+    <h1>AGENTIC SHOPIFY<br>WORKFLOWS</h1>
+    <p class="sub" style="margin:26px auto 0">one coding agent. your whole stack.<br>we build a real win-back machine, live, right now.</p>
+    <p class="sub" style="margin:30px auto 0;font-size:clamp(.8rem,1.6vw,1rem);color:#fff">press → to roll · drop questions in the bar below any time 👇</p>
+  </div>
+</section>
+
+<!-- 2 · WHO AM I -->
+<section class="slide" data-n="2">
+  <div class="inner">
+    <div class="who">
+      <figure class="polaroid">
+        <img src="photo-dom.jpg" alt="Dom Coryell presenting on stage">
+        <figcaption>caught mid-vibe. as usual.</figcaption>
+      </figure>
+      <div class="who-txt">
+        <h2 class="alt">WHO AM I?</h2>
+        <p class="sub" style="color:#fff">DOM CORYELL</p>
+        <ul class="roles">
+          <li>PRODUCT DIRECTOR</li><br>
+          <li>ETERNAL TINKERER</li><br>
+          <li>VIBE CODE EXTRAORDINAIRE</li>
+        </ul>
+        <p class="receipts">growth at Facebook, Instagram, and Shopify.<br>now I ship something every single day.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 3 · THE LANDSCAPE -->
+<section class="slide" data-n="3">
+  <div class="inner" style="text-align:center">
+    <h2>THE LANDSCAPE JUST FLIPPED</h2>
+    <div class="land">
+      <div class="card">
+        <h3>😮‍💨 THE OLD WAY</h3>
+        <div class="old-row"><span>you</span><span class="arrow">→</span><span class="chip shopify">SHOPIFY</span><span>build the store</span></div>
+        <div class="old-row"><span>you</span><span class="arrow">→</span><span class="chip recharge">RECHARGE</span><span>set up subscriptions</span></div>
+        <div class="old-row"><span>you</span><span class="arrow">→</span><span class="chip meta">META</span><span>build the ads</span></div>
+        <div class="old-row"><span>you</span><span class="arrow">→</span><span class="chip klaviyo">KLAVIYO</span><span>write the emails</span></div>
+        <p style="margin-top:14px"><span class="hl">a new tab, a new login, a new headache. every time.</span></p>
+      </div>
+      <div class="card" style="background:#fff">
+        <h3>⚡ THE NEW WAY</h3>
+        <div class="hub">
+          <div class="hub-agent">YOUR CODING AGENT</div>
+          <div class="hub-minis">
+            <span class="chip big" style="background:var(--yellow)">CLAUDE CODE</span>
+            <span class="chip">codex</span>
+            <span class="chip">cursor</span>
+            <span class="chip">antigravity</span>
+          </div>
+          <div class="hub-wire">↓ ↓ ↓ ↓ ↓</div>
+          <div class="hub-tools">
+            <span class="chip shopify">SHOPIFY</span>
+            <span class="chip recharge">RECHARGE</span>
+            <span class="chip meta">META</span>
+            <span class="chip vercel">VERCEL</span>
+            <span class="chip klaviyo">KLAVIYO</span>
+          </div>
+          <p style="margin-top:10px"><span class="hl-t hl">one agent talks to all of them. you just talk to the agent.</span></p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 4 · TODAY'S SETUP -->
+<section class="slide" data-n="4">
+  <div class="inner" style="text-align:center;max-width:900px">
+    <h2 class="alt2">TODAY'S SETUP</h2>
+    <div class="term">
+      <div class="term-bar"><span class="dot r"></span><span class="dot y"></span><span class="dot g"></span><span class="term-title">claude</span></div>
+      <div class="term-body"><span class="ps1">➜</span> claude
+<span class="ok">✔</span> connected: your Shopify store (MCP)
+<span class="ok">✔</span> ready when you are</div>
+    </div>
+    <ul class="setup-points">
+      <li>🔌 we assume your <b>Shopify store is already connected to Claude</b>. if not, no stress, setup instructions land in your inbox after this.</li>
+      <li>🗣️ what that means: your terminal <b>talks directly to your store</b>. customers, products, orders. all of it.</li>
+      <li>🏗️ today we run one full workflow: <span class="hl">find sleeping customers → build the offer → subscription → ads → email</span></li>
+    </ul>
+  </div>
+</section>
+
+<!-- 5 · STEP 1 -->
+<section class="slide" data-n="5">
+  <div class="inner" style="text-align:center;max-width:960px">
+    <span class="kicker">STEP 1 OF 5</span>
+    <h2>FIND THE SLEEPERS</h2>
+    <div class="term">
+      <div class="term-bar"><span class="dot r"></span><span class="dot y"></span><span class="dot g"></span><span class="term-title">prompt 01</span><button class="copy-btn">COPY</button></div>
+      <div class="term-body" data-prompt><span class="ps1">➜</span> Look at my Shopify store. Who are my customers, and which of them have NEVER placed an order? Give me the list with names, emails, and when they signed up.</div>
+    </div>
+    <p class="returns">returns: <b>a clean list of window shoppers</b> 👀</p>
+  </div>
+</section>
+
+<!-- 6 · STEP 2 -->
+<section class="slide" data-n="6">
+  <div class="inner" style="text-align:center;max-width:960px">
+    <span class="kicker">STEP 2 OF 5</span>
+    <h2 class="alt">BUILD THE OFFER</h2>
+    <div class="term">
+      <div class="term-bar"><span class="dot r"></span><span class="dot y"></span><span class="dot g"></span><span class="term-title">prompt 02</span><button class="copy-btn">COPY</button></div>
+      <div class="term-body" data-prompt><span class="ps1">➜</span> Look at the products my buyers actually purchase. Build me a first-order offer for the never-ordered list. Make it stupid simple to say yes to.</div>
+    </div>
+    <p class="returns">returns: <b>the offer, built from real purchase data</b> 🎁</p>
+  </div>
+</section>
+
+<!-- 7 · STEP 3 -->
+<section class="slide" data-n="7">
+  <div class="inner" style="text-align:center;max-width:960px">
+    <span class="kicker">STEP 3 OF 5</span>
+    <h2 class="alt3">SPIN UP THE SUBSCRIPTION</h2>
+    <div class="term">
+      <div class="term-bar"><span class="dot r"></span><span class="dot y"></span><span class="dot g"></span><span class="term-title">prompt 03</span><button class="copy-btn">COPY</button></div>
+      <div class="term-body" data-prompt><span class="ps1">➜</span> Check my Recharge subscriptions. If one already fits this offer, use it. If not, create a new subscription with the offer baked in.</div>
+    </div>
+    <p class="returns">returns: <b>a live subscription in Recharge</b> 🔁</p>
+  </div>
+</section>
+
+<!-- 8 · STEP 4 -->
+<section class="slide" data-n="8">
+  <div class="inner" style="text-align:center;max-width:960px">
+    <span class="kicker">STEP 4 OF 5</span>
+    <h2 class="alt2">MAKE THE ADS</h2>
+    <div class="term">
+      <div class="term-bar"><span class="dot r"></span><span class="dot y"></span><span class="dot g"></span><span class="term-title">prompt 04</span><button class="copy-btn">COPY</button></div>
+      <div class="term-body" data-prompt><span class="ps1">➜</span> Take the product images and create ads with this offer. Give me 3 variations I can run on Meta today.</div>
+    </div>
+    <p class="returns">returns: <b>ad creative, ready to launch</b> 🎨</p>
+  </div>
+</section>
+
+<!-- 9 · STEP 5 -->
+<section class="slide" data-n="9">
+  <div class="inner" style="text-align:center;max-width:960px">
+    <span class="kicker">STEP 5 OF 5</span>
+    <h2 class="alt4">AUDIENCE + EMAIL</h2>
+    <div class="term">
+      <div class="term-bar"><span class="dot r"></span><span class="dot y"></span><span class="dot g"></span><span class="term-title">prompt 05</span><button class="copy-btn">COPY</button></div>
+      <div class="term-body" data-prompt><span class="ps1">➜</span> Build a Meta custom audience of everyone on that list who hasn't bought. Then write the Klaviyo email with the offer and set it up.</div>
+    </div>
+    <p class="returns">returns: <b>audience live on Meta + email queued in Klaviyo</b> 📬</p>
+  </div>
+</section>
+
+<!-- 10 · YOUR QUESTIONS -->
+<section class="slide" data-n="10">
+  <div class="inner" style="text-align:center">
+    <h2 class="alt">YOUR QUESTIONS</h2>
+    <div class="qcount" id="qcount">0</div>
+    <div class="qcount-label">questions dropped during this talk · summarized live by Claude</div>
+    <div class="themes" id="themes">
+      <p class="q-empty">nothing yet. hit the bar below and ask me anything 👇</p>
+    </div>
+  </div>
+</section>
+
+<div class="qbar">
+  <span class="qb-label">GOT A QUESTION?</span>
+  <input id="qinput" type="text" maxlength="500" placeholder="type it here, I'll answer at the end…">
+  <button id="qsend">ASK 🎤</button>
+  <span class="qb-count" id="qbarcount">0 ?s</span>
+</div>
+<div class="toast" id="toast">got it! 🙌</div>
+
+<script>
+  var CONVEX = "https://dazzling-squid-751.convex.site";
+  var slides = Array.prototype.slice.call(document.querySelectorAll(".slide"));
+  var N = slides.length;
+  var cur = 0;
+
+  var dots = document.getElementById("navdots");
+  slides.forEach(function (_, i) {
+    var d = document.createElement("span");
+    d.addEventListener("click", function () { go(i); });
+    dots.appendChild(d);
+  });
+
+  function go(i) {
+    if (i < 0 || i >= N) return;
+    var dir = i < cur ? "back" : "";
+    slides.forEach(function (s, j) {
+      s.classList.toggle("active", j === i);
+      s.classList.toggle("back", j < i);
+    });
+    cur = i;
+    document.getElementById("slideno").textContent = (i + 1) + " / " + N;
+    Array.prototype.forEach.call(dots.children, function (d, j) {
+      d.classList.toggle("on", j === i);
+    });
+    location.hash = i + 1;
+    if (i === N - 1) startSummary(); else stopSummary();
+  }
+  function next() { go(cur + 1); }
+  function prev() { go(cur - 1); }
+
+  document.getElementById("nextBtn").addEventListener("click", next);
+  document.getElementById("prevBtn").addEventListener("click", prev);
+
+  document.addEventListener("keydown", function (e) {
+    if (e.target === document.getElementById("qinput")) return;
+    // PageDown/PageUp covers presentation clickers
+    if (["ArrowRight", "PageDown", " ", "Enter"].indexOf(e.key) !== -1) { e.preventDefault(); next(); }
+    if (["ArrowLeft", "PageUp", "Backspace"].indexOf(e.key) !== -1) { e.preventDefault(); prev(); }
+    if (e.key === "Home") go(0);
+    if (e.key === "End") go(N - 1);
+  });
+
+  var touchX = null;
+  document.addEventListener("touchstart", function (e) {
+    if (e.target.closest(".qbar")) return;
+    touchX = e.touches[0].clientX;
+  }, { passive: true });
+  document.addEventListener("touchend", function (e) {
+    if (touchX === null) return;
+    var dx = e.changedTouches[0].clientX - touchX;
+    if (Math.abs(dx) > 60) (dx < 0 ? next() : prev());
+    touchX = null;
+  }, { passive: true });
+
+  document.querySelectorAll(".copy-btn").forEach(function (btn) {
+    btn.addEventListener("click", function () {
+      var body = btn.closest(".term").querySelector("[data-prompt]");
+      var text = body.textContent.replace(/^\s*➜\s*/, "").trim();
+      navigator.clipboard.writeText(text).then(function () {
+        btn.textContent = "COPIED!";
+        setTimeout(function () { btn.textContent = "COPY"; }, 1400);
+      });
+    });
+  });
+
+  // ---- questions ----
+  var toast = document.getElementById("toast");
+  function showToast(msg) {
+    toast.textContent = msg;
+    toast.classList.add("show");
+    setTimeout(function () { toast.classList.remove("show"); }, 1800);
+  }
+  function setCount(n) {
+    document.getElementById("qbarcount").textContent = n + " ?s";
+    document.getElementById("qcount").textContent = n;
+  }
+
+  function ask() {
+    var input = document.getElementById("qinput");
+    var text = input.value.trim();
+    if (text.length < 3) { showToast("gimme a real question 😅"); return; }
+    fetch(CONVEX + "/question", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ text: text, source: "domvibes.ai/recharge" }),
+    })
+      .then(function (r) { return r.json(); })
+      .then(function (d) {
+        if (d.status === "asked") {
+          input.value = "";
+          setCount(d.count);
+          showToast("got it! 🙌");
+        } else {
+          showToast(d.error || "hmm, try again");
+        }
+      })
+      .catch(function () { showToast("network hiccup, try again"); });
+  }
+  document.getElementById("qsend").addEventListener("click", ask);
+  document.getElementById("qinput").addEventListener("keydown", function (e) {
+    if (e.key === "Enter") ask();
+  });
+
+  function renderSummary(d) {
+    setCount(d.questionCount);
+    var box = document.getElementById("themes");
+    if (!d.summary) {
+      box.innerHTML = '<p class="q-empty">' +
+        (d.questionCount > 0
+          ? "summarizing " + d.questionCount + " questions… ⏳"
+          : "nothing yet. hit the bar below and ask me anything 👇") +
+        "</p>";
+      return;
+    }
+    var rows = d.summary.split("\n").filter(function (l) { return l.indexOf("::") !== -1; });
+    if (rows.length === 0) {
+      box.innerHTML = '<div class="theme"><div class="t-q"></div></div>';
+      box.querySelector(".t-q").textContent = d.summary;
+      return;
+    }
+    box.innerHTML = "";
+    rows.forEach(function (line) {
+      var parts = line.split("::");
+      var head = parts[0].trim();
+      var q = parts.slice(1).join("::").trim();
+      var m = head.match(/^(.*)\((\d+)\s*asked\)\s*$/i);
+      var title = m ? m[1].trim() : head;
+      var n = m ? m[2] : null;
+      var el = document.createElement("div");
+      el.className = "theme";
+      var h = document.createElement("div");
+      h.className = "t-head";
+      h.textContent = title + " ";
+      if (n) {
+        var badge = document.createElement("span");
+        badge.className = "t-n";
+        badge.textContent = n + " asked";
+        h.appendChild(badge);
+      }
+      var body = document.createElement("div");
+      body.className = "t-q";
+      body.textContent = q;
+      el.appendChild(h);
+      el.appendChild(body);
+      box.appendChild(el);
+    });
+  }
+
+  var summaryTimer = null;
+  function fetchSummary(refresh) {
+    fetch(CONVEX + "/summary" + (refresh ? "?refresh=1" : ""))
+      .then(function (r) { return r.json(); })
+      .then(renderSummary)
+      .catch(function () {});
+  }
+  function startSummary() {
+    fetchSummary(true);
+    if (!summaryTimer) summaryTimer = setInterval(function () { fetchSummary(true); }, 20000);
+  }
+  function stopSummary() {
+    if (summaryTimer) { clearInterval(summaryTimer); summaryTimer = null; }
+  }
+
+  // light count refresh so the bar badge stays honest pre-finale
+  fetch(CONVEX + "/summary").then(function (r) { return r.json(); })
+    .then(function (d) { setCount(d.questionCount); }).catch(function () {});
+
+  var start = parseInt(location.hash.replace("#", ""), 10);
+  go(isNaN(start) ? 0 : Math.min(Math.max(start - 1, 0), N - 1));
+</script>
+</body>
+</html>

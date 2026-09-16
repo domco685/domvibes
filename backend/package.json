@@ -1,0 +1,8 @@
+{
+  "name": "domvibes-backend",
+  "version": "1.0.0",
+  "private": true,
+  "dependencies": {
+    "convex": "^1.42.3"
+  }
+}

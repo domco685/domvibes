@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DOMVIBES — Vibe Coding Expeditions</title>
+<meta name="description" content="DOMVIBES. Good vibes for the DOM. Join the vibe coding expeditions — we pick a wild idea and ship it to the internet before the vibes wear off.">
+<meta property="og:title" content="DOMVIBES">
+<meta property="og:description" content="Vibe coding expeditions. Big ideas, loud colors, shipped fast.">
+<meta property="og:image" content="https://domvibes.vercel.app/og.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://domvibes.vercel.app/og.jpg">
+<link rel="icon" href="/logo.webp" type="image/webp">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Titan+One&family=Bungee&family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --pink:#F52B8E;
+    --pink-deep:#E0187B;
+    --teal:#2EE6C8;
+    --yellow:#FFE81A;
+    --purple:#9B5DE5;
+    --orange:#FF9F1C;
+    --mint:#9BE8C4;
+    --ink:#12000B;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{
+    font-family:'Space Grotesk',sans-serif;
+    color:var(--ink);
+    background-color:var(--pink);
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='320' height='320' viewBox='0 0 320 320'%3E%3Cpath d='M20 40 q15 -22 30 0 t30 0 t30 0' fill='none' stroke='%232EE6C8' stroke-width='7' stroke-linecap='round'/%3E%3Cpath d='M200 280 q15 -22 30 0 t30 0' fill='none' stroke='%239BE8C4' stroke-width='7' stroke-linecap='round'/%3E%3Cpolygon points='250,60 285,115 215,115' fill='%239B5DE5'/%3E%3Cpolygon points='60,230 88,272 32,272' fill='%23FFE81A'/%3E%3Ccircle cx='150' cy='150' r='9' fill='%23FF9F1C'/%3E%3Ccircle cx='300' cy='200' r='7' fill='%23FFE81A'/%3E%3Ccircle cx='40' cy='130' r='7' fill='%23FF9F1C'/%3E%3Cpath d='M120 300 l14 -24 l-8 24 l14 -24' fill='none' stroke='%23FFE81A' stroke-width='6' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+    background-size:320px 320px;
+    overflow-x:hidden;
+  }
+  ::selection{background:var(--yellow);color:var(--ink)}
+
+  /* ticker */
+  .ticker{
+    background:var(--ink);
+    color:var(--yellow);
+    font-family:'Bungee',cursive;
+    font-size:clamp(.8rem,2vw,1rem);
+    padding:.55em 0;
+    white-space:nowrap;
+    overflow:hidden;
+    border-bottom:4px solid var(--ink);
+    position:relative;
+  }
+  .ticker-inner{display:inline-block;animation:scroll 28s linear infinite}
+  @keyframes scroll{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+  .ticker span{margin:0 1.2em}
+  .t-pink{color:var(--pink)} .t-teal{color:var(--teal)} .t-purp{color:#c9a6ff}
+
+  .wrap{max-width:980px;margin:0 auto;padding:0 20px}
+
+  /* hero */
+  .hero{padding:56px 0 30px;text-align:center;position:relative}
+  .logo-sticker{
+    display:inline-block;
+    max-width:min(480px,88vw);
+    transform:rotate(-2.5deg);
+    border:8px solid #fff;
+    outline:5px solid var(--ink);
+    box-shadow:14px 14px 0 var(--ink);
+    border-radius:14px;
+    transition:transform .2s;
+  }
+  .logo-sticker:hover{transform:rotate(1.5deg) scale(1.02)}
+  .logo-sticker img{display:block;width:100%;border-radius:6px}
+  .tagline{
+    font-family:'Bungee',cursive;
+    font-size:clamp(1.05rem,3.2vw,1.6rem);
+    color:#fff;
+    text-shadow:3px 3px 0 var(--ink);
+    margin:34px auto 10px;
+    max-width:640px;
+    line-height:1.35;
+  }
+  .tagline em{font-style:normal;color:var(--yellow)}
+  .sub{color:#ffd9ec;font-weight:500;font-size:1.05rem;max-width:560px;margin:0 auto}
+
+  .btn{
+    display:inline-block;
+    font-family:'Titan One',cursive;
+    font-size:clamp(1.1rem,3vw,1.5rem);
+    letter-spacing:.03em;
+    color:var(--ink);
+    background:var(--yellow);
+    border:5px solid var(--ink);
+    border-radius:999px;
+    padding:.65em 1.5em;
+    margin-top:30px;
+    text-decoration:none;
+    box-shadow:8px 8px 0 var(--ink);
+    transition:transform .12s, box-shadow .12s;
+    cursor:pointer;
+  }
+  .btn:hover{transform:translate(3px,3px);box-shadow:4px 4px 0 var(--ink)}
+  .btn:active{transform:translate(8px,8px);box-shadow:0 0 0 var(--ink)}
+
+  /* cards */
+  section{padding:44px 0}
+  .card{
+    background:#fff;
+    border:6px solid var(--ink);
+    border-radius:22px;
+    box-shadow:12px 12px 0 var(--ink);
+    padding:clamp(26px,5vw,48px);
+    position:relative;
+  }
+  .card.tilt-l{transform:rotate(-1deg)}
+  .card.tilt-r{transform:rotate(1deg)}
+  h2{
+    font-family:'Titan One',cursive;
+    font-size:clamp(1.7rem,5vw,2.6rem);
+    -webkit-text-stroke:2px var(--ink);
+    color:#fff;
+    text-shadow:5px 5px 0 var(--teal);
+    margin-bottom:.6em;
+    letter-spacing:.02em;
+  }
+  h2.alt{text-shadow:5px 5px 0 var(--purple)}
+  h2.alt2{text-shadow:5px 5px 0 var(--orange)}
+  .card p{font-size:clamp(1.02rem,2.4vw,1.18rem);line-height:1.65;margin-bottom:1em}
+  .card p:last-child{margin-bottom:0}
+  .hl{background:var(--yellow);padding:.05em .25em;border-radius:.3em;font-weight:700}
+  .hl-t{background:var(--teal)} .hl-p{background:#d8befa}
+
+  .badge{
+    position:absolute;top:-22px;right:22px;
+    font-family:'Bungee',cursive;font-size:.85rem;
+    background:var(--teal);border:4px solid var(--ink);border-radius:999px;
+    padding:.4em .9em;transform:rotate(4deg);
+    box-shadow:4px 4px 0 var(--ink);
+  }
+  .badge.b2{background:var(--yellow)} .badge.b3{background:var(--orange)}
+
+  .grid3{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:26px;margin-top:28px}
+  .mini{
+    border:5px solid var(--ink);border-radius:16px;padding:22px;
+    box-shadow:7px 7px 0 var(--ink);
+  }
+  .mini h3{font-family:'Bungee',cursive;font-size:1.05rem;margin-bottom:.5em}
+  .mini p{font-size:.98rem;line-height:1.55;margin:0}
+  .mini.c1{background:#CFF9EE}
+  .mini.c2{background:#FFF6B0}
+  .mini.c3{background:#EBDCFE}
+
+  /* join */
+  .join-card{background:var(--ink);color:#fff;border-color:#fff;box-shadow:12px 12px 0 rgba(0,0,0,.45)}
+  .join-card h2{text-shadow:5px 5px 0 var(--pink)}
+  .join-card p{color:#ffd9ec}
+  .join-form{display:flex;flex-wrap:wrap;gap:16px;margin-top:26px}
+  .join-form input{
+    flex:1 1 300px;
+    font-family:'Space Grotesk',sans-serif;
+    font-size:clamp(1.1rem,3vw,1.45rem);
+    font-weight:700;
+    padding:.75em 1em;
+    border:5px solid #fff;
+    border-radius:16px;
+    background:#fff;
+    color:var(--ink);
+    outline:none;
+    box-shadow:7px 7px 0 var(--teal);
+  }
+  .join-form input:focus{box-shadow:7px 7px 0 var(--yellow)}
+  .join-form .btn{margin-top:0;flex:0 0 auto}
+  .join-note{font-size:.95rem;color:#ff9fce !important;margin-top:18px}
+  .big-email{
+    display:inline-block;
+    font-family:'Bungee',cursive;
+    font-size:clamp(1.05rem,3.4vw,1.7rem);
+    color:var(--teal);
+    text-decoration:none;
+    border-bottom:5px dotted var(--pink);
+    margin-top:8px;
+    word-break:break-all;
+  }
+  .big-email:hover{color:var(--yellow)}
+  .joined-msg{
+    display:none;
+    font-family:'Bungee',cursive;
+    color:var(--yellow) !important;
+    margin-top:18px;
+  }
+
+  footer{
+    text-align:center;
+    padding:40px 20px 60px;
+    color:#fff;
+    font-size:.9rem;
+  }
+  footer .stars{font-size:1.3rem;letter-spacing:.4em;color:var(--yellow);text-shadow:2px 2px 0 var(--ink)}
+  footer p{margin-top:10px;text-shadow:1px 1px 0 var(--ink)}
+  .counter{
+    display:inline-block;margin-top:14px;
+    font-family:'Bungee',cursive;
+    background:#000;color:#3CFF6E;border:3px solid #fff;
+    padding:.3em .7em;letter-spacing:.25em;font-size:.9rem;
+  }
+</style>
+</head>
+<body>
+
+<div class="ticker" aria-hidden="true">
+  <div class="ticker-inner">
+    <span>★ DOMVIBES ★</span><span class="t-teal">VIBE CODING EXPEDITIONS</span><span class="t-pink">SHIP IT BEFORE THE VIBES WEAR OFF</span><span class="t-purp">EST. THE 90s (IN SPIRIT)</span><span>★ DOMVIBES ★</span><span class="t-teal">NO GATEKEEPING</span><span class="t-pink">BIG IDEAS · LOUD COLORS</span><span class="t-purp">JOIN THE LIST ↓</span>
+    <span>★ DOMVIBES ★</span><span class="t-teal">VIBE CODING EXPEDITIONS</span><span class="t-pink">SHIP IT BEFORE THE VIBES WEAR OFF</span><span class="t-purp">EST. THE 90s (IN SPIRIT)</span><span>★ DOMVIBES ★</span><span class="t-teal">NO GATEKEEPING</span><span class="t-pink">BIG IDEAS · LOUD COLORS</span><span class="t-purp">JOIN THE LIST ↓</span>
+  </div>
+</div>
+
+<header class="hero wrap">
+  <div class="logo-sticker"><img src="/logo.webp" alt="DOMVIBES logo — chunky white letters on a hot pink 90s Memphis pattern" width="512" height="512"></div>
+  <p class="tagline">GOOD VIBES FOR THE <em>DOM</em>.<br>AND EVERY OTHER LAYER OF THE STACK.</p>
+  <p class="sub">Yes, that DOM. The Document Object Model deserves to have fun too.</p>
+  <a class="btn" href="#join">JOIN THE LIST ⚡</a>
+  <p style="margin-top:22px"><a href="/shopify-claude-code" style="font-family:'Bungee',cursive;font-size:.95rem;color:var(--ink);background:var(--teal);border:4px solid var(--ink);border-radius:999px;padding:.5em 1.2em;text-decoration:none;box-shadow:5px 5px 0 var(--ink);display:inline-block;transform:rotate(-1.5deg)">🆕 SHOPIFY × CLAUDE CODE FIELD GUIDE →</a></p>
+</header>
+
+<main class="wrap">
+
+  <section>
+    <div class="card tilt-l">
+      <span class="badge">100% HUMAN</span>
+      <h2>WHO'S BEHIND THIS?</h2>
+      <p>Hey, I'm Dom 👋 — the human behind DOMVIBES (yes it's my name, yes it's also the Document Object Model, the pun was right there). I build <span class="hl">weird, fun internet things</span> — fast. Dating-advice bots, kids' cartoon apps, banana-themed storefronts, AI experiments that probably shouldn't work but do. If it can be shipped in a weekend and make someone grin, I'm building it.</p>
+      <p>My whole philosophy: the internet used to be <span class="hl-t hl">playful</span>. Geocities glitter, marquee tags, under-construction GIFs. Somewhere along the way we all got tasteful and beige. DOMVIBES is my corner of the web where the saturation slider stays <span class="hl-p hl">all the way up</span> — and where I show people that building software is now something anyone can do.</p>
+    </div>
+  </section>
+
+  <section>
+    <div class="card tilt-r">
+      <span class="badge b2">BYO IDEA</span>
+      <h2 class="alt">WHAT'S A VIBE CODING EXPEDITION?</h2>
+      <p>A <span class="hl">vibe coding expedition</span> is a group adventure where we take one wild idea and ship it to the real internet — together, out loud, before the excitement wears off. No computer science degree. No permission slip. You describe what you want, AI tools write the code with you, and I guide the whole trek from blank screen to live URL.</p>
+      <div class="grid3">
+        <div class="mini c1">
+          <h3>🏕️ THE VIBE</h3>
+          <p>Bring an idea you actually care about — an app for your kid, your side hustle, your weird hobby. Enthusiasm is the only prerequisite.</p>
+        </div>
+        <div class="mini c2">
+          <h3>⚡ THE CODE</h3>
+          <p>We vibe code it: you steer in plain English, AI does the typing, and you learn just enough of what's underneath to stay dangerous.</p>
+        </div>
+        <div class="mini c3">
+          <h3>🚀 THE SUMMIT</h3>
+          <p>Every expedition ends the same way — your thing, live on the internet, with a URL you can text to your group chat. We ship. Always.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="join">
+    <div class="card join-card">
+      <span class="badge b3">FREE 4EVER</span>
+      <h2>JOIN THE LIST</h2>
+      <p>Get first dibs on upcoming expeditions, behind-the-scenes builds, and the occasional unhinged experiment. No spam — just vibes, shipped straight to your inbox.</p>
+      <form class="join-form" id="joinForm">
+        <input type="email" id="emailInput" name="email" placeholder="you@awesome.com" required autocomplete="email" aria-label="Your email address">
+        <button class="btn" type="submit" id="joinBtn">JOIN ⚡</button>
+      </form>
+      <p class="joined-msg" id="joinedMsg"></p>
+      <p class="join-note">One click and you're in — no confirmation emails, no hoops. Wanna say more than an email address? Holler directly:</p>
+      <a class="big-email" href="mailto:niquecoryell@gmail.com?subject=DOMVIBES">niquecoryell@gmail.com</a>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="stars">★ ★ ★</div>
+  <p>© 2026 DOMVIBES · best viewed in Netscape Navigator 4.0 at 800×600</p>
+  <div class="counter">VISITOR&nbsp;No.&nbsp;001337</div>
+</footer>
+
+<script>
+  var SUBSCRIBE_URL = 'https://dazzling-squid-751.convex.site/subscribe';
+  var joinForm = document.getElementById('joinForm');
+  var joinBtn = document.getElementById('joinBtn');
+  var joinedMsg = document.getElementById('joinedMsg');
+
+  joinForm.addEventListener('submit', function(e){
+    e.preventDefault();
+    var email = document.getElementById('emailInput').value.trim();
+    if(!email) return;
+    joinBtn.disabled = true;
+    joinBtn.textContent = 'JOINING…';
+    fetch(SUBSCRIBE_URL, {
+      method: 'POST',
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify({email: email, source: 'domvibes.vercel.app/#join'})
+    }).then(function(res){ return res.json(); }).then(function(data){
+      if(data.status === 'subscribed'){
+        joinedMsg.textContent = "RADICAL!! You're on the list. ✌️";
+      } else if(data.status === 'already_subscribed'){
+        joinedMsg.textContent = "You're already on the list — extra vibes for the enthusiasm!! 💖";
+      } else {
+        joinedMsg.textContent = 'Hmm, that email looks off — double-check it and try again?';
+      }
+      joinedMsg.style.display = 'block';
+      joinBtn.disabled = false;
+      joinBtn.textContent = 'JOIN ⚡';
+      if(data.status === 'subscribed' || data.status === 'already_subscribed'){
+        joinForm.reset();
+      }
+    }).catch(function(){
+      joinedMsg.textContent = 'Gah, the internet hiccuped. Try again, or email niquecoryell@gmail.com directly.';
+      joinedMsg.style.display = 'block';
+      joinBtn.disabled = false;
+      joinBtn.textContent = 'JOIN ⚡';
+    });
+  });
+</script>
+
+</body>
+</html>
