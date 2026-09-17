@@ -110,6 +110,9 @@ http.route({
       cached === null ||
       ((cached.text === "" || cached.questionCount !== questions.length) &&
         Date.now() - cached.generatedAt > 15_000);
+    // raw questions ride along so the slide can show them even when there
+    // are too few to summarize (newest last, matching listAll order)
+    const raw = questions.map((q) => q.text);
     if (wantRefresh && stale && questions.length > 0) {
       try {
         const fresh = await ctx.runAction(internal.questions.summarize, {});
@@ -117,6 +120,7 @@ http.route({
           summary: fresh.text,
           questionCount: questions.length,
           summarizedCount: fresh.questionCount,
+          questions: raw,
         });
       } catch (e) {
         // fall through to cached so the slide never breaks mid-talk,
@@ -128,6 +132,7 @@ http.route({
       summary: cached?.text ?? "",
       questionCount: questions.length,
       summarizedCount: cached?.questionCount ?? 0,
+      questions: raw,
     });
   }),
 });

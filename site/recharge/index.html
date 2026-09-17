@@ -217,6 +217,9 @@
   .theme .t-q{font-size:clamp(1rem,2vw,1.35rem);line-height:1.5}
   .q-empty{font-family:'Space Grotesk',sans-serif;color:var(--dim);
     font-size:clamp(1rem,2.2vw,1.5rem);text-align:center}
+  .rawq{max-width:940px;margin:18px auto 0;text-align:left;font-family:'IBM Plex Mono',monospace}
+  .rawq-h{color:var(--dim);letter-spacing:.08em;font-size:clamp(.68rem,1.3vw,.85rem);margin-bottom:6px}
+  .rawq-item{color:#fff;opacity:.85;font-size:clamp(.78rem,1.5vw,.98rem);line-height:1.65}
 
   /* bottom question bar */
   .qbar{
@@ -530,6 +533,8 @@
     <div class="themes" id="themes">
       <p class="q-empty">nothing yet. hit the bar below and ask me anything 👇</p>
     </div>
+    <div class="rawq" id="rawq" hidden>
+    </div>
   </div>
 </section>
 
@@ -646,8 +651,28 @@
     if (e.key === "Enter") ask();
   });
 
+  function renderRaw(d) {
+    var raw = document.getElementById("rawq");
+    var qs = d.questions || [];
+    if (qs.length === 0) { raw.hidden = true; return; }
+    raw.hidden = false;
+    var latest = qs.slice(-6).reverse();
+    raw.innerHTML = "";
+    var h = document.createElement("div");
+    h.className = "rawq-h";
+    h.textContent = "RAW FEED · latest " + latest.length + " of " + qs.length;
+    raw.appendChild(h);
+    latest.forEach(function (t) {
+      var el = document.createElement("div");
+      el.className = "rawq-item";
+      el.textContent = "→ " + t;
+      raw.appendChild(el);
+    });
+  }
+
   function renderSummary(d) {
     setCount(d.questionCount);
+    renderRaw(d);
     var box = document.getElementById("themes");
     if (!d.summary) {
       box.innerHTML = '<p class="q-empty">' +
