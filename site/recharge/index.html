@@ -138,6 +138,14 @@
   .returns b{background:var(--teal);color:var(--ink);
     padding:.25em .6em;display:inline-block;font-weight:600}
 
+  .link-btn{
+    display:inline-block;margin-top:26px;font-family:'Archivo Black',sans-serif;
+    font-size:clamp(.9rem,1.9vw,1.25rem);text-decoration:none;letter-spacing:.03em;
+    background:var(--yellow);color:var(--ink);border:3px solid var(--ink);
+    padding:.7em 1.4em;box-shadow:8px 8px 0 var(--pink);
+  }
+  .link-btn:active{transform:translate(4px,4px);box-shadow:4px 4px 0 var(--pink)}
+
   /* who am i */
   .who{display:flex;gap:clamp(20px,4vw,56px);align-items:center;flex-wrap:wrap;justify-content:center}
   .polaroid{
@@ -517,10 +525,11 @@
     <span class="kicker">STEP 5 OF 5</span>
     <h2 class="alt4">TAKING IT A STEP FURTHER</h2>
     <div class="term">
-      <div class="term-bar"><span class="dot r"></span><span class="dot y"></span><span class="dot g"></span><span class="term-title">ads / content</span><button class="copy-btn">COPY</button></div>
-      <div class="term-body" data-prompt><span class="ps1">➜</span> Take the product images and this offer. Create 3 ad variations I can run on Meta today, plus social content to match.</div>
+      <div class="term-bar"><span class="dot r"></span><span class="dot y"></span><span class="dot g"></span><span class="term-title">prompt 05</span><button class="copy-btn">COPY</button></div>
+      <div class="term-body" data-prompt style="font-size:clamp(.85rem,1.75vw,1.3rem)"><span class="ps1">➜</span> Convert that free gift and subscription offer into a high converting sales page on Vercel with my coffee store brand. Make it much more focused on the free dripper, we'll use this for new customer acquisition. So basically have it be loud about the free dripper with the subscription, and then really sell how amazing our coffee is too.</div>
     </div>
-    <p class="returns">returns: <b>ads + content, ready to launch</b> 🎨</p>
+    <p class="returns">returns: <b>a live acquisition page, deployed</b> 🚀</p>
+    <a class="link-btn" href="https://lock-in-your-roast.vercel.app/?utm_source=klaviyo&utm_medium=email&utm_campaign=upsell-ladder&utm_content=offer-2-annual-dripper&_kx=W06fnIg_liY2AjGd9bQ-Cw.ReKepv" target="_blank" rel="noopener">SEE THE LIVE PAGE →</a>
   </div>
 </section>
 
