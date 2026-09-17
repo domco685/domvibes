@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FREE DRIPPER ADS — one prompt, three creatives</title>
+<meta name="description" content="The Meta ads campaign Claude built from one prompt: 3 distinct creatives selling the free dripper subscription offer. Everything created paused for review.">
+<meta property="og:title" content="FREE DRIPPER ADS — one prompt, three creatives">
+<meta property="og:description" content="A full Meta campaign built by a coding agent. 3 angles: gift, value, quality.">
+<meta property="og:url" content="https://domvibes.ai/recharge/ads">
+<link rel="icon" href="/logo.webp" type="image/webp">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Space+Grotesk:wght@400;500;700&family=IBM+Plex+Mono:wght@400;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --pink:#F52B8E;
+    --teal:#2EE6C8;
+    --yellow:#FFE81A;
+    --purple:#9B5DE5;
+    --orange:#FF9F1C;
+    --ink:#12000B;
+    --ink2:#1d0a15;
+    --line:#3a2530;
+    --dim:#d9c9d2;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{
+    font-family:'Space Grotesk',sans-serif;
+    color:#fff;
+    background-color:var(--ink);
+    background-image:repeating-linear-gradient(135deg,transparent 0 26px,rgba(245,43,142,.05) 26px 28px);
+    padding:clamp(24px,5vw,64px) 16px 80px;
+  }
+  .wrap{max-width:1180px;margin:0 auto}
+  .kicker{
+    display:inline-block;font-family:'IBM Plex Mono',monospace;font-weight:600;
+    font-size:clamp(.7rem,1.4vw,.9rem);letter-spacing:.12em;
+    background:var(--yellow);color:var(--ink);border:2px solid var(--ink);
+    padding:.35em .9em;box-shadow:5px 5px 0 var(--pink);margin-bottom:22px;
+  }
+  h1{
+    font-family:'Archivo Black',sans-serif;font-size:clamp(1.7rem,5vw,3.4rem);
+    line-height:1.05;letter-spacing:.01em;text-shadow:6px 6px 0 var(--purple);
+    margin-bottom:14px;
+  }
+  .sub{color:var(--dim);font-size:clamp(1rem,2vw,1.25rem);max-width:820px;line-height:1.55}
+  .sub b{color:#fff}
+  .facts{
+    display:flex;flex-wrap:wrap;gap:10px;margin:26px 0 44px;
+    font-family:'IBM Plex Mono',monospace;font-size:clamp(.72rem,1.4vw,.9rem);
+  }
+  .facts span{
+    background:var(--ink2);border:2px solid var(--line);color:var(--dim);
+    padding:.45em .8em;white-space:nowrap;
+  }
+  .facts span b{color:var(--teal);font-weight:600}
+  .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:26px}
+  .ad{
+    background:#fff;color:var(--ink);
+    box-shadow:10px 10px 0 var(--pink);
+    display:flex;flex-direction:column;
+  }
+  .ad .angle{
+    font-family:'IBM Plex Mono',monospace;font-weight:600;font-size:.78rem;
+    letter-spacing:.1em;background:var(--ink);color:var(--yellow);
+    padding:.6em .9em;display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;
+  }
+  .ad .angle em{color:var(--teal);font-style:normal}
+  .ad img{display:block;width:100%;aspect-ratio:1/1;object-fit:cover}
+  .ad .body{padding:18px 20px 22px;display:flex;flex-direction:column;gap:10px;flex:1}
+  .ad .msg{font-size:.98rem;line-height:1.5}
+  .ad h2{font-family:'Archivo Black',sans-serif;font-size:1.15rem;line-height:1.2}
+  .ad .desc{color:#5c4450;font-size:.88rem}
+  .ad .cta{
+    margin-top:auto;align-self:flex-start;
+    font-family:'Archivo Black',sans-serif;font-size:.85rem;text-decoration:none;
+    background:var(--teal);color:var(--ink);border:3px solid var(--ink);
+    padding:.55em 1.1em;box-shadow:5px 5px 0 var(--purple);
+  }
+  .ad .cta:active{transform:translate(3px,3px);box-shadow:2px 2px 0 var(--purple)}
+  .how{
+    margin-top:56px;background:var(--ink2);border:2px solid var(--line);
+    padding:24px 26px;max-width:900px;
+  }
+  .how h3{font-family:'Archivo Black',sans-serif;font-size:clamp(1rem,2vw,1.3rem);
+    color:var(--yellow);margin-bottom:12px}
+  .how p{color:var(--dim);line-height:1.6;font-size:clamp(.92rem,1.8vw,1.05rem)}
+  .how p b{color:#fff}
+  .back{
+    display:inline-block;margin-top:34px;font-family:'Archivo Black',sans-serif;
+    font-size:clamp(.85rem,1.8vw,1.05rem);text-decoration:none;letter-spacing:.03em;
+    background:var(--yellow);color:var(--ink);border:3px solid var(--ink);
+    padding:.65em 1.3em;box-shadow:7px 7px 0 var(--pink);
+  }
+  .back:active{transform:translate(4px,4px);box-shadow:3px 3px 0 var(--pink)}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <span class="kicker">META ADS · BUILT BY ONE PROMPT</span>
+  <h1>FREE DRIPPER — NEW SUBSCRIBER ACQUISITION</h1>
+  <p class="sub">One prompt: <b>"create a Meta ads campaign with 3 distinct creative ads about the offer, for me to review."</b> The agent shipped a campaign, an ad set, and three ads with three different angles on the same offer. Nothing spends until it gets turned on.</p>
+
+  <div class="facts">
+    <span>objective <b>traffic</b></span>
+    <span>budget <b>$20/day</b></span>
+    <span>audience <b>US · 18–65</b></span>
+    <span>status <b>PAUSED for review</b></span>
+    <span>landing <b>lock-in-your-roast.vercel.app</b></span>
+  </div>
+
+  <div class="grid">
+    <article class="ad">
+      <div class="angle">AD 1 · GIFT ANGLE <em>free dripper</em></div>
+      <img src="https://cdn.shopify.com/s/files/1/0598/1346/2038/files/33be3ff1cb715564f9c05474529aad13.png?v=1789399773" alt="Ceramic pour-over dripper product shot">
+      <div class="body">
+        <p class="msg">Every new coffee subscription comes with our $24 Ceramic Pour-Over Dripper — free, in your first box. Plus 15% off every bag, forever. Skip or cancel anytime.</p>
+        <h2>This $24 Dripper Is Free</h2>
+        <p class="desc">Just add coffee.</p>
+        <a class="cta" href="https://lock-in-your-roast.vercel.app?utm_source=facebook&utm_medium=paid-social&utm_campaign=free-dripper-acquisition&utm_content=ad-1-free-dripper" target="_blank" rel="noopener">SHOP NOW</a>
+      </div>
+    </article>
+
+    <article class="ad">
+      <div class="angle">AD 2 · VALUE ANGLE <em>first-box math</em></div>
+      <img src="https://cdn.shopify.com/s/files/1/0598/1346/2038/files/28084168083797b4714a7c509727d7e2.png?v=1789399760" alt="First box: coffee bag plus dripper flat lay">
+      <div class="body">
+        <p class="msg">Do the math: House Blend at $10.63 + a $24 dripper for $0.00. That's $36.50 of coffee and gear for under eleven bucks — and every bag after is 15% off, forever.</p>
+        <h2>Your First Box: 71% Off</h2>
+        <p class="desc">Free $24 dripper with any subscription.</p>
+        <a class="cta" href="https://lock-in-your-roast.vercel.app?utm_source=facebook&utm_medium=paid-social&utm_campaign=free-dripper-acquisition&utm_content=ad-2-first-box-math" target="_blank" rel="noopener">SHOP NOW</a>
+      </div>
+    </article>
+
+    <article class="ad">
+      <div class="angle">AD 3 · QUALITY ANGLE <em>coffee first</em></div>
+      <img src="https://cdn.shopify.com/s/files/1/0598/1346/2038/files/db51e1d7ff46fd93026ddad166a47dff.png?v=1789399770" alt="Single origin coffee jars styled product shot">
+      <div class="body">
+        <p class="msg">Single origins from Yirgacheffe to Huila, roasted the week they ship. Subscribe and every bag is 15% off — and we'll throw in a $24 pour-over dripper, free.</p>
+        <h2>Roasted to Order. 15% Off Forever.</h2>
+        <p class="desc">The dripper is free. The coffee is the point.</p>
+        <a class="cta" href="https://lock-in-your-roast.vercel.app?utm_source=facebook&utm_medium=paid-social&utm_campaign=free-dripper-acquisition&utm_content=ad-3-coffee-first" target="_blank" rel="noopener">SHOP NOW</a>
+      </div>
+    </article>
+  </div>
+
+  <div class="how">
+    <h3>HOW THIS GOT BUILT</h3>
+    <p>The agent read the offer off the acquisition page, wrote three angles (gift, value, quality), generated the creatives, uploaded them to the ad account via the Marketing API, then created the campaign, ad set, and ads — <b>everything paused</b>, with per-ad UTM tracking pointed at the landing page. Human reviews, human flips the switch. $0 spent until then.</p>
+  </div>
+
+  <a class="back" href="/recharge/">← BACK TO THE DECK</a>
+</div>
+</body>
+</html>
