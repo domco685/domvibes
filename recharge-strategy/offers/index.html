@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex">
+<title>Recharge Demo Coffee — Offer Lab</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --charcoal: #0f0f10;
+  --charcoal-soft: #18181a;
+  --bone: #e8e4dc;
+  --bone-dim: #c4bfb6;
+  --gold: #d9ae36;
+  --gold-soft: #b3902c;
+  --orange: #cf5310;
+  --yellow: #ffd84d;
+  --red: #e02020;
+  --border: #2a2a2e;
+  --text: var(--bone);
+  --text-secondary: var(--bone-dim);
+  --text-dim: #8f8a80;
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  background: var(--charcoal);
+  color: var(--text);
+  font-family: 'Poppins', system-ui, sans-serif;
+  line-height: 1.6;
+  padding-inline: clamp(16px, 4vw, 64px);
+}
+.wrap { max-width: 1180px; margin: 0 auto; }
+
+header { padding: 36px 0 0; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 8px; }
+.logo { font-family: 'Archivo Black', sans-serif; font-size: 18px; letter-spacing: 0.18em; text-transform: uppercase; }
+.logo .nk { color: var(--bone); }
+.logo .lab { color: var(--gold); }
+header a { color: var(--text-dim); font-size: 13px; text-decoration: none; border-bottom: 1px solid var(--border); }
+header a:hover { color: var(--gold); }
+
+.hero { padding: 64px 0 24px; }
+.hero h1 {
+  font-family: 'Archivo Black', sans-serif;
+  font-size: clamp(30px, 5vw, 56px);
+  line-height: 1.08;
+  text-transform: uppercase;
+  max-width: 20ch;
+}
+.hero h1 em { font-style: normal; color: var(--gold); }
+.hero p { max-width: 62ch; margin-top: 18px; color: var(--text-secondary); font-size: 16px; }
+
+.stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 14px; margin: 36px 0 12px; }
+.stat {
+  background: var(--charcoal-soft); border: 1px solid var(--border); border-radius: 14px;
+  padding: 18px 20px; box-shadow: 3px 3px 0 #000;
+}
+.stat b { display: block; font-family: 'Fraunces', serif; font-size: 34px; font-weight: 700; color: var(--gold); line-height: 1.1; }
+.stat span { font-size: 12.5px; color: var(--text-dim); text-transform: uppercase; letter-spacing: 0.08em; }
+.stat.warn b { color: var(--orange); }
+
+section { padding: 52px 0 8px; }
+h2 {
+  font-family: 'Archivo Black', sans-serif; font-size: clamp(20px, 3vw, 30px);
+  text-transform: uppercase; margin-bottom: 6px;
+}
+h2 .num { color: var(--gold); margin-right: 10px; }
+.sub { color: var(--text-secondary); max-width: 68ch; margin-bottom: 26px; }
+
+/* product mix bars */
+.mix { background: var(--charcoal-soft); border: 1px solid var(--border); border-radius: 14px; padding: 26px 28px; box-shadow: 3px 3px 0 #000; }
+.mixrow { display: grid; grid-template-columns: minmax(140px, 220px) 1fr 90px; gap: 14px; align-items: center; padding: 7px 0; }
+.mixrow .name { font-size: 14px; color: var(--text); }
+.mixrow .name small { color: var(--text-dim); }
+.bartrack { height: 18px; position: relative; }
+.bar { height: 18px; background: var(--gold); border-radius: 0 4px 4px 0; min-width: 3px; }
+.mixrow.gear .bar { background: var(--gold-soft); opacity: 0.55; }
+.mixrow .val { font-family: 'Fraunces', serif; font-size: 15px; font-weight: 600; color: var(--bone); text-align: right; white-space: nowrap; }
+.mixnote { margin-top: 18px; font-size: 13.5px; color: var(--text-dim); border-top: 1px solid var(--border); padding-top: 14px; }
+.mixnote strong { color: var(--bone-dim); }
+
+/* offer cards */
+.offers { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(460px, 100%), 1fr)); gap: 20px; }
+.offer {
+  background: var(--charcoal-soft); border: 1px solid var(--border); border-radius: 14px;
+  padding: 26px 28px; box-shadow: 4px 4px 0 #000; display: flex; flex-direction: column; gap: 14px;
+}
+.offer.headline { border-color: var(--gold-soft); box-shadow: 4px 4px 0 var(--gold-soft); }
+.tagrow { display: flex; gap: 8px; flex-wrap: wrap; }
+.tag {
+  font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; font-weight: 600;
+  border: 1px solid var(--border); border-radius: 20px; padding: 3px 12px; color: var(--text-dim);
+}
+.tag.gold { color: var(--charcoal); background: var(--gold); border-color: var(--gold); }
+.tag.orange { color: var(--charcoal); background: var(--orange); border-color: var(--orange); }
+.offer h3 { font-family: 'Fraunces', serif; font-size: 24px; font-weight: 700; line-height: 1.2; }
+.deal {
+  font-size: 15px; color: var(--bone); background: #101012; border: 1px dashed var(--gold-soft);
+  border-radius: 10px; padding: 12px 16px;
+}
+.deal b { color: var(--gold); }
+.why { font-size: 14px; color: var(--text-secondary); }
+.why b { color: var(--bone); font-weight: 600; }
+.math { border-top: 1px solid var(--border); padding-top: 14px; }
+.math .label { font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--text-dim); margin-bottom: 8px; }
+.math table { width: 100%; border-collapse: collapse; font-size: 14px; }
+.math th { text-align: left; font-size: 11px; text-transform: uppercase; letter-spacing: 0.08em; color: var(--text-dim); font-weight: 600; padding: 4px 8px 4px 0; border-bottom: 1px solid var(--border); }
+.math td { padding: 6px 8px 6px 0; border-bottom: 1px solid #1f1f22; color: var(--text-secondary); }
+.math td.n { font-family: 'Fraunces', serif; font-weight: 600; color: var(--bone); }
+.math tr.base td { color: var(--bone); }
+.math tr.base td.n { color: var(--gold); }
+.percust { font-size: 13px; color: var(--text-dim); margin-top: 8px; }
+
+/* outcomes */
+.outcome { background: var(--charcoal-soft); border: 1px solid var(--gold-soft); border-radius: 14px; padding: 28px; box-shadow: 4px 4px 0 var(--gold-soft); overflow-x: auto; }
+.outcome table { width: 100%; border-collapse: collapse; font-size: 15px; min-width: 560px; }
+.outcome th { text-align: left; font-size: 12px; text-transform: uppercase; letter-spacing: 0.08em; color: var(--text-dim); padding: 8px 12px 8px 0; border-bottom: 1px solid var(--border); }
+.outcome td { padding: 10px 12px 10px 0; border-bottom: 1px solid #1f1f22; color: var(--text-secondary); }
+.outcome td.n { font-family: 'Fraunces', serif; font-size: 19px; font-weight: 700; color: var(--bone); }
+.outcome tr.base td { color: var(--bone); }
+.outcome tr.base td.n { color: var(--gold); }
+.outnote { margin-top: 16px; font-size: 13.5px; color: var(--text-dim); }
+.outnote strong { color: var(--bone-dim); }
+
+/* ship list */
+.ship { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(340px, 100%), 1fr)); gap: 14px; }
+.shipstep { background: var(--charcoal-soft); border: 1px solid var(--border); border-radius: 12px; padding: 18px 20px; font-size: 14px; color: var(--text-secondary); box-shadow: 3px 3px 0 #000; }
+.shipstep b { display: block; color: var(--bone); font-weight: 600; margin-bottom: 4px; }
+.shipstep code { font-size: 12.5px; color: var(--gold); background: #101012; padding: 1px 6px; border-radius: 6px; }
+
+.fine { padding: 44px 0 60px; font-size: 12.5px; color: var(--text-dim); max-width: 78ch; border-top: 1px solid var(--border); margin-top: 52px; }
+.fine b { color: var(--bone-dim); }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header>
+  <div class="logo"><span class="nk">Nordkap</span> <span class="lab">Offer Lab</span></div>
+  <a href="../">← subscription strategy</a>
+</header>
+
+<div class="hero">
+  <h1>241 people already act like subscribers. <em>none of them pay like one.</em></h1>
+  <p>These are Recharge Demo Coffee customers with no subscription who keep coming back and manually rebuying the same product roughly every 30 days. They have done the hard part themselves. The offers below convert the habit into recurring revenue before it lapses.</p>
+</div>
+
+<div class="stats">
+  <div class="stat"><b>241</b><span>repeat buyers, no sub</span></div>
+  <div class="stat"><b>3.5</b><span>avg rebuys of same product</span></div>
+  <div class="stat"><b>~30d</b><span>avg gap between orders</span></div>
+  <div class="stat"><b>€46K</b><span>full-price annual run-rate</span></div>
+  <div class="stat warn"><b>78</b><span>gone quiet since July</span></div>
+</div>
+
+<section id="mix">
+  <h2><span class="num">01</span>What they buy</h2>
+  <p class="sub">One number matters here: 233 of 241 rebuy coffee. Gear shows up in fewer than 10 carts. So coffee is the subscription, and gear is the sweetener you give away to win the annual commitment.</p>
+  <div class="mix">
+    <div class="mixrow"><div class="name">Colombia Huila <small>· €14.50</small></div><div class="bartrack"><div class="bar" style="width:100%"></div></div><div class="val">44 buyers</div></div>
+    <div class="mixrow"><div class="name">House Blend <small>· €12.50</small></div><div class="bartrack"><div class="bar" style="width:86%"></div></div><div class="val">38 buyers</div></div>
+    <div class="mixrow"><div class="name">Midnight Sun Dark Roast <small>· €13.00</small></div><div class="bartrack"><div class="bar" style="width:84%"></div></div><div class="val">37 buyers</div></div>
+    <div class="mixrow"><div class="name">Swiss Water Decaf <small>· €13.00</small></div><div class="bartrack"><div class="bar" style="width:77%"></div></div><div class="val">34 buyers</div></div>
+    <div class="mixrow"><div class="name">Ethiopia Yirgacheffe <small>· €15.50</small></div><div class="bartrack"><div class="bar" style="width:66%"></div></div><div class="val">29 buyers</div></div>
+    <div class="mixrow"><div class="name">Polar Espresso Blend <small>· €13.50</small></div><div class="bartrack"><div class="bar" style="width:52%"></div></div><div class="val">23 buyers</div></div>
+    <div class="mixrow"><div class="name">Roaster's Variety Box <small>· €36.00</small></div><div class="bartrack"><div class="bar" style="width:39%"></div></div><div class="val">17 buyers</div></div>
+    <div class="mixrow"><div class="name">Cold Brew Pack <small>· €16.00</small></div><div class="bartrack"><div class="bar" style="width:25%"></div></div><div class="val">11 buyers</div></div>
+    <div class="mixrow gear"><div class="name">Brew gear (4 items) <small>· €22 to €79</small></div><div class="bartrack"><div class="bar" style="width:18%"></div></div><div class="val">8 buyers</div></div>
+    <div class="mixnote"><strong>Read:</strong> average bag is €15.38 and they rebuy it 3.5 times on their own. 90 of them buy single origins or the variety box, which means they like exploring. That is your upgrade path.</div>
+  </div>
+</section>
+
+<section id="offers">
+  <h2><span class="num">02</span>The offers</h2>
+  <p class="sub">Four offers, one per segment, mutually exclusive. Every customer sees exactly one. Percentage off carries the coffee subscription. Complimentary gear is reserved for the annual commitment, where the bigger incentive is paid for by twelve locked months.</p>
+
+  <div class="offers">
+
+    <div class="offer headline">
+      <div class="tagrow"><span class="tag gold">Core offer</span><span class="tag">233 coffee repeaters</span></div>
+      <h3>1 · Subscribe &amp; Save 15</h3>
+      <div class="deal">Your usual coffee, on autopilot. <b>15% off every order</b>, delivered monthly. Skip, swap, or cancel anytime.</div>
+      <p class="why"><b>Why it works:</b> they already reorder every ~30 days by hand. This removes the chore and pays them for it. 15% is the subscribe-and-save standard, low enough to protect margin, high enough to beat "I'll just order when I remember." The anytime-skip line kills commitment fear.</p>
+      <div class="math">
+        <div class="label">Year-1 revenue at €13.07/mo per subscriber</div>
+        <table>
+          <tr><th>Scenario</th><th>Take rate</th><th>New subs</th><th>Year-1 revenue</th></tr>
+          <tr><td>Conservative</td><td>20%</td><td class="n">47</td><td class="n">€7,300</td></tr>
+          <tr class="base"><td>Base</td><td>35%</td><td class="n">82</td><td class="n">€12,800</td></tr>
+          <tr><td>Strong</td><td>50%</td><td class="n">117</td><td class="n">€18,300</td></tr>
+        </table>
+        <p class="percust">Per customer: €15.38 avg bag × 85% = €13.07/mo. Discount cost €2.31/mo, roughly the cost of one paid click.</p>
+      </div>
+    </div>
+
+    <div class="offer">
+      <div class="tagrow"><span class="tag gold">Annual + free gear</span><span class="tag">80 hot buyers (4+ orders, active)</span></div>
+      <h3>2 · Annual Roast Club</h3>
+      <div class="deal">Prepay 12 months and get <b>20% off the whole year</b> plus a <b>free Ceramic Pour-Over Dripper (€24)</b> or <b>Double-Wall Glass Mugs (€22)</b> in the first box.</div>
+      <p class="why"><b>Why it works:</b> these 80 have ordered 4+ times and bought recently. They are not deciding whether they like the coffee, they are deciding how to pay for it. Gear as the gift beats deeper discounting: it costs ~€12 landed, feels like €24, and a dripper on their counter is a daily brand ad. Prepay moves a year of cash to day one.</p>
+      <div class="math">
+        <div class="label">Year-1 cash at €147.67 prepaid per member</div>
+        <table>
+          <tr><th>Scenario</th><th>Take rate</th><th>Members</th><th>Year-1 cash</th></tr>
+          <tr><td>Conservative</td><td>15%</td><td class="n">12</td><td class="n">€1,800</td></tr>
+          <tr class="base"><td>Base</td><td>25%</td><td class="n">20</td><td class="n">€3,000</td></tr>
+          <tr><td>Strong</td><td>40%</td><td class="n">32</td><td class="n">€4,700</td></tr>
+        </table>
+        <p class="percust">Per member: €36.91 discount + ~€12 gear cost = €49 incentive, against €147.67 collected upfront and zero churn risk for 12 months.</p>
+      </div>
+    </div>
+
+    <div class="offer">
+      <div class="tagrow"><span class="tag gold">AOV upgrade</span><span class="tag">90 single-origin + variety buyers</span></div>
+      <h3>3 · Explorer Upgrade</h3>
+      <div class="deal">Swap your single bag for the <b>Roaster's Variety Box (3 × 250g)</b> subscription at <b>10% off</b>: €32.40/mo, plus a free pack of paper filters in box one.</div>
+      <p class="why"><b>Why it works:</b> 90 people buy Huila, Yirgacheffe, or the variety box. They shop for novelty, and novelty is the #1 reason coffee subs get cancelled ("bored of the same bag"). A rotating head-roaster pick solves boredom AND doubles the ticket, from ~€15 to €32.40. The smaller 10% discount holds because the value story is curation, not price.</p>
+      <div class="math">
+        <div class="label">Year-1 revenue at €32.40/mo per subscriber</div>
+        <table>
+          <tr><th>Scenario</th><th>Take rate</th><th>New subs</th><th>Year-1 revenue</th></tr>
+          <tr><td>Conservative</td><td>10%</td><td class="n">9</td><td class="n">€3,500</td></tr>
+          <tr class="base"><td>Base</td><td>20%</td><td class="n">18</td><td class="n">€7,000</td></tr>
+          <tr><td>Strong</td><td>30%</td><td class="n">27</td><td class="n">€10,500</td></tr>
+        </table>
+        <p class="percust">Per convert: roughly +€17/mo over their current bag. One Explorer is worth ~2.5 standard subs in incremental revenue.</p>
+      </div>
+    </div>
+
+    <div class="offer">
+      <div class="tagrow"><span class="tag orange">Winback</span><span class="tag">78 quiet since July</span></div>
+      <h3>4 · Wake the Sleepers</h3>
+      <div class="deal">"We roasted your usual." <b>25% off your first 3 months</b> back, then it settles at the standard 15% subscriber rate.</div>
+      <p class="why"><b>Why it works:</b> these 78 rebuilt the habit 3+ times, then went quiet. A third of the audience is already leaking. Reactivating a lapsed known buyer is far cheaper than acquiring a stranger, and the steeper front-loaded discount is temporary by design: it decays to the same 15% everyone else gets, so it never trains permanent discount-hunting.</p>
+      <div class="math">
+        <div class="label">Year-1 revenue at €152.28 per reactivated sub</div>
+        <table>
+          <tr><th>Scenario</th><th>Take rate</th><th>New subs</th><th>Year-1 revenue</th></tr>
+          <tr><td>Conservative</td><td>10%</td><td class="n">8</td><td class="n">€1,200</td></tr>
+          <tr class="base"><td>Base</td><td>20%</td><td class="n">16</td><td class="n">€2,400</td></tr>
+          <tr><td>Strong</td><td>30%</td><td class="n">23</td><td class="n">€3,600</td></tr>
+        </table>
+        <p class="percust">Per convert: 3 months at €11.54, then 9 at €13.07. Doing nothing prices these 78 at €0.</p>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<section id="outcome">
+  <h2><span class="num">03</span>Financial outcome</h2>
+  <p class="sub">Blended model with the segments kept mutually exclusive: 80 hot buyers get the annual offer (with monthly fallback), 78 sleepers get the winback, the remaining 75 get Subscribe &amp; Save. Explorer upside sits on top and is not counted below.</p>
+  <div class="outcome">
+    <table>
+      <tr><th>Scenario</th><th>New recurring customers</th><th>Year-1 recurring revenue</th><th>Prepaid cash on day 1</th><th>Subscriber base</th></tr>
+      <tr><td>Conservative</td><td class="n">+37</td><td class="n">€5,800</td><td class="n">€1,200</td><td>140 → 177 (+26%)</td></tr>
+      <tr class="base"><td>Base</td><td class="n">+66</td><td class="n">€10,200</td><td class="n">€1,900</td><td>140 → 206 (+47%)</td></tr>
+      <tr><td>Strong</td><td class="n">+97</td><td class="n">€15,000</td><td class="n">€2,600</td><td>140 → 237 (+69%)</td></tr>
+    </table>
+    <div class="outnote"><strong>Against the status quo:</strong> left alone, this audience decays. 78 of 241 have already gone quiet, and the average repeat buyer stops after ~3.5 orders. The base case converts a leaking €46K run-rate into €10K+ of locked year-1 recurring revenue and grows the subscriber base by nearly half. Add the Explorer base case and year-1 lands around €17K.</div>
+  </div>
+</section>
+
+<section id="ship">
+  <h2><span class="num">04</span>Shipping it in Recharge</h2>
+  <p class="sub">Everything above maps to standard Recharge + Shopify primitives. No custom code.</p>
+  <div class="ship">
+    <div class="shipstep"><b>1 · Segment the audience</b>Tag customers in Shopify from the repeat-buyer analysis: <code>upsell-hot</code>, <code>upsell-core</code>, <code>upsell-sleeper</code>, <code>upsell-explorer</code>. One tag per customer, in that priority order.</div>
+    <div class="shipstep"><b>2 · Create the discounts</b>Four Recharge discount codes: <code>NORDKAP15</code> (15% recurring), <code>ROASTCLUB20</code> (20% on the annual plan), <code>EXPLORER10</code> (10% recurring on the Variety Box), <code>WELCOMEBACK25</code> (25%, first 3 charges).</div>
+    <div class="shipstep"><b>3 · Add the annual plan</b>The 8 coffees already carry a monthly Recharge plan. Add a 12-month prepaid plan for Roast Club and attach the free gear item to the first shipment.</div>
+    <div class="shipstep"><b>4 · Send the emails</b>One Klaviyo flow per segment, referencing the exact product each customer rebuys ("your Colombia Huila, on autopilot"). Personal beats clever: they should feel seen, not marketed to.</div>
+  </div>
+</section>
+
+<div class="fine">
+  <b>Assumptions and sources.</b> Audience built from 14 months of Recharge Demo Coffee order history: customers with no active subscription who bought the same product 2+ times in a row roughly 30 days apart (241 today; 135 similar customers were converted to real subscriptions earlier in this demo). Average coffee item €15.38. Gear cost assumed at 50% of retail. Take rates are planning scenarios, not forecasts; subscribe-and-save conversions on a warmed audience commonly land in the 20 to 40% range. Year-1 revenue assumes converts stay subscribed 12 months; any churn under ~5%/mo still beats the do-nothing decay curve. All figures EUR, aggregate demo data only.
+</div>
+
+</div>
+</body>
+</html>
