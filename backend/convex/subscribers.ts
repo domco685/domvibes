@@ -14,7 +14,10 @@ export const add = internalMutation({
       return { status: "already_subscribed" };
     }
     await ctx.db.insert("subscribers", { email, source: args.source });
-    await ctx.scheduler.runAfter(0, internal.kit.forward, { email });
+    await ctx.scheduler.runAfter(0, internal.kit.forward, {
+      email,
+      source: args.source,
+    });
     return { status: "subscribed" };
   },
 });

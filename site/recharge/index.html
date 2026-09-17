@@ -138,6 +138,14 @@
   .returns b{background:var(--teal);color:var(--ink);
     padding:.25em .6em;display:inline-block;font-weight:600}
 
+  .link-btn{
+    display:inline-block;margin-top:26px;font-family:'Archivo Black',sans-serif;
+    font-size:clamp(.9rem,1.9vw,1.25rem);text-decoration:none;letter-spacing:.03em;
+    background:var(--yellow);color:var(--ink);border:3px solid var(--ink);
+    padding:.7em 1.4em;box-shadow:8px 8px 0 var(--pink);
+  }
+  .link-btn:active{transform:translate(4px,4px);box-shadow:4px 4px 0 var(--pink)}
+
   /* who am i */
   .who{display:flex;gap:clamp(20px,4vw,56px);align-items:center;flex-wrap:wrap;justify-content:center}
   .polaroid{
@@ -217,6 +225,30 @@
   .theme .t-q{font-size:clamp(1rem,2vw,1.35rem);line-height:1.5}
   .q-empty{font-family:'Space Grotesk',sans-serif;color:var(--dim);
     font-size:clamp(1rem,2.2vw,1.5rem);text-align:center}
+  .rawq{max-width:940px;margin:18px auto 0;text-align:left;font-family:'IBM Plex Mono',monospace}
+  .rawq-h{color:var(--dim);letter-spacing:.08em;font-size:clamp(.68rem,1.3vw,.85rem);margin-bottom:6px}
+  .rawq-item{color:#fff;opacity:.85;font-size:clamp(.78rem,1.5vw,.98rem);line-height:1.65}
+
+  /* deck email collector */
+  .deckmail{display:flex;gap:10px;align-items:center;justify-content:center;flex-wrap:wrap;
+    max-width:760px;margin:0 auto 28px}
+  .deckmail .dm-label{font-family:'Archivo Black',sans-serif;color:var(--yellow);
+    font-size:clamp(.7rem,1.5vw,1rem);white-space:nowrap}
+  .deckmail input{
+    flex:1;min-width:220px;font-family:'IBM Plex Mono',monospace;
+    font-size:clamp(.9rem,1.7vw,1.05rem);padding:.55em .8em;
+    background:var(--ink2);border:2px solid var(--line);color:#fff;outline:none;
+  }
+  .deckmail input::placeholder{color:#8b7480}
+  .deckmail input:focus{border-color:var(--teal)}
+  .deckmail button{
+    font-family:'Archivo Black',sans-serif;font-size:clamp(.75rem,1.5vw,.95rem);
+    background:var(--yellow);color:var(--ink);border:none;padding:.55em 1.1em;
+    box-shadow:4px 4px 0 var(--pink);cursor:pointer;
+  }
+  .deckmail button:disabled{opacity:.6;cursor:default}
+  .deckmail .dm-done{font-family:'IBM Plex Mono',monospace;color:var(--teal);
+    font-size:clamp(.85rem,1.6vw,1.05rem)}
 
   /* bottom question bar */
   .qbar{
@@ -315,7 +347,7 @@
 
 <div class="spectrum"><i></i><i></i><i></i><i></i><i></i></div>
 <a class="homelogo" href="/" title="DOMVIBES home"><img src="/logo.webp" alt="DOMVIBES logo"></a>
-<div class="slideno" id="slideno">1 / 11</div>
+<div class="slideno" id="slideno">1 / 13</div>
 <div class="navdots" id="navdots"></div>
 <div class="navarrow prev" id="prevBtn" title="previous">←</div>
 <div class="navarrow next" id="nextBtn" title="next">→</div>
@@ -343,15 +375,14 @@
     <div class="who">
       <figure class="polaroid">
         <img src="/recharge/photo-dom.jpg" alt="Dom Coryell presenting on stage">
-        <figcaption>CAUGHT MID-VIBE. AS USUAL.</figcaption>
       </figure>
       <div class="who-txt">
         <h2 class="alt">WHO AM I?</h2>
         <p class="sub" style="color:#fff;font-weight:700">DOM CORYELL</p>
         <ul class="roles">
-          <li>PRODUCT DIRECTOR</li><br>
+          <li>PRODUCT DIRECTOR @SHOPIFY</li><br>
           <li>ETERNAL TINKERER</li><br>
-          <li>VIBE CODE EXTRAORDINAIRE</li>
+          <li>VIBE CODE ADDICT</li>
         </ul>
         <p class="receipts">growth at Facebook, Instagram, and Shopify.<br>now I ship something every single day.</p>
       </div>
@@ -452,9 +483,10 @@
     <h2 class="alt">BUILD THE OFFER</h2>
     <div class="term">
       <div class="term-bar"><span class="dot r"></span><span class="dot y"></span><span class="dot g"></span><span class="term-title">prompt 02</span><button class="copy-btn">COPY</button></div>
-      <div class="term-body" data-prompt><span class="ps1">➜</span> Look at the products my buyers actually purchase. Build me a first-order offer for the never-ordered list. Make it stupid simple to say yes to.</div>
+      <div class="term-body" data-prompt style="font-size:clamp(.82rem,1.65vw,1.2rem)"><span class="ps1">➜</span> Now please look at all of the products that these people buy and come up with several offers that I could offer them. Include percentage off as well as complimentary product for things that are more like gear if they sign up for an annual subscription. Present all these to me in terminal, but also wrap them into an easy to understand Vercel page for me to open up and see the different options as to why these would work as well as potential financial outcomes.</div>
     </div>
-    <p class="returns">returns: <b>the offer, built from real purchase data</b> 🎁</p>
+    <p class="returns">returns: <b>the offers, built from real purchase data</b> 🎁</p>
+    <p style="margin-top:14px"><a href="https://recharge-upsell-offers.vercel.app" target="_blank" rel="noopener" style="display:inline-block;font-family:'Archivo Black',sans-serif;font-size:clamp(.75rem,1.5vw,1rem);background:var(--teal);color:var(--ink);text-decoration:none;padding:.55em 1.1em;box-shadow:4px 4px 0 var(--pink)">OPEN THE OFFERS PAGE ↗</a></p>
   </div>
 </section>
 
@@ -464,7 +496,7 @@
     <span class="kicker">STEP 2 OF 5 · THE ANSWER</span>
     <div class="term" style="margin-top:6px">
       <div class="term-bar"><span class="dot r"></span><span class="dot y"></span><span class="dot g"></span><span class="term-title">answer 02</span></div>
-      <div class="term-body" style="white-space:normal;text-align:left;font-size:clamp(.68rem,1.35vw,1rem);line-height:1.55"><b style="color:#fff">What the program is worth</b> (non-overlapping assignment)<table style="width:100%;border-collapse:collapse;margin:12px 0;font-size:inherit"><tr><th style="border:1px solid rgba(233,255,233,.45);padding:6px 12px;font-weight:600">Scenario</th><th style="border:1px solid rgba(233,255,233,.45);padding:6px 12px;font-weight:600">New subscribers</th><th style="border:1px solid rgba(233,255,233,.45);padding:6px 12px;font-weight:600">Yr-1 cohort revenue</th><th style="border:1px solid rgba(233,255,233,.45);padding:6px 12px;font-weight:600">vs. do-nothing ($16.1k, decaying)</th></tr><tr><td style="border:1px solid rgba(233,255,233,.45);padding:6px 12px">Conservative</td><td style="border:1px solid rgba(233,255,233,.45);padding:6px 12px">~40</td><td style="border:1px solid rgba(233,255,233,.45);padding:6px 12px">~$19k</td><td style="border:1px solid rgba(233,255,233,.45);padding:6px 12px">+18%</td></tr><tr style="font-weight:700;color:#fff"><td style="border:1px solid rgba(233,255,233,.45);padding:6px 12px">Expected</td><td style="border:1px solid rgba(233,255,233,.45);padding:6px 12px">~70</td><td style="border:1px solid rgba(233,255,233,.45);padding:6px 12px">~$23k</td><td style="border:1px solid rgba(233,255,233,.45);padding:6px 12px">+43%</td></tr><tr><td style="border:1px solid rgba(233,255,233,.45);padding:6px 12px">Optimistic</td><td style="border:1px solid rgba(233,255,233,.45);padding:6px 12px">~110</td><td style="border:1px solid rgba(233,255,233,.45);padding:6px 12px">~$28k</td><td style="border:1px solid rgba(233,255,233,.45);padding:6px 12px">+74%</td></tr></table><p style="margin:0 0 10px">Expected case takes the subscriber base from 140 → ~210 (+50%) and store penetration from <b style="color:#fff">10.1% → ~15.1%</b>. Unlike the manual streaks, that revenue recurs into year two. Total discount + gear cost in the expected case is roughly $2.6k against +$7k revenue.</p><p style="margin:0"><b style="color:#fff">Assumptions to sanity-check before spending real budget</b> (all labeled on the page): coffee gross margin 65%, gear COGS 50% of retail, 90% year-1 retention for converts (75% for win-backs), conversion rates are scenario inputs typical of warm subscribe-&amp;-save campaigns, and it's all sandbox data.</p></div>
+      <img src="/recharge/backup-offers-answer.png" alt="Claude's answer: five subscription offers with year-1 revenue scenarios, expected case ~70 new subscribers and ~$23k cohort revenue" style="display:block;width:100%">
     </div>
     <p class="returns">the full playbook: <b><a href="https://recharge-upsell-offers.vercel.app" target="_blank" rel="noopener" style="color:inherit;text-decoration:underline">recharge-upsell-offers.vercel.app</a></b> 📈</p>
   </div>
@@ -483,40 +515,85 @@
   </div>
 </section>
 
-<!-- 10 · STEP 4 -->
+<!-- 10 · STEP 3 ANSWER (BACKUP) -->
 <section class="slide" data-n="10">
+  <div class="inner" style="text-align:center;max-width:1100px">
+    <span class="kicker">STEP 3 OF 5 · THE ANSWER</span>
+    <div class="term" style="margin-top:6px">
+      <div class="term-bar"><span class="dot r"></span><span class="dot y"></span><span class="dot g"></span><span class="term-title">answer 03</span></div>
+      <img src="/recharge/backup-plan-answer.png" alt="Claude's answer: no existing plan fit, so it created a Lock In Your Roast 15% monthly plan on all 8 coffees via the Recharge Plans API, with live subscribe links per product" style="display:block;width:100%">
+    </div>
+    <p class="returns">returns: <b>a 15% plan live on all 8 coffees, with subscribe links</b> 🔁</p>
+  </div>
+</section>
+
+<!-- 11 · STEP 4 -->
+<section class="slide" data-n="11">
   <div class="inner" style="text-align:center;max-width:960px">
     <span class="kicker">STEP 4 OF 5</span>
     <h2 class="alt2">SEND THE OFFER VIA EMAIL</h2>
     <div class="term">
       <div class="term-bar"><span class="dot r"></span><span class="dot y"></span><span class="dot g"></span><span class="term-title">prompt 04</span><button class="copy-btn">COPY</button></div>
-      <div class="term-body" data-prompt><span class="ps1">➜</span> Write the Klaviyo email for this offer and send it to the upsell list. Short, one clear CTA. Set it up ready to go.</div>
+      <div class="term-body" data-prompt style="font-size:clamp(.85rem,1.75vw,1.3rem)"><span class="ps1">➜</span> Write the Klaviyo email for these offers and as a marketing automation flow where we start with the most profitable and graduate to biggest discounts. Short, one clear CTA. Set it up ready to go. Send me the flow link.</div>
     </div>
-    <p class="returns">returns: <b>email queued in Klaviyo</b> 📬</p>
+    <p class="returns">returns: <b>a live Klaviyo flow, most profitable offer first</b> 📬</p>
   </div>
 </section>
 
-<!-- 11 · STEP 5 -->
-<section class="slide" data-n="11">
+<!-- 12 · STEP 5 -->
+<section class="slide" data-n="12">
   <div class="inner" style="text-align:center;max-width:960px">
     <span class="kicker">STEP 5 OF 5</span>
     <h2 class="alt4">TAKING IT A STEP FURTHER</h2>
     <div class="term">
-      <div class="term-bar"><span class="dot r"></span><span class="dot y"></span><span class="dot g"></span><span class="term-title">ads / content</span><button class="copy-btn">COPY</button></div>
-      <div class="term-body" data-prompt><span class="ps1">➜</span> Take the product images and this offer. Create 3 ad variations I can run on Meta today, plus social content to match.</div>
+      <div class="term-bar"><span class="dot r"></span><span class="dot y"></span><span class="dot g"></span><span class="term-title">prompt 05</span><button class="copy-btn">COPY</button></div>
+      <div class="term-body" data-prompt style="font-size:clamp(.85rem,1.75vw,1.3rem)"><span class="ps1">➜</span> Convert that free gift and subscription offer into a high converting sales page on Vercel with my coffee store brand. Make it much more focused on the free dripper, we'll use this for new customer acquisition. So basically have it be loud about the free dripper with the subscription, and then really sell how amazing our coffee is too.</div>
     </div>
-    <p class="returns">returns: <b>ads + content, ready to launch</b> 🎨</p>
+    <p class="returns">returns: <b>a live acquisition page, deployed</b> 🚀</p>
+    <a class="link-btn" href="https://lock-in-your-roast.vercel.app/?utm_source=klaviyo&utm_medium=email&utm_campaign=upsell-ladder&utm_content=offer-2-annual-dripper&_kx=W06fnIg_liY2AjGd9bQ-Cw.ReKepv" target="_blank" rel="noopener">SEE THE LIVE PAGE →</a>
   </div>
 </section>
 
-<!-- 12 · YOUR QUESTIONS -->
-<section class="slide" data-n="12">
+<!-- 13 · ADS -->
+<section class="slide" data-n="13">
+  <div class="inner" style="text-align:center;max-width:960px">
+    <span class="kicker">BONUS · PAID SOCIAL</span>
+    <h2 class="alt">NOW EVEN FURTHER WITH ADS</h2>
+    <div class="term">
+      <div class="term-bar"><span class="dot r"></span><span class="dot y"></span><span class="dot g"></span><span class="term-title">prompt 06</span><button class="copy-btn">COPY</button></div>
+      <div class="term-body" data-prompt style="font-size:clamp(.85rem,1.75vw,1.3rem)"><span class="ps1">➜</span> Can you create a Meta ads campaign with 3 distinct creative ads about the offer in the account for me to review.</div>
+    </div>
+    <p class="returns">returns: <b>a full campaign, 3 ads, everything paused for review</b> 📣</p>
+  </div>
+</section>
+
+<!-- 14 · ADS ANSWER (BACKUP) -->
+<section class="slide" data-n="14">
+  <div class="inner" style="text-align:center;max-width:1100px">
+    <span class="kicker">BONUS · THE ANSWER</span>
+    <div class="term" style="margin-top:6px">
+      <div class="term-bar"><span class="dot r"></span><span class="dot y"></span><span class="dot g"></span><span class="term-title">answer 06</span></div>
+      <img src="/recharge/meta-ads.png" alt="Meta Ads Manager: Free Dripper campaign with 3 ads — Free Dripper (gift angle), First-Box Math (value angle), Coffee First (quality angle) — with Facebook feed ad previews" style="display:block;width:auto;max-width:100%;max-height:56vh;margin:0 auto;background:#fff">
+    </div>
+    <a class="link-btn" href="/recharge/ads/" target="_blank" rel="noopener">SEE THE AD SUMMARY →</a>
+  </div>
+</section>
+
+<!-- 15 · YOUR QUESTIONS -->
+<section class="slide" data-n="15">
   <div class="inner" style="text-align:center">
+    <form class="deckmail" id="deckmail">
+      <span class="dm-label">GET THIS DECK VIA EMAIL 📬</span>
+      <input id="deckEmail" type="email" maxlength="320" placeholder="you@company.com" autocomplete="email" required>
+      <button type="submit" id="deckBtn">SEND IT</button>
+    </form>
     <h2 class="alt">YOUR QUESTIONS</h2>
     <div class="qcount" id="qcount">0</div>
     <div class="qcount-label">questions dropped during this talk · summarized live by Claude</div>
     <div class="themes" id="themes">
       <p class="q-empty">nothing yet. hit the bar below and ask me anything 👇</p>
+    </div>
+    <div class="rawq" id="rawq" hidden>
     </div>
   </div>
 </section>
@@ -565,7 +642,7 @@
   document.getElementById("prevBtn").addEventListener("click", prev);
 
   document.addEventListener("keydown", function (e) {
-    if (e.target === document.getElementById("qinput")) return;
+    if (e.target.tagName === "INPUT") return;
     // PageDown/PageUp covers presentation clickers
     if (["ArrowRight", "PageDown", " ", "Enter"].indexOf(e.key) !== -1) { e.preventDefault(); next(); }
     if (["ArrowLeft", "PageUp", "Backspace"].indexOf(e.key) !== -1) { e.preventDefault(); prev(); }
@@ -634,8 +711,65 @@
     if (e.key === "Enter") ask();
   });
 
+  // ---- deck email collector ----
+  var deckForm = document.getElementById("deckmail");
+  deckForm.addEventListener("submit", function (e) {
+    e.preventDefault();
+    var input = document.getElementById("deckEmail");
+    var btn = document.getElementById("deckBtn");
+    var email = input.value.trim();
+    if (!email) return;
+    btn.disabled = true;
+    btn.textContent = "SENDING…";
+    fetch(CONVEX + "/subscribe", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ email: email, source: "recharge-deck" }),
+    })
+      .then(function (r) { return r.json(); })
+      .then(function (d) {
+        if (d.status === "subscribed" || d.status === "already_subscribed") {
+          var done = document.createElement("span");
+          done.className = "dm-done";
+          done.textContent = d.status === "subscribed"
+            ? "you're in. deck heading to your inbox 📬"
+            : "already on the list, deck heading your way 👌";
+          deckForm.replaceChildren(done);
+        } else {
+          btn.disabled = false;
+          btn.textContent = "SEND IT";
+          showToast(d.error || "hmm, try again");
+        }
+      })
+      .catch(function () {
+        btn.disabled = false;
+        btn.textContent = "SEND IT";
+        showToast("network hiccup, try again");
+      });
+  });
+
+  function renderRaw(d) {
+    var raw = document.getElementById("rawq");
+    var qs = d.questions || [];
+    if (qs.length === 0) { raw.hidden = true; return; }
+    raw.hidden = false;
+    var latest = qs.slice(-6).reverse();
+    raw.innerHTML = "";
+    var h = document.createElement("div");
+    h.className = "rawq-h";
+    h.textContent = "RAW FEED · latest " + latest.length + " of " + qs.length;
+    raw.appendChild(h);
+    latest.forEach(function (t) {
+      var el = document.createElement("div");
+      el.className = "rawq-item";
+      el.textContent = "→ " + t;
+      raw.appendChild(el);
+    });
+  }
+
   function renderSummary(d) {
     setCount(d.questionCount);
+    renderRaw(d);
     var box = document.getElementById("themes");
     if (!d.summary) {
       box.innerHTML = '<p class="q-empty">' +
