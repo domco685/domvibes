@@ -229,6 +229,27 @@
   .rawq-h{color:var(--dim);letter-spacing:.08em;font-size:clamp(.68rem,1.3vw,.85rem);margin-bottom:6px}
   .rawq-item{color:#fff;opacity:.85;font-size:clamp(.78rem,1.5vw,.98rem);line-height:1.65}
 
+  /* deck email collector */
+  .deckmail{display:flex;gap:10px;align-items:center;justify-content:center;flex-wrap:wrap;
+    max-width:760px;margin:0 auto 28px}
+  .deckmail .dm-label{font-family:'Archivo Black',sans-serif;color:var(--yellow);
+    font-size:clamp(.7rem,1.5vw,1rem);white-space:nowrap}
+  .deckmail input{
+    flex:1;min-width:220px;font-family:'IBM Plex Mono',monospace;
+    font-size:clamp(.9rem,1.7vw,1.05rem);padding:.55em .8em;
+    background:var(--ink2);border:2px solid var(--line);color:#fff;outline:none;
+  }
+  .deckmail input::placeholder{color:#8b7480}
+  .deckmail input:focus{border-color:var(--teal)}
+  .deckmail button{
+    font-family:'Archivo Black',sans-serif;font-size:clamp(.75rem,1.5vw,.95rem);
+    background:var(--yellow);color:var(--ink);border:none;padding:.55em 1.1em;
+    box-shadow:4px 4px 0 var(--pink);cursor:pointer;
+  }
+  .deckmail button:disabled{opacity:.6;cursor:default}
+  .deckmail .dm-done{font-family:'IBM Plex Mono',monospace;color:var(--teal);
+    font-size:clamp(.85rem,1.6vw,1.05rem)}
+
   /* bottom question bar */
   .qbar{
     position:fixed;left:0;right:0;bottom:0;height:var(--bar-h);
@@ -536,6 +557,11 @@
 <!-- 13 · YOUR QUESTIONS -->
 <section class="slide" data-n="13">
   <div class="inner" style="text-align:center">
+    <form class="deckmail" id="deckmail">
+      <span class="dm-label">GET THIS DECK VIA EMAIL 📬</span>
+      <input id="deckEmail" type="email" maxlength="320" placeholder="you@company.com" autocomplete="email" required>
+      <button type="submit" id="deckBtn">SEND IT</button>
+    </form>
     <h2 class="alt">YOUR QUESTIONS</h2>
     <div class="qcount" id="qcount">0</div>
     <div class="qcount-label">questions dropped during this talk · summarized live by Claude</div>
@@ -591,7 +617,7 @@
   document.getElementById("prevBtn").addEventListener("click", prev);
 
   document.addEventListener("keydown", function (e) {
-    if (e.target === document.getElementById("qinput")) return;
+    if (e.target.tagName === "INPUT") return;
     // PageDown/PageUp covers presentation clickers
     if (["ArrowRight", "PageDown", " ", "Enter"].indexOf(e.key) !== -1) { e.preventDefault(); next(); }
     if (["ArrowLeft", "PageUp", "Backspace"].indexOf(e.key) !== -1) { e.preventDefault(); prev(); }
@@ -658,6 +684,43 @@
   document.getElementById("qsend").addEventListener("click", ask);
   document.getElementById("qinput").addEventListener("keydown", function (e) {
     if (e.key === "Enter") ask();
+  });
+
+  // ---- deck email collector ----
+  var deckForm = document.getElementById("deckmail");
+  deckForm.addEventListener("submit", function (e) {
+    e.preventDefault();
+    var input = document.getElementById("deckEmail");
+    var btn = document.getElementById("deckBtn");
+    var email = input.value.trim();
+    if (!email) return;
+    btn.disabled = true;
+    btn.textContent = "SENDING…";
+    fetch(CONVEX + "/subscribe", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ email: email, source: "recharge-deck" }),
+    })
+      .then(function (r) { return r.json(); })
+      .then(function (d) {
+        if (d.status === "subscribed" || d.status === "already_subscribed") {
+          var done = document.createElement("span");
+          done.className = "dm-done";
+          done.textContent = d.status === "subscribed"
+            ? "you're in. deck heading to your inbox 📬"
+            : "already on the list, deck heading your way 👌";
+          deckForm.replaceChildren(done);
+        } else {
+          btn.disabled = false;
+          btn.textContent = "SEND IT";
+          showToast(d.error || "hmm, try again");
+        }
+      })
+      .catch(function () {
+        btn.disabled = false;
+        btn.textContent = "SEND IT";
+        showToast("network hiccup, try again");
+      });
   });
 
   function renderRaw(d) {
