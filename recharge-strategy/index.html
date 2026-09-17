@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Recharge Demo Coffee — Subscription Strategy</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🦉</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --charcoal: #0f0f10;
+  --charcoal-soft: #18181a;
+  --bone: #e8e4dc;
+  --bone-dim: #c4bfb6;
+  --gold: #d9ae36;
+  --gold-soft: #b3902c;
+  --orange: #cf5310;
+  --yellow: #ffd84d;
+  --red: #e02020;
+  --border: #2a2a2e;
+  --text: var(--bone);
+  --text-secondary: var(--bone-dim);
+  --text-dim: #8f8a80;
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  background: var(--charcoal);
+  color: var(--text);
+  font-family: 'Poppins', system-ui, sans-serif;
+  line-height: 1.6;
+  padding-inline: clamp(16px, 4vw, 64px);
+}
+.font-display { font-family: 'Archivo Black', sans-serif; }
+.wrap { max-width: 1180px; margin: 0 auto; position: relative; }
+
+header { padding: 36px 0 0; display: flex; justify-content: space-between; align-items: center; position: relative; z-index: 1; flex-wrap: wrap; gap: 8px; }
+.logo { font-family: 'Archivo Black', sans-serif; font-size: 18px; letter-spacing: 0.18em; text-transform: uppercase; }
+.logo .on { color: var(--bone); }
+.logo .ramps { color: var(--gold); }
+.store-tag { font-family: 'Poppins'; font-size: 12px; font-weight: 500; letter-spacing: 0.16em; color: var(--text-dim); text-transform: uppercase; }
+
+.hero { padding: 72px 0 40px; position: relative; z-index: 1; }
+.badge {
+  display: inline-flex; padding: 10px 24px; border-radius: 12px;
+  font-family: 'Poppins'; font-size: clamp(11px, 1.4vw, 13px); font-weight: 600;
+  letter-spacing: 0.22em; text-transform: uppercase;
+  background: var(--charcoal-soft); border: 1px solid var(--gold-soft); color: var(--gold);
+}
+h1 {
+  font-family: 'Archivo Black', sans-serif; font-size: clamp(30px, 5.2vw, 58px);
+  letter-spacing: -0.01em; line-height: 1.15; margin-top: 36px; color: var(--bone);
+}
+h1 .glow-cyan { color: var(--gold); }
+.hero p { max-width: 720px; margin-top: 22px; font-size: clamp(16px, 2vw, 19px); color: var(--text-secondary); font-weight: 300; }
+.hero p strong { color: var(--bone); font-weight: 600; }
+
+.divider { height: 1px; background: var(--border); margin: 44px 0; }
+
+section { position: relative; z-index: 1; padding: 24px 0 8px; }
+h2 { font-family: 'Fraunces', serif; font-size: clamp(24px, 3.2vw, 36px); font-weight: 700; letter-spacing: 0; margin-bottom: 10px; color: var(--bone); }
+.section-sub { color: var(--text-dim); font-size: 15px; margin-bottom: 30px; max-width: 700px; }
+
+/* KPI tiles */
+.kpis { display: grid; grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); gap: 22px; }
+.kpi {
+  background: var(--charcoal-soft); border-radius: 14px; padding: 26px 24px;
+  border: 1px solid var(--border);
+  border-top: 3px solid var(--gold);
+}
+.kpi .num { font-family: 'Archivo Black', sans-serif; font-size: clamp(28px, 3.4vw, 38px); color: var(--gold); }
+.kpi .label { font-size: 13px; color: var(--text-secondary); margin-top: 6px; font-weight: 500; }
+.kpi .note { font-size: 12px; color: var(--text-dim); margin-top: 2px; }
+.kpi.green { border-top-color: var(--yellow); }
+.kpi.green .num { color: var(--yellow); }
+.kpi.magenta { border-top-color: var(--red); }
+.kpi.magenta .num { color: var(--red); }
+.kpi.purple { border-top-color: var(--orange); }
+.kpi.purple .num { color: var(--orange); }
+
+/* Funnel */
+.panel {
+  background: var(--charcoal-soft); border-radius: 14px; padding: clamp(24px, 4vw, 44px);
+  border: 1px solid var(--border);
+}
+.frow { display: grid; grid-template-columns: minmax(150px, 240px) 1fr 70px; align-items: center; gap: 14px; padding: 9px 0; }
+.frow .flabel { font-size: 14px; color: var(--text-secondary); font-weight: 500; text-align: right; }
+.frow .ftrack { position: relative; height: 26px; }
+.frow .fbar {
+  height: 100%; border-radius: 0 4px 4px 0; min-width: 4px;
+  background: var(--gold);
+  transition: filter .15s;
+}
+.frow:hover .fbar { filter: brightness(1.12); }
+.frow .fval { font-family: 'Archivo Black', sans-serif; font-size: 15px; color: var(--bone); }
+.frow.hot .fbar { background: var(--yellow); }
+.frow.hot .fval { color: var(--yellow); }
+.fnote { margin-top: 18px; font-size: 13px; color: var(--text-dim); }
+
+/* Bars (products) */
+.twocol { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+@media (max-width: 900px) { .twocol { grid-template-columns: 1fr; } }
+.panel h3 { font-family: 'Fraunces', serif; font-size: 20px; font-weight: 700; letter-spacing: 0; margin-bottom: 4px; color: var(--bone); }
+.panel .psub { font-size: 13px; color: var(--text-dim); margin-bottom: 20px; }
+.brow { display: grid; grid-template-columns: minmax(120px, 190px) 1fr 88px; align-items: center; gap: 12px; padding: 7px 0; position: relative; }
+.brow .blabel { font-size: 13px; color: var(--text-secondary); text-align: right; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.brow .btrack { height: 20px; position: relative; }
+.brow .bbar { height: 100%; border-radius: 0 4px 4px 0; min-width: 4px; background: var(--gold); transition: filter .15s; }
+.brow:hover .bbar { filter: brightness(1.12); }
+.brow .bval { font-size: 12.5px; color: var(--bone); font-weight: 600; }
+.brow .bval span { color: var(--text-dim); font-weight: 400; }
+.panel.purple-tint .bbar { background: var(--orange); }
+.insight { margin-top: 18px; padding: 14px 18px; border-radius: 12px; background: var(--charcoal); border: 1px solid var(--gold-soft); font-size: 13.5px; color: var(--text-secondary); }
+.insight strong { color: var(--gold); }
+
+/* Play cards */
+.plays { display: grid; grid-template-columns: repeat(auto-fit, minmax(330px, 1fr)); gap: 26px; }
+.play {
+  background: var(--charcoal-soft); border-radius: 14px; padding: 32px 30px 26px;
+  display: flex; flex-direction: column; gap: 14px;
+  border: 1px solid var(--border);
+  border-top: 3px solid var(--gold);
+}
+.play[data-accent="green"]  { border-top-color: var(--yellow); }
+.play[data-accent="purple"] { border-top-color: var(--orange); }
+.play[data-accent="magenta"]{ border-top-color: var(--red); }
+.play-top { display: flex; justify-content: space-between; align-items: center; gap: 10px; }
+.step { font-family: 'Poppins'; font-size: 12px; font-weight: 600; letter-spacing: 0.22em; text-transform: uppercase; }
+.play[data-accent="cyan"] .step { color: var(--gold); }
+.play[data-accent="green"] .step { color: var(--yellow); }
+.play[data-accent="purple"] .step { color: var(--orange); }
+.play[data-accent="magenta"] .step { color: var(--red); }
+.play h3 { font-family: 'Fraunces', serif; font-size: 22px; font-weight: 700; letter-spacing: 0; line-height: 1.3; color: var(--bone); }
+.play .audience { font-size: 13px; color: var(--text-dim); }
+.play .audience b { color: var(--bone); font-weight: 700; }
+.play p.desc { font-size: 14.5px; color: var(--text-secondary); flex: 1; }
+.play p.desc strong { color: var(--bone); }
+.why { font-size: 13px; color: var(--text-dim); border-left: 2px solid var(--border); padding-left: 12px; }
+.play-actions { display: flex; gap: 10px; align-items: center; margin-top: 6px; flex-wrap: wrap; }
+.btn {
+  font-family: 'Poppins'; font-size: 12px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase;
+  padding: 12px 20px; border-radius: 12px; cursor: pointer; border: 1px solid var(--gold);
+  background: var(--gold); color: var(--charcoal);
+  box-shadow: 3px 3px 0 var(--gold-soft);
+  transition: all .12s;
+}
+.btn:hover { transform: translate(-1px, -1px); box-shadow: 4px 4px 0 var(--gold-soft); }
+.btn:active { transform: translate(2px, 2px); box-shadow: 1px 1px 0 var(--gold-soft); }
+.play[data-accent="green"] .btn { background: var(--yellow); border-color: var(--yellow); box-shadow: 3px 3px 0 var(--gold-soft); }
+.play[data-accent="purple"] .btn { background: var(--orange); border-color: var(--orange); color: var(--bone); box-shadow: 3px 3px 0 #7d3208; }
+.play[data-accent="purple"] .btn:hover { box-shadow: 4px 4px 0 #7d3208; }
+.play[data-accent="purple"] .btn:active { box-shadow: 1px 1px 0 #7d3208; }
+.play[data-accent="magenta"] .btn { background: var(--red); border-color: var(--red); color: var(--bone); box-shadow: 3px 3px 0 #7d1010; }
+.play[data-accent="magenta"] .btn:hover { box-shadow: 4px 4px 0 #7d1010; }
+.play[data-accent="magenta"] .btn:active { box-shadow: 1px 1px 0 #7d1010; }
+.status {
+  font-family: 'Poppins'; font-size: 11px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase;
+  padding: 11px 16px; border-radius: 12px; cursor: pointer;
+  background: transparent; border: 1px solid var(--border); color: var(--text-dim);
+  transition: all .15s;
+}
+.status[data-state="progress"] { border-color: var(--gold); color: var(--gold); }
+.status[data-state="done"] { border-color: var(--gold); color: var(--charcoal); background: var(--gold); }
+
+/* Revenue math */
+.math { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 22px; }
+.math .kpi .num { font-size: clamp(24px, 3vw, 32px); }
+
+footer { padding: 60px 0 40px; text-align: center; color: var(--text-dim); font-family: 'Poppins'; font-size: 12px; font-weight: 500; letter-spacing: 0.16em; position: relative; z-index: 1; }
+
+.toast {
+  position: fixed; bottom: 28px; left: 50%; transform: translateX(-50%) translateY(80px);
+  background: var(--gold); border: 1px solid var(--gold); color: var(--charcoal);
+  font-family: 'Poppins'; font-size: 12px; font-weight: 700; letter-spacing: 0.08em;
+  padding: 14px 26px; border-radius: 12px; opacity: 0; transition: all .25s; z-index: 50;
+  box-shadow: 4px 4px 0 var(--gold-soft); max-width: 90vw; text-align: center;
+}
+.toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+</style>
+</head>
+<body>
+
+<div class="wrap">
+  <header>
+    <div class="logo"><span class="on">ON</span><span class="ramps">RAMPS</span></div>
+    <div class="store-tag">Recharge Demo Coffee · Recharge × Shopify</div>
+  </header>
+
+  <div class="hero">
+    <span class="badge">Subscription Conversion Strategy</span>
+    <h1>10% subscribed.<br><span class="glow-cyan">The next 5% is already buying monthly.</span></h1>
+    <p>Analysis of <strong>3,502 orders</strong> (Jul 2025 – Sep 2026) across <strong>1,390 customers</strong> found 329 people manually re-buying the same coffee every ~30 days. <strong>139 of them (10% of the base) are now on Recharge subscriptions.</strong> This page is the playbook to convert the next 70 — from 10% to 15% — out of the 190 strong re-buyers still ordering à la carte.</p>
+  </div>
+
+  <div class="divider"></div>
+
+  <section>
+    <h2>The Numbers</h2>
+    <p class="section-sub">Current state, from the live store data.</p>
+    <div class="kpis">
+      <div class="kpi"><div class="num">1,390</div><div class="label">Shopify customers</div><div class="note">1,374 have purchased</div></div>
+      <div class="kpi green"><div class="num">10%</div><div class="label">On a subscription</div><div class="note">140 active Recharge subscribers</div></div>
+      <div class="kpi magenta"><div class="num">15%</div><div class="label">The goal</div><div class="note">+70 subscribers via the six plays</div></div>
+      <div class="kpi"><div class="num">190</div><div class="label">Strong re-buyers left</div><div class="note">same product, ~30-day cadence, not yet subscribed</div></div>
+      <div class="kpi purple"><div class="num">€17k</div><div class="label">Annual revenue still at risk</div><div class="note">churn-exposed on every à-la-carte order</div></div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <section>
+    <h2>The Funnel</h2>
+    <p class="section-sub">Where the opportunity concentrates. Strong = 3+ purchases of the same product with ≥60% of intervals in the 20–45 day window.</p>
+    <div class="panel">
+      <div class="frow"><div class="flabel">All customers</div><div class="ftrack"><div class="fbar" style="width:100%"></div></div><div class="fval">1,390</div></div>
+      <div class="frow"><div class="flabel">Have purchased</div><div class="ftrack"><div class="fbar" style="width:98.8%"></div></div><div class="fval">1,374</div></div>
+      <div class="frow"><div class="flabel">Repeat same-product buyers</div><div class="ftrack"><div class="fbar" style="width:33.7%"></div></div><div class="fval">469</div></div>
+      <div class="frow"><div class="flabel">Strong monthly pattern</div><div class="ftrack"><div class="fbar" style="width:23.7%"></div></div><div class="fval">329</div></div>
+      <div class="frow"><div class="flabel">Converted — subscribed (10%)</div><div class="ftrack"><div class="fbar" style="width:10%"></div></div><div class="fval">139</div></div>
+      <div class="frow hot"><div class="flabel">Remaining — convert next</div><div class="ftrack"><div class="fbar" style="width:13.7%"></div></div><div class="fval">190</div></div>
+      <div class="fnote">70 of the 190 gets the store to 15%. Plus 61 moderate-signal customers (second wave) and lapsed monthly buyers (winback audience). Average strong candidate: 6.3 repeat purchases of the same coffee.</div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <section>
+    <h2>What They Buy</h2>
+    <p class="section-sub">Left: the coffee each candidate re-buys monthly (their future subscription). Right: everything else they buy — gear, purchased once, always attached to a coffee order.</p>
+    <div class="twocol">
+      <div class="panel">
+        <h3>Anchor coffees</h3>
+        <div class="psub">Strong candidates per product · customers</div>
+        <div class="brow"><div class="blabel">House Blend 250g</div><div class="btrack"><div class="bbar" style="width:100%"></div></div><div class="bval">64 <span>· €12.50</span></div></div>
+        <div class="brow"><div class="blabel">Colombia Huila 250g</div><div class="btrack"><div class="bbar" style="width:92%"></div></div><div class="bval">59 <span>· €14.50</span></div></div>
+        <div class="brow"><div class="blabel">Midnight Sun Dark 250g</div><div class="btrack"><div class="bbar" style="width:81%"></div></div><div class="bval">52 <span>· €13.00</span></div></div>
+        <div class="brow"><div class="blabel">Swiss Water Decaf 250g</div><div class="btrack"><div class="bbar" style="width:75%"></div></div><div class="bval">48 <span>· €13.00</span></div></div>
+        <div class="brow"><div class="blabel">Ethiopia Yirgacheffe 250g</div><div class="btrack"><div class="bbar" style="width:63%"></div></div><div class="bval">40 <span>· €15.50</span></div></div>
+        <div class="brow"><div class="blabel">Polar Espresso 250g</div><div class="btrack"><div class="bbar" style="width:45%"></div></div><div class="bval">29 <span>· €13.50</span></div></div>
+        <div class="brow"><div class="blabel">Roaster's Variety Box</div><div class="btrack"><div class="bbar" style="width:41%"></div></div><div class="bval">26 <span>· €36.00</span></div></div>
+        <div class="brow"><div class="blabel">Cold Brew Pack 500g</div><div class="btrack"><div class="bbar" style="width:17%"></div></div><div class="bval">11 <span>· €16.00</span></div></div>
+      </div>
+      <div class="panel purple-tint">
+        <h3>Attach purchases (gear)</h3>
+        <div class="psub">Cohort buyers · bought once, in the same order as coffee</div>
+        <div class="brow"><div class="blabel">Paper Filters 100pk</div><div class="btrack"><div class="bbar" style="width:100%"></div></div><div class="bval">28 <span>· €6.50</span></div></div>
+        <div class="brow"><div class="blabel">Nordkap Canvas Tote</div><div class="btrack"><div class="bbar" style="width:93%"></div></div><div class="bval">26 <span>· €14</span></div></div>
+        <div class="brow"><div class="blabel">Glass Mugs — Set of 2</div><div class="btrack"><div class="bbar" style="width:89%"></div></div><div class="bval">25 <span>· €22</span></div></div>
+        <div class="brow"><div class="blabel">Pour-Over Dripper</div><div class="btrack"><div class="bbar" style="width:82%"></div></div><div class="bval">23 <span>· €24</span></div></div>
+        <div class="brow"><div class="blabel">Travel Press Brewer</div><div class="btrack"><div class="bbar" style="width:79%"></div></div><div class="bval">22 <span>· €39</span></div></div>
+        <div class="brow"><div class="blabel">Hand Coffee Grinder</div><div class="btrack"><div class="bbar" style="width:79%"></div></div><div class="bval">22 <span>· €59</span></div></div>
+        <div class="brow"><div class="blabel">Precision Brew Scale</div><div class="btrack"><div class="bbar" style="width:71%"></div></div><div class="bval">20</div></div>
+        <div class="brow"><div class="blabel">Gooseneck Kettle</div><div class="btrack"><div class="bbar" style="width:68%"></div></div><div class="bval">19 <span>· €79</span></div></div>
+        <div class="insight"><strong>Insight:</strong> filters are the only recurring consumable — subscription add-on material. The gear is one-and-done — use it as incentive inventory, not bundles.</div>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <section id="plays">
+    <h2>The Six Plays</h2>
+    <p class="section-sub">Each card is a buildable action. <strong style="color:var(--text-secondary)">Copy Build Prompt</strong> puts a ready-to-run Claude Code prompt on your clipboard — paste it into a session with the Recharge MCP + Shopify CLI connected. Click the status pill to track progress (saved in this browser).</p>
+    <div class="plays">
+
+      <div class="play" data-accent="cyan" data-id="tag">
+        <div class="play-top"><span class="step">Play 01 · Foundation</span></div>
+        <h3>Tag &amp; Segment the Candidates</h3>
+        <div class="audience">Audience: <b>190 remaining strong</b> + 61 moderate</div>
+        <p class="desc">Tag every candidate <strong>subscription-candidate</strong> (plus <strong>lapsed</strong>/<strong>active</strong>) in Shopify and build a customer segment. Everything else targets this segment.</p>
+        <div class="why">Why: no offer can ship until the audience exists as a targetable object.</div>
+        <div class="play-actions">
+          <button class="btn" data-prompt="tag">Copy Build Prompt</button>
+          <button class="status" data-state="todo">To Do</button>
+        </div>
+      </div>
+
+      <div class="play" data-accent="cyan" data-id="sas">
+        <div class="play-top"><span class="step">Play 02 · Core Offer</span></div>
+        <h3>Subscribe &amp; Save 15%</h3>
+        <div class="audience">Audience: <b>190 remaining</b> monthly re-buyers</div>
+        <p class="desc">Monthly selling plan at <strong>15% off</strong> on all 8 coffees, pitched per-customer on the exact product they already re-buy. Their cadence is ~30 days — zero behavior change.</p>
+        <div class="why">Why: House Blend €12.50 → €10.60. They're manually doing this every month; remove the work.</div>
+        <div class="play-actions">
+          <button class="btn" data-prompt="sas">Copy Build Prompt</button>
+          <button class="status" data-state="todo">To Do</button>
+        </div>
+      </div>
+
+      <div class="play" data-accent="green" data-id="filters">
+        <div class="play-top"><span class="step">Play 03 · Sweetener</span></div>
+        <h3>Free Filters on First Order</h3>
+        <div class="audience">Cost: <b>€6.50</b> per conversion</div>
+        <p class="desc">Free <strong>Paper Filters 100-Pack</strong> with the first subscription order, then offered as a recurring add-on every other month.</p>
+        <div class="why">Why: #1 attach item in the cohort — and it seeds a second recurring line on the same subscription.</div>
+        <div class="play-actions">
+          <button class="btn" data-prompt="filters">Copy Build Prompt</button>
+          <button class="status" data-state="todo">To Do</button>
+        </div>
+      </div>
+
+      <div class="play" data-accent="purple" data-id="gear">
+        <div class="play-top"><span class="step">Play 04 · Retention</span></div>
+        <h3>Month-3 Gear Reward</h3>
+        <div class="audience">Audience: new subscribers, renewal 3</div>
+        <p class="desc">Stay subscribed 3 months → <strong>free Glass Mugs (€22)</strong> or <strong>50% off</strong> the Grinder or Kettle. A locked reward that turns trial subscribers into retained ones.</p>
+        <div class="why">Why: the cohort buys gear alongside coffee, but only ~7% each have pulled the trigger.</div>
+        <div class="play-actions">
+          <button class="btn" data-prompt="gear">Copy Build Prompt</button>
+          <button class="status" data-state="todo">To Do</button>
+        </div>
+      </div>
+
+      <div class="play" data-accent="purple" data-id="variety">
+        <div class="play-top"><span class="step">Play 05 · Upsell</span></div>
+        <h3>Variety Box Swap</h3>
+        <div class="audience">Audience: <b>26</b> Variety Box re-buyers + all subscribers</div>
+        <p class="desc">"Swap any month for the <strong>Roaster's Variety Box (€36)</strong>" — subscriptions are already swappable in Recharge; make it a feature, not a support ticket.</p>
+        <div class="why">Why: raises average order value ~2.7× on swap months for explorers.</div>
+        <div class="play-actions">
+          <button class="btn" data-prompt="variety">Copy Build Prompt</button>
+          <button class="status" data-state="todo">To Do</button>
+        </div>
+      </div>
+
+      <div class="play" data-accent="magenta" data-id="winback">
+        <div class="play-top"><span class="step">Play 06 · Winback</span></div>
+        <h3>Winback the Lapsed 84</h3>
+        <div class="audience">Audience: <b>84 lapsed</b> monthly buyers</div>
+        <p class="desc">Same subscribe &amp; save offer with a stronger hook: <strong>20–25% off the first subscription order</strong> on the coffee they used to buy monthly.</p>
+        <div class="why">Why: the habit is proven — they drifted, they weren't lost. Cheapest re-acquisition you'll ever run.</div>
+        <div class="play-actions">
+          <button class="btn" data-prompt="winback">Copy Build Prompt</button>
+          <button class="status" data-state="todo">To Do</button>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <section>
+    <h2>The Math</h2>
+    <p class="section-sub">The path from 10% to 15%: convert 70 of the 190 remaining re-buyers at 15% off.</p>
+    <div class="math">
+      <div class="kpi"><div class="num">~€17k</div><div class="label">Annual coffee revenue still churn-exposed</div><div class="note">~106 still-active re-buyers × ~€13.50 × 12</div></div>
+      <div class="kpi green"><div class="num">140 → 209</div><div class="label">Subscribers at the 15% goal</div><div class="note">+70 = 37% of the 190 remaining</div></div>
+      <div class="kpi purple"><div class="num">~€11k</div><div class="label">Revenue locked into recurring</div><div class="note">for ~€1.7k/yr of discount margin</div></div>
+      <div class="kpi magenta"><div class="num">6.3×</div><div class="label">Avg repeat purchases already made</div><div class="note">per candidate — the habit exists</div></div>
+    </div>
+  </section>
+
+  <footer>RECHARGE DEMO COFFEE · STRATEGY BY ONRAMPS · DATA: 3,502 ORDERS · SEP 2026</footer>
+</div>
+
+<div class="toast" id="toast">PROMPT COPIED — PASTE INTO CLAUDE CODE</div>
+
+<script>
+const PROMPTS = {
+  tag: `Analyze my Shopify store dominic-coryell.myshopify.com: find every customer who bought the same product 3+ times at 20-45 day intervals (use processedAt on orders). Tag them 'subscription-candidate' via the Admin API, add 'sc-active' if they purchased in the last 50 days or 'sc-lapsed' otherwise, then create a customer segment for each tag. Report counts when done.`,
+  sas: `On my Shopify store dominic-coryell.myshopify.com (Recharge MCP connected), create a monthly Subscribe & Save selling plan at 15% off for all 8 coffee products (House Blend, Colombia Huila, Midnight Sun Dark Roast, Swiss Water Decaf, Ethiopia Yirgacheffe, Polar Espresso, Roaster's Variety Box, Cold Brew Pack). Default cadence: every 30 days. Show me the plan config before applying.`,
+  filters: `Create a first-subscription-order incentive on dominic-coryell.myshopify.com: free 'Paper Filters — 100 Pack' (€6.50) added to a customer's first subscription order, and configure Paper Filters as an optional recurring add-on every 2nd delivery in Recharge. Show me the mechanics (discount vs auto-added line item) before applying.`,
+  gear: `Design a month-3 subscriber reward for my Recharge Demo Coffee sandbox store (Recharge domain happyhootsnft.com): after a subscriber's 3rd successful recurring charge, automatically send a reward — choice of free 'Double-Wall Glass Mugs — Set of 2' or a 50%-off single-use discount for the Hand Coffee Grinder or Gooseneck Kettle. Use Recharge webhooks/flows + Shopify discount codes. Outline the automation, then build it.`,
+  variety: `Enable 'swap any month for the Roaster's Variety Box' on my Recharge Demo Coffee subscriptions (Recharge domain happyhootsnft.com): verify subscriptions are swappable, add the Variety Box variant as an approved swap, and draft the customer-facing copy for the portal + a one-line email announcement to existing subscribers.`,
+  winback: `Build a winback campaign for my lapsed monthly re-buyers on dominic-coryell.myshopify.com (customers tagged 'sc-lapsed', 84 people): create a 20% off first-subscription-order discount code WELCOME-BACK-20 valid on the coffee product each customer used to re-buy, and draft the winback email referencing their specific coffee. Show me the email before anything sends.`
+};
+
+const toast = document.getElementById('toast');
+let toastTimer;
+function showToast(msg) {
+  toast.textContent = msg;
+  toast.classList.add('show');
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(() => toast.classList.remove('show'), 2600);
+}
+
+document.querySelectorAll('.btn[data-prompt]').forEach(btn => {
+  btn.addEventListener('click', async () => {
+    const text = PROMPTS[btn.dataset.prompt];
+    try {
+      await navigator.clipboard.writeText(text);
+      showToast('PROMPT COPIED — PASTE INTO CLAUDE CODE');
+    } catch {
+      window.prompt('Copy this prompt:', text);
+    }
+  });
+});
+
+const STATES = ['todo', 'progress', 'done'];
+const LABELS = { todo: 'To Do', progress: 'In Progress', done: 'Done ✓' };
+document.querySelectorAll('.play').forEach(card => {
+  const pill = card.querySelector('.status');
+  const key = 'rdc-play-' + card.dataset.id;
+  let saved = null;
+  try { saved = localStorage.getItem(key); } catch {}
+  if (saved && STATES.includes(saved)) {
+    pill.dataset.state = saved;
+    pill.textContent = LABELS[saved];
+  }
+  pill.addEventListener('click', () => {
+    const next = STATES[(STATES.indexOf(pill.dataset.state) + 1) % STATES.length];
+    pill.dataset.state = next;
+    pill.textContent = LABELS[next];
+    try { localStorage.setItem(key, next); } catch {}
+  });
+});
+</script>
+</body>
+</html>

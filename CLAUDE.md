@@ -18,6 +18,16 @@ step, no framework. Keep it that way unless Dom says otherwise.
   audience questions (`/question`, `/summary`), and forwards every new
   subscriber to Kit tagged `domvibes`.
 - `brand/` — logos and OG banners.
+- `recharge-strategy/` — subscription-conversion strategy page for the
+  Recharge Demo Coffee sandbox store (the 10% → 15% playbook shown alongside
+  the Recharge talk). Deploys to its own Vercel project
+  `recharge-demo-strategy` (same team), live at
+  https://recharge-demo-strategy.vercel.app — NOT part of `site/`, so it
+  never lands on domvibes.ai. Deploy: `cd recharge-strategy && vercel deploy
+  --prod --yes` (folder must be linked to project `recharge-demo-strategy`).
+- `recharge-workshop/` — "The 61% Workshop" hands-on demo page for the
+  Recharge × Shopify AI Toolkit session. Currently run locally / deployed
+  ad-hoc; also not part of `site/`.
 
 ## Workflow (important)
 
