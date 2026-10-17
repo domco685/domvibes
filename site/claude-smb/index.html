@@ -1,0 +1,464 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CLAUDE × SMB — The DOMVIBES Field Guide</title>
+<meta name="description" content="How I set up Claude's Small Business plugin with Shopify, Canva, Meta Ads and more — plus six copy-paste prompts and a daily trend-to-campaign routine.">
+<meta property="og:title" content="CLAUDE × SMB — The DOMVIBES Field Guide">
+<meta property="og:description" content="Claude's Small Business plugin + Shopify, explained. Six copy-paste prompts and a daily marketing routine.">
+<meta property="og:image" content="https://domvibes.ai/og.jpg">
+<meta property="og:url" content="https://domvibes.ai/claude-smb">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://domvibes.ai/og.jpg">
+<link rel="icon" href="/logo.webp" type="image/webp">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Titan+One&family=Bungee&family=Space+Grotesk:wght@400;500;700&family=IBM+Plex+Mono:wght@400;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --pink:#F52B8E; --teal:#2EE6C8; --yellow:#FFE81A; --purple:#9B5DE5;
+    --orange:#FF9F1C; --mint:#9BE8C4; --ink:#12000B;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{
+    font-family:'Space Grotesk',sans-serif;color:var(--ink);
+    background-color:var(--pink);
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='320' height='320' viewBox='0 0 320 320'%3E%3Cpath d='M20 40 q15 -22 30 0 t30 0 t30 0' fill='none' stroke='%232EE6C8' stroke-width='7' stroke-linecap='round'/%3E%3Cpath d='M200 280 q15 -22 30 0 t30 0' fill='none' stroke='%239BE8C4' stroke-width='7' stroke-linecap='round'/%3E%3Cpolygon points='250,60 285,115 215,115' fill='%239B5DE5'/%3E%3Cpolygon points='60,230 88,272 32,272' fill='%23FFE81A'/%3E%3Ccircle cx='150' cy='150' r='9' fill='%23FF9F1C'/%3E%3Ccircle cx='300' cy='200' r='7' fill='%23FFE81A'/%3E%3Ccircle cx='40' cy='130' r='7' fill='%23FF9F1C'/%3E%3Cpath d='M120 300 l14 -24 l-8 24 l14 -24' fill='none' stroke='%23FFE81A' stroke-width='6' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+    background-size:320px 320px;overflow-x:hidden;
+  }
+  ::selection{background:var(--yellow);color:var(--ink)}
+  a{color:inherit}
+
+  .ticker{background:var(--ink);color:var(--yellow);font-family:'Bungee',cursive;font-size:clamp(.8rem,2vw,1rem);padding:.55em 0;white-space:nowrap;overflow:hidden}
+  .ticker-inner{display:inline-block;animation:scroll 30s linear infinite}
+  @keyframes scroll{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+  .ticker span{margin:0 1.2em}
+  .t-pink{color:var(--pink)} .t-teal{color:var(--teal)} .t-purp{color:#c9a6ff}
+  @media (prefers-reduced-motion:reduce){.ticker-inner{animation:none}}
+
+  .wrap{max-width:980px;margin:0 auto;padding:0 16px}
+
+  .topnav{padding:18px 0 0}
+  .topnav a{font-family:'Bungee',cursive;font-size:.85rem;text-decoration:none;color:#fff;text-shadow:2px 2px 0 var(--ink)}
+
+  .hero{padding:40px 0 20px;text-align:center}
+  .kicker{display:inline-block;font-family:'Bungee',cursive;font-size:.9rem;background:var(--teal);border:4px solid var(--ink);border-radius:999px;padding:.4em 1em;box-shadow:5px 5px 0 var(--ink);transform:rotate(-2deg)}
+  .hero h1{
+    font-family:'Titan One',cursive;font-size:clamp(2.6rem,11vw,6rem);line-height:.95;
+    color:#fff;-webkit-text-stroke:3px var(--ink);text-shadow:8px 8px 0 var(--ink);
+    margin:24px 0 10px;letter-spacing:.02em;
+  }
+  .hero h1 .x{color:var(--yellow)}
+  .tagline{font-family:'Bungee',cursive;font-size:clamp(1rem,3vw,1.45rem);color:#fff;text-shadow:3px 3px 0 var(--ink);margin:18px auto 10px;max-width:700px;line-height:1.35}
+  .tagline em{font-style:normal;color:var(--yellow)}
+  .sub{color:#ffe3f1;font-weight:500;font-size:1.08rem;max-width:620px;margin:0 auto;text-shadow:1px 1px 0 var(--ink)}
+
+  .btn{
+    display:inline-block;font-family:'Titan One',cursive;font-size:clamp(1.05rem,3vw,1.4rem);letter-spacing:.03em;
+    color:var(--ink);background:var(--yellow);border:5px solid var(--ink);border-radius:999px;
+    padding:.6em 1.4em;margin-top:26px;text-decoration:none;box-shadow:8px 8px 0 var(--ink);
+    transition:transform .12s, box-shadow .12s;cursor:pointer;
+  }
+  .btn:hover{transform:translate(3px,3px);box-shadow:4px 4px 0 var(--ink)}
+  .btn:active{transform:translate(8px,8px);box-shadow:0 0 0 var(--ink)}
+  .btn.ghost{background:#fff;margin-left:10px}
+
+  .toc{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;margin:34px auto 0;max-width:800px}
+  .toc a{font-family:'Bungee',cursive;font-size:.8rem;text-decoration:none;background:#fff;border:3px solid var(--ink);border-radius:999px;padding:.4em .9em;box-shadow:3px 3px 0 var(--ink)}
+  .toc a:hover{background:var(--yellow)}
+
+  section{padding:40px 0}
+  .label{font-family:'Bungee',cursive;font-size:.85rem;color:#fff;text-shadow:2px 2px 0 var(--ink);margin-bottom:12px;letter-spacing:.06em}
+  .card{background:#fff;border:6px solid var(--ink);border-radius:22px;box-shadow:12px 12px 0 var(--ink);padding:clamp(22px,5vw,46px);position:relative}
+  .card.tilt-l{transform:rotate(-.6deg)} .card.tilt-r{transform:rotate(.6deg)}
+  h2{font-family:'Titan One',cursive;font-size:clamp(1.6rem,5vw,2.5rem);-webkit-text-stroke:2px var(--ink);color:#fff;text-shadow:5px 5px 0 var(--teal);margin-bottom:.55em;letter-spacing:.02em;line-height:1.1}
+  h2.alt{text-shadow:5px 5px 0 var(--purple)} h2.alt2{text-shadow:5px 5px 0 var(--orange)} h2.alt3{text-shadow:5px 5px 0 var(--pink)}
+  h3{font-family:'Bungee',cursive;font-size:1.05rem;margin:0 0 .45em}
+  .card p,.card li{font-size:clamp(1rem,2.3vw,1.12rem);line-height:1.6}
+  .card p{margin-bottom:1em}
+  .card p:last-child{margin-bottom:0}
+  .card ul{margin:0 0 1em 1.2em}
+  .card li{margin-bottom:.4em}
+  .hl{background:var(--yellow);padding:.05em .25em;border-radius:.3em;font-weight:700}
+  .hl-t{background:var(--teal)} .hl-p{background:#d8befa}
+  code.inl{font-family:'IBM Plex Mono',monospace;font-size:.92em;background:#f3eaff;border:2px solid var(--ink);border-radius:6px;padding:0 .3em;white-space:nowrap}
+
+  .badge{position:absolute;top:-20px;right:20px;font-family:'Bungee',cursive;font-size:.8rem;background:var(--teal);border:4px solid var(--ink);border-radius:999px;padding:.4em .9em;transform:rotate(4deg);box-shadow:4px 4px 0 var(--ink)}
+  .badge.b2{background:var(--yellow)} .badge.b3{background:var(--orange)} .badge.b4{background:#d8befa}
+
+  .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:22px;margin-top:22px}
+  .mini{border:5px solid var(--ink);border-radius:16px;padding:20px;box-shadow:6px 6px 0 var(--ink)}
+  .mini p{font-size:.98rem;line-height:1.5;margin:0}
+  .mini .skill{display:block;font-family:'IBM Plex Mono',monospace;font-size:.82rem;font-weight:600;margin-bottom:.5em;opacity:.8}
+  .c1{background:#CFF9EE} .c2{background:#FFF6B0} .c3{background:#EBDCFE} .c4{background:#FFE0C2} .c5{background:#FFD3E8}
+
+  .steps{counter-reset:s;list-style:none;margin:0!important}
+  .steps li{counter-increment:s;position:relative;padding-left:52px;margin-bottom:18px!important}
+  .steps li::before{content:counter(s);position:absolute;left:0;top:-2px;width:38px;height:38px;border:4px solid var(--ink);border-radius:50%;background:var(--yellow);font-family:'Titan One',cursive;display:flex;align-items:center;justify-content:center;font-size:1.05rem}
+
+  .tools{display:flex;flex-wrap:wrap;gap:10px;margin:8px 0 18px}
+  .tools span{font-family:'Bungee',cursive;font-size:.78rem;border:3px solid var(--ink);border-radius:999px;padding:.35em .8em;background:var(--mint)}
+  .tools span:nth-child(2n){background:var(--yellow)} .tools span:nth-child(3n){background:#d8befa}
+
+  /* cartridges */
+  .cart{background:#fff;border:6px solid var(--ink);border-radius:20px;box-shadow:10px 10px 0 var(--ink);margin-bottom:34px;overflow:hidden}
+  .cart-head{display:flex;align-items:center;gap:14px;padding:16px 20px;border-bottom:5px solid var(--ink)}
+  .cart-num{flex:0 0 auto;font-family:'Titan One',cursive;font-size:1.6rem;width:52px;height:52px;border:4px solid var(--ink);border-radius:12px;background:#fff;display:flex;align-items:center;justify-content:center;box-shadow:3px 3px 0 var(--ink)}
+  .cart-head h3{margin:0;font-size:clamp(1rem,3vw,1.3rem)}
+  .cart-head small{display:block;font-family:'Space Grotesk',sans-serif;font-size:.95rem;font-weight:500;margin-top:2px}
+  .cart:nth-of-type(6n+1) .cart-head{background:var(--teal)}
+  .cart:nth-of-type(6n+2) .cart-head{background:var(--yellow)}
+  .cart:nth-of-type(6n+3) .cart-head{background:#d8befa}
+  .cart:nth-of-type(6n+4) .cart-head{background:var(--orange)}
+  .cart:nth-of-type(6n+5) .cart-head{background:var(--mint)}
+  .cart:nth-of-type(6n+6) .cart-head{background:#ff9fce}
+  .cart-body{padding:18px 20px 22px}
+  .cart-body > p{margin-bottom:14px;font-size:1.02rem;line-height:1.55}
+
+  .prompt{background:var(--ink);border-radius:14px;border:4px solid var(--ink);overflow:hidden}
+  .prompt-bar{display:flex;justify-content:space-between;align-items:center;padding:8px 12px;background:#2a0a1d}
+  .prompt-bar span{font-family:'IBM Plex Mono',monospace;color:#ff9fce;font-size:.85rem}
+  .copy{font-family:'Bungee',cursive;font-size:.75rem;background:var(--yellow);color:var(--ink);border:3px solid #fff;border-radius:999px;padding:.35em .9em;cursor:pointer}
+  .copy:hover{background:var(--teal)}
+  .copy.done{background:var(--mint)}
+  .prompt pre{margin:0;padding:16px 16px 18px;color:#f5f0ff;font-family:'IBM Plex Mono',monospace;font-size:.88rem;line-height:1.6;white-space:pre-wrap;word-wrap:break-word;max-height:420px;overflow:auto}
+  .prompt pre .ph{color:var(--yellow)}
+
+  .rules{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:16px;margin-top:10px}
+  .rule{border:4px solid var(--ink);border-radius:14px;padding:16px;background:#FFF6B0;box-shadow:5px 5px 0 var(--ink)}
+  .rule b{font-family:'Bungee',cursive;font-size:.9rem;display:block;margin-bottom:4px}
+  .rule p{font-size:.96rem!important;margin:0!important;line-height:1.45!important}
+
+  /* join */
+  .join-card{background:var(--ink);color:#fff;border-color:#fff;box-shadow:12px 12px 0 rgba(0,0,0,.45)}
+  .join-card h2{text-shadow:5px 5px 0 var(--pink)}
+  .join-card p{color:#ffd9ec}
+  .join-form{display:flex;flex-wrap:wrap;gap:16px;margin-top:22px}
+  .join-form input{flex:1 1 260px;min-width:0;font-family:'Space Grotesk',sans-serif;font-size:clamp(1.05rem,3vw,1.35rem);font-weight:700;padding:.7em 1em;border:5px solid #fff;border-radius:16px;background:#fff;color:var(--ink);outline:none;box-shadow:7px 7px 0 var(--teal)}
+  .join-form input:focus{box-shadow:7px 7px 0 var(--yellow)}
+  .join-form .btn{margin-top:0;flex:0 0 auto}
+  .join-note{font-size:.95rem;color:#ff9fce!important;margin-top:16px}
+  .joined-msg{display:none;font-family:'Bungee',cursive;color:var(--yellow)!important;margin-top:16px}
+  .hp{position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden}
+
+  .sources{font-size:.95rem!important}
+  .sources a{font-weight:700}
+
+  footer{text-align:center;padding:30px 16px 60px;color:#fff;font-size:.9rem}
+  footer .stars{font-size:1.3rem;letter-spacing:.4em;color:var(--yellow);text-shadow:2px 2px 0 var(--ink)}
+  footer p{margin-top:10px;text-shadow:1px 1px 0 var(--ink)}
+  footer a{color:var(--yellow)}
+
+  @media (max-width:560px){
+    .btn.ghost{margin-left:0}
+    .card.tilt-l,.card.tilt-r{transform:none}
+    .cart-head{padding:14px}
+    .cart-body{padding:16px 14px 18px}
+  }
+</style>
+</head>
+<body>
+
+<div class="ticker" aria-hidden="true">
+  <div class="ticker-inner">
+    <span>★ CLAUDE × SMB ★</span><span class="t-teal">SHOPIFY + PLUGINS + PROMPTS</span><span class="t-pink">NOTHING GOES LIVE WITHOUT A YES</span><span class="t-purp">COPY · PASTE · SELL</span><span>★ DOMVIBES ★</span><span class="t-teal">NO CS DEGREE REQUIRED</span><span class="t-pink">SIX CARTRIDGES INSIDE</span><span class="t-purp">JOIN THE LIST ↓</span>
+    <span>★ CLAUDE × SMB ★</span><span class="t-teal">SHOPIFY + PLUGINS + PROMPTS</span><span class="t-pink">NOTHING GOES LIVE WITHOUT A YES</span><span class="t-purp">COPY · PASTE · SELL</span><span>★ DOMVIBES ★</span><span class="t-teal">NO CS DEGREE REQUIRED</span><span class="t-pink">SIX CARTRIDGES INSIDE</span><span class="t-purp">JOIN THE LIST ↓</span>
+  </div>
+</div>
+
+<div class="wrap topnav"><a href="/">← DOMVIBES</a></div>
+
+<header class="hero wrap">
+  <span class="kicker">THE DOMVIBES FIELD GUIDE</span>
+  <h1>CLAUDE <span class="x">×</span> SMB</h1>
+  <p class="tagline">How I turned Claude into <em>the back office</em> for my Shopify stores.</p>
+  <p class="sub">Plugins, connectors, a daily trend-hunting routine, and six copy-paste prompts. Everything I figured out, so you can skip the poking-around part.</p>
+  <a class="btn" href="#arcade">GET THE PROMPTS ⚡</a><a class="btn ghost" href="#join">JOIN THE LIST</a>
+  <nav class="toc" aria-label="On this page">
+    <a href="#basics">THE BASICS</a><a href="#plugin">THE PLUGIN</a><a href="#combos">COMBOS</a><a href="#routine">DAILY ROUTINE</a><a href="#arcade">6 PROMPTS</a><a href="#rules">HOUSE RULES</a>
+  </nav>
+</header>
+
+<main class="wrap">
+
+  <!-- BASICS -->
+  <section id="basics">
+    <p class="label">READ ME 1ST</p>
+    <div class="card tilt-l">
+      <span class="badge">5-MIN READ</span>
+      <h2>THE BASICS (AKA WHERE'S COWORK?)</h2>
+      <p>First thing I went looking for was "Cowork." Plot twist: <span class="hl">it's not a separate place anymore</span>. Its powers are just part of Claude now. You install plugins and run everything from the normal chat box.</p>
+      <div class="grid">
+        <div class="mini c1"><h3>⌨️ SKILLS</h3><p>Type <code class="inl">/</code> in the message box and you'll see your skills. A skill is a packaged recipe for one job. You can call one by name, or just describe what you want and Claude picks the right one.</p></div>
+        <div class="mini c2"><h3>🔌 CONNECTORS</h3><p>Connectors are your actual apps: Shopify, Canva, Meta Ads, Gmail and so on. They're what let Claude <em>do</em> things in your store instead of just talking about them.</p></div>
+        <div class="mini c3"><h3>🎁 PLUGINS</h3><p>A plugin is a bundle of skills that know how to use your connectors together. Install one and its skills show up in your <code class="inl">/</code> list.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PLUGIN -->
+  <section id="plugin">
+    <p class="label">START HERE</p>
+    <div class="card tilt-r">
+      <span class="badge b2">THE BIG ONE</span>
+      <h2 class="alt">THE SMALL BUSINESS PLUGIN</h2>
+      <p>The plugin I used is Anthropic's <span class="hl">Small Business</span> plugin. Install it from the plugin directory, then say <em>"help me get set up."</em> It walks you through connecting your first tools and learns about your business.</p>
+      <p>I wasn't sure at first whether it worked with Shopify, because the setup guide only lists QuickBooks, PayPal, HubSpot, Canva, Gmail and Docusign as defaults. It does. <span class="hl-t hl">Shopify is one of its newer integrations</span>, and it plugs into the briefings, marketing, restocking and month-end workflows.</p>
+      <p>The connectors I ended up running alongside it:</p>
+      <div class="tools"><span>SHOPIFY</span><span>CANVA</span><span>META ADS</span><span>HIGGSFIELD</span><span>ADWHISPR</span><span>VERCEL</span></div>
+      <p>👉 <b>Running more than one store?</b> Start every request with which store you mean. I have several, and Claude can switch between them, but only if you tell it which one.</p>
+    </div>
+  </section>
+
+  <!-- COMBOS -->
+  <section id="combos">
+    <p class="label">PRO MOVES</p>
+    <div class="card tilt-l">
+      <span class="badge b3">STACK 'EM</span>
+      <h2 class="alt2">SHOPIFY + OTHER STUFF = MAGIC</h2>
+      <p>The plugin gets good when it combines Shopify with your other tools. These are the combos I found most useful:</p>
+      <div class="grid">
+        <div class="mini c1"><span class="skill">/restock · inventory-planner</span><h3>🔁 NEVER RUN OUT</h3><p>Works out how fast each product is selling, predicts when it runs out, and drafts the purchase orders and supplier emails. Nothing gets sent until you say so.</p></div>
+        <div class="mini c2"><span class="skill">/monday-brief</span><h3>☕ MONDAY BRIEF</h3><p>Sales, cash, your calendar and the emails that need you, all on one page. A great way to start the week.</p></div>
+        <div class="mini c3"><span class="skill">marketing-monday · growth-pulse</span><h3>📈 GROWTH CHECK</h3><p>Best and worst sellers, what's working in marketing, what competitors changed, and three things to do this week.</p></div>
+        <div class="mini c4"><span class="skill">social-content-engine · ad-manager</span><h3>🎨 CONTENT + ADS</h3><p>Drafts next week's posts in your voice, with on-brand graphics from Canva, plus ad copy and creative briefs. Everything waits for your approval.</p></div>
+        <div class="mini c5"><span class="skill">/close-month</span><h3>🧾 CLOSE THE BOOKS</h3><p>Matches your Shopify payouts against QuickBooks or Xero and flags duplicates and missing receipts. You'll need an accounting tool connected.</p></div>
+        <div class="mini c1"><span class="skill">build-agent</span><h3>🤖 MAKE YOUR OWN</h3><p>Do something on repeat? It turns that task into your own named skill that you can run whenever you want, or on a schedule.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ROUTINE -->
+  <section id="routine">
+    <p class="label">THE SECRET SAUCE</p>
+    <div class="card tilt-r">
+      <span class="badge b4">RUNS AT 7AM</span>
+      <h2 class="alt3">THE DAILY TREND-TO-CAMPAIGN ROUTINE</h2>
+      <p>This is my favorite thing I built. Every morning Claude scans the internet for <span class="hl">trends, news, weather and viral moments</span>, matches them to my products, and has a ready-to-launch campaign waiting before I'm out of bed. I set it up for <b>mindprint</b>, my AI-designed apparel store.</p>
+      <ol class="steps">
+        <li><b>Check the store.</b> Pull yesterday's and last week's sales by product from Shopify.</li>
+        <li><b>Scan for trends.</b> Use web search for news, holidays, weather and events, Higgsfield for trending TikTok sounds and formats, and AdWhispr for the competitor ads that have run longest.</li>
+        <li><b>Match.</b> Pick the three best trend-to-product matches, score each on fit, urgency and effort, and flag the winner.</li>
+        <li><b>Build drafts.</b> An unpublished Shopify landing collection, an inactive discount code, Canva graphics, a short video concept, and a <em>paused</em> Meta ad.</li>
+        <li><b>Brief me.</b> A one-page brief plus a phone notification. I say yes, and it goes live.</li>
+      </ol>
+      <div class="prompt">
+        <div class="prompt-bar"><span>daily-routine.txt</span><button class="copy" type="button">COPY PROMPT</button></div>
+<pre>Set up a daily scheduled task for my <span class="ph">[STORE NAME]</span> Shopify store. Run every day at 7:00am <span class="ph">[TIMEZONE]</span> with a phone push notification when done.
+
+WHAT THE STORE IS: <span class="ph">[what you sell, price range, best-known products, and whether it's print-on-demand or stocked]</span>. Goal: <span class="ph">[e.g. grow fall sales]</span>.
+
+EACH RUN:
+1. Store check (Shopify): yesterday's and last 7 days' sales by product; note top sellers and products with views but no sales.
+2. Trend scan:
+   - Web search: today's news, viral moments/memes, upcoming dates and holidays, weather, big events relevant to my products.
+   - Higgsfield: this week's trending TikTok sounds and viral video formats.
+   - AdWhispr: brands in my space actively running ads now; surface their longest-running ads.
+3. Match: pick the 3 best trend-to-product matches, each tied to specific products. Score each on fit, urgency, effort; flag the #1.
+4. Build the #1 idea as DRAFTS ONLY:
+   - Shopify: an unpublished themed collection to use as a landing page, plus an inactive discount code.
+   - Canva: social graphics sized for feed and stories.
+   - Higgsfield: a short video concept set to a trending sound; run the virality predictor on it.
+   - Meta ad: copy, targeting and creative, created PAUSED with no spend.
+5. Report: a one-page brief with today's moments, the 3 ideas, links to every draft, and a "say yes to launch" list.
+
+GUARDRAILS: Never publish, activate, post or spend money without my explicit approval. Skip tragedies, disasters and divisive politics. No trademarked characters, logos or celebrity likenesses. Don't repeat an idea used in the last 14 days.</pre>
+      </div>
+    </div>
+  </section>
+
+  <!-- ARCADE -->
+  <section id="arcade">
+    <p class="label">THE TUTORIAL ARCADE</p>
+    <div class="card" style="margin-bottom:34px">
+      <span class="badge">6 CARTRIDGES</span>
+      <h2>SIX PROMPTS. SIX THREADS.</h2>
+      <p>Give each of these its own chat so the context stays clean. Fill in the <span class="hl">[yellow bits]</span>, paste, and go.</p>
+    </div>
+
+    <article class="cart">
+      <div class="cart-head"><div class="cart-num">1</div><h3>HOW TO CONNECT<small>Get your tools talking to each other.</small></h3></div>
+      <div class="cart-body">
+        <p>Do this first. Claude checks what's already hooked up, tells you what's missing for running an online store, and tests every connection.</p>
+        <div class="prompt"><div class="prompt-bar"><span>connect.txt</span><button class="copy" type="button">COPY PROMPT</button></div>
+<pre>Help me get my tools connected for my Shopify business(es): <span class="ph">[store names]</span>.
+1. Check which connectors are live right now and confirm which Shopify store is active and how to switch between my stores.
+2. Tell me what's missing for running an online store (email, calendar, accounting, Canva, Meta Ads, TikTok, Higgsfield, AdWhispr) and which ones matter most for me.
+3. For each missing one, show me how to connect it.
+4. Finish with a one-line test of each connector so I know it works.
+Keep it plain-English and one step at a time.</pre></div>
+      </div>
+    </article>
+
+    <article class="cart">
+      <div class="cart-head"><div class="cart-num">2</div><h3>NEW STORE ON SHOPIFY<small>From "I have an idea" to a store you can preview.</small></h3></div>
+      <div class="cart-body">
+        <p>Claude suggests names, checks domains, and generates real Shopify store previews you can click through.</p>
+        <div class="prompt"><div class="prompt-bar"><span>new-store.txt</span><button class="copy" type="button">COPY PROMPT</button></div>
+<pre>I want to start a new Shopify store. Idea: <span class="ph">[what you'd sell, who it's for, the vibe]</span>.
+1. Suggest 10 business names, then check domain availability and price for my top 3 picks.
+2. Generate store previews with themes and starter products so I can compare looks.
+3. Recommend a starter catalog (5–10 products), pricing and a sourcing approach (print-on-demand, wholesale or dropship).
+4. Give me a launch checklist: payments, shipping, policies, collections, a discount code and launch posts.
+Don't sign me up for anything or spend money without asking.</pre></div>
+      </div>
+    </article>
+
+    <article class="cart">
+      <div class="cart-head"><div class="cart-num">3</div><h3>BRIEFINGS &amp; ROUTINES<small>Your business, summarized before coffee.</small></h3></div>
+      <div class="cart-body">
+        <p>Scheduled tasks that run whether or not you're at your computer, and ping your phone when they're done.</p>
+        <div class="prompt"><div class="prompt-bar"><span>briefings.txt</span><button class="copy" type="button">COPY PROMPT</button></div>
+<pre>Set up recurring briefings for my stores. Store(s): <span class="ph">[store(s)]</span>.
+- Daily at 7am <span class="ph">[timezone]</span>: yesterday's sales, orders needing attention, low stock and one thing to do today.
+- Monday: a weekly brief (sales trend, top/bottom products, the calendar for the week).
+- Monday: a growth brief (what's working in marketing, competitor moves, three actions).
+Send a phone alert when each one is ready. Keep each brief to one page.
+Before creating anything, show me the schedule and contents for approval, and don't duplicate any scheduled tasks I already have.</pre></div>
+      </div>
+    </article>
+
+    <article class="cart">
+      <div class="cart-head"><div class="cart-num">4</div><h3>MANAGE INVENTORY<small>Know what to reorder before you run out.</small></h3></div>
+      <div class="cart-body">
+        <p>Works out how fast each product is selling, predicts when it runs out, drafts the reorders, and finds the stock that's just sitting there.</p>
+        <div class="prompt"><div class="prompt-bar"><span>inventory.txt</span><button class="copy" type="button">COPY PROMPT</button></div>
+<pre>Store: <span class="ph">[store]</span>. Help me manage inventory.
+1. Pull current stock and sales history, then calculate sales speed per product (last 7 and 28 days).
+2. Predict when each item runs out and flag anything at risk in the next 30 days.
+3. Size reorder quantities for 60 days and draft purchase orders and supplier emails, but don't send them.
+4. List slow movers and dead stock, with ideas to clear them (bundles, discounts, promos).
+Skip reorder math for print-on-demand items and just report what's selling.</pre></div>
+      </div>
+    </article>
+
+    <article class="cart">
+      <div class="cart-head"><div class="cart-num">5</div><h3>MAKING THEME CHANGES<small>Redesign without breaking your live store.</small></h3></div>
+      <div class="cart-body">
+        <p>The golden rule: <b>always work on a copy of your theme.</b> This prompt builds that rule in.</p>
+        <div class="prompt"><div class="prompt-bar"><span>theme.txt</span><button class="copy" type="button">COPY PROMPT</button></div>
+<pre>Store: <span class="ph">[store]</span>. I want to change my theme: <span class="ph">[describe the change, e.g. new homepage banner, featured collection, announcement bar, colors, a new section]</span>.
+Rules:
+- Always work on a COPY of my live theme, never the published one.
+- Show me what you'll change before doing it, then give me a preview link.
+- Don't publish until I say "publish."
+- Tell me how to roll back if I don't like it.
+If something can't be done through the connector, tell me exactly where to click in Shopify admin instead.</pre></div>
+      </div>
+    </article>
+
+    <article class="cart">
+      <div class="cart-head"><div class="cart-num">6</div><h3>MARKETING CAMPAIGNS<small>Research, landing page, creative and ads in one go.</small></h3></div>
+      <div class="cart-body">
+        <p>A full campaign, built and parked in draft. You check it over, then flip it on.</p>
+        <div class="prompt"><div class="prompt-bar"><span>campaign.txt</span><button class="copy" type="button">COPY PROMPT</button></div>
+<pre>Store: <span class="ph">[store]</span>. Build a marketing campaign for: <span class="ph">[product/collection + goal, e.g. "fall jackets, 50 sales by Nov 15"]</span>. Budget: <span class="ph">[$ amount]</span>.
+1. Research: current trends, competitor ads that have run longest, and the best angle for my products.
+2. Shopify: a campaign landing collection (unpublished) plus a discount code (inactive).
+3. Creative: Canva graphics for feed and stories, plus a short video concept with a trending sound (Higgsfield) and a virality score.
+4. Meta ads: campaign, ad set and ads built in my Meta Ads account, all PAUSED, with targeting and copy explained.
+5. A launch plan: posting schedule, email copy and what to measure.
+Nothing goes live, publishes or spends money until I approve.</pre></div>
+      </div>
+    </article>
+  </section>
+
+  <!-- RULES -->
+  <section id="rules">
+    <p class="label">DON'T SKIP THIS</p>
+    <div class="card tilt-l">
+      <span class="badge b2">SAFETY FIRST</span>
+      <h2 class="alt">HOUSE RULES</h2>
+      <div class="rules">
+        <div class="rule"><b>✋ DRAFTS FIRST</b><p>Every prompt says "nothing goes live without my yes." Keep that line in.</p></div>
+        <div class="rule"><b>🏪 NAME THE STORE</b><p>Got more than one shop? Say which one at the top of every thread.</p></div>
+        <div class="rule"><b>🧪 COPY THE THEME</b><p>Never edit your live theme. Duplicate it, preview it, then publish.</p></div>
+        <div class="rule"><b>💸 PAUSED ADS ONLY</b><p>Ads get built paused. You switch them on, never the robot.</p></div>
+        <div class="rule"><b>🔐 GUARD THE KEYS</b><p>Only connect your store to tools and people you actually trust.</p></div>
+        <div class="rule"><b>🚫 NO TRAGEDY-JACKING</b><p>Trend-hunting skips disasters, divisive politics and other people's logos.</p></div>
+      </div>
+      <p class="sources" style="margin-top:22px">Want the official details? <a href="https://claude.com/resources/articles/claude-for-small-business-launches-new-workflows-integrations-and-training-programs" target="_blank" rel="noopener">Claude for Small Business launch post</a> · <a href="https://claude.com/resources/tutorials/how-to-install-the-claude-for-small-business-plugin" target="_blank" rel="noopener">How to install the plugin</a></p>
+    </div>
+  </section>
+
+  <!-- JOIN -->
+  <section id="join">
+    <div class="card join-card">
+      <span class="badge b3">FREE 4EVER</span>
+      <h2>WANT THE NEXT ONE?</h2>
+      <p>I'm turning these into more routines, more prompts and probably some unhinged experiments. Drop your email and I'll send the next field guide the day it ships.</p>
+      <form class="join-form" id="joinForm" novalidate>
+        <input type="email" id="emailInput" name="email" placeholder="you@yourstore.com" required autocomplete="email" aria-label="Your email address">
+        <input type="text" id="hpInput" name="company" class="hp" tabindex="-1" autocomplete="off" aria-hidden="true">
+        <button class="btn" type="submit" id="joinBtn">SEND IT ⚡</button>
+      </form>
+      <p class="joined-msg" id="joinedMsg" role="status" aria-live="polite"></p>
+      <p class="join-note">No spam, just vibes. Unsubscribe anytime.</p>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="stars">★ ★ ★</div>
+  <p>© 2026 DOMVIBES · made with Claude, best viewed with the volume up</p>
+  <p><a href="/">domvibes.ai</a> · <a href="/shopify-claude-code">Shopify × Claude Code field guide</a></p>
+</footer>
+
+<script>
+  // Copy buttons
+  document.querySelectorAll('.copy').forEach(function(btn){
+    btn.addEventListener('click', function(){
+      var pre = btn.closest('.prompt').querySelector('pre');
+      var text = pre.innerText;
+      function done(){
+        btn.textContent = 'COPIED ✓'; btn.classList.add('done');
+        setTimeout(function(){ btn.textContent = 'COPY PROMPT'; btn.classList.remove('done'); }, 1800);
+      }
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(text).then(done).catch(fallback);
+      } else { fallback(); }
+      function fallback(){
+        var r = document.createRange(); r.selectNodeContents(pre);
+        var s = window.getSelection(); s.removeAllRanges(); s.addRange(r);
+        try { document.execCommand('copy'); done(); } catch(e) { btn.textContent = 'SELECT + COPY'; }
+      }
+    });
+  });
+
+  // Email signup (same list as the DOMVIBES homepage)
+  var SUBSCRIBE_URL = 'https://dazzling-squid-751.convex.site/subscribe';
+  var joinForm = document.getElementById('joinForm');
+  var joinBtn = document.getElementById('joinBtn');
+  var joinedMsg = document.getElementById('joinedMsg');
+  var emailInput = document.getElementById('emailInput');
+
+  function show(msg){ joinedMsg.textContent = msg; joinedMsg.style.display = 'block'; }
+  function reset(){ joinBtn.disabled = false; joinBtn.textContent = 'SEND IT ⚡'; }
+
+  joinForm.addEventListener('submit', function(e){
+    e.preventDefault();
+    if (document.getElementById('hpInput').value) { show("RADICAL!! You're on the list. ✌️"); return; }
+    var email = emailInput.value.trim();
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) { show('Hmm, that email looks off. Double-check it?'); emailInput.focus(); return; }
+    joinBtn.disabled = true; joinBtn.textContent = 'SENDING…';
+    fetch(SUBSCRIBE_URL, {
+      method: 'POST',
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify({email: email, source: 'domvibes.ai/claude-smb'})
+    }).then(function(res){ return res.json(); }).then(function(data){
+      if (data.status === 'subscribed') { show("RADICAL!! You're on the list. ✌️"); joinForm.reset(); }
+      else if (data.status === 'already_subscribed') { show("You're already on the list. Extra vibes for the enthusiasm!! 💖"); joinForm.reset(); }
+      else { show('Hmm, that email looks off. Double-check it and try again?'); }
+      reset();
+    }).catch(function(){
+      show('Gah, the internet hiccuped. Give it another try in a sec.');
+      reset();
+    });
+  });
+</script>
+
+</body>
+</html>
