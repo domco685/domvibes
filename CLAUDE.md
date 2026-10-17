@@ -13,6 +13,8 @@ step, no framework. Keep it that way unless Dom says otherwise.
   - `/recharge` — 10-slide stage deck for the Recharge x Shopify talk, with a
     live audience Q&A bar (posts to Convex) and a Claude-generated question
     summary on the last slide
+  - `/claude-smb` — field guide: Claude's Small Business plugin + Shopify,
+    six copy-paste prompts and a daily marketing routine
   - `/builds/ambitions` — build log: AMBITIONS from idea to build (dark
     deck style, same palette as `/recharge`). Images live next to the page.
 - `backend/` — Convex backend (project `domvibes` on team `domco`, prod
